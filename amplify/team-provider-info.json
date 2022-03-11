@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-bookreviewapp-dev-125205-authRole",
+      "UnauthRoleArn": "arn:aws:iam::014913632072:role/amplify-bookreviewapp-dev-125205-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::014913632072:role/amplify-bookreviewapp-dev-125205-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-bookreviewapp-dev-125205-deployment",
+      "UnauthRoleName": "amplify-bookreviewapp-dev-125205-unauthRole",
+      "StackName": "amplify-bookreviewapp-dev-125205",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:014913632072:stack/amplify-bookreviewapp-dev-125205/a03cc300-a0ee-11ec-8a67-060cd10296cf",
+      "AmplifyAppId": "d1q1dy9t221yys"
+    },
+    "categories": {
+      "auth": {
+        "bookreviewapp084cdc0e": {}
+      }
+    }
+  }
+}

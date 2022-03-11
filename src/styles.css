@@ -1,0 +1,24 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+:root {
+  --amplify-primary-color: #319795; /*メインとなるリンク、ボタン色*/
+  --amplify-primary-tint: #2d3438;
+  --amplify-primary-shade: #gray;
+  --amplify-secondary-tint: #red; /*アラート表示の背景色*/
+  --amplify-secondary-shade: #gray;
+}
+
+/* All components have a class name starting with `amplify` */
+.amplify-button {
+  font-size: 2rem;
+  padding: 1rem 2rem;
+  background: gray;
+  border: 2px solid black;
+}
+
+.amplify-button:hover {
+  background: gray;
+}
