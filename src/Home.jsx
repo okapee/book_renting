@@ -23,9 +23,6 @@ function Home() {
       setBooks(res.data.listPosts.items);
     }
     fn();
-    // async function test(){
- 
-    // }
   }, []);
 
   return (

@@ -1,16 +1,19 @@
 import axios from "axios";
-import React from "react";
-import Search from "./Search";
 import { Container, Flex, SimpleGrid, Stack, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { SearchResultItem } from "./SearchResultsItem";
-import Card from "./Card";
+import BookSearchResult from "./BookSearchResult";
 import SearchForm from "./SearchForm";
 
 function BookSearch(){
   const [books, setBooks] = useState([]);
   const [query, setQuery] = useState("amazon");
 
+const dummy = [
+  { name: 'icon' },
+  { name: 'check box' },
+  { name: 'images' },
+];
+  
   useEffect(() => {
     const url =
       "https://www.googleapis.com/books/v1/volumes?q=" + query ?? "amazon";
@@ -24,9 +27,12 @@ function BookSearch(){
   }, [query]);
 
   return (
+   
     <VStack margin={4}>
+       {console.log('BookSearch.jsx: ' + typeof(books))}
       <SearchForm setQuery={setQuery} />
-
+      <BookSearchResult books={books} />
+{/*
       <Container maxW="80rem" centerContent>
         <SimpleGrid columns={[1, 2, 1, 2]} backgroundColor="teal.50">
           {books.map((book) => {
@@ -35,7 +41,7 @@ function BookSearch(){
                 key={book.key}
                 title={book.volumeInfo.title}
                 thumbnail={book.volumeInfo?.imageLinks?.thumbnail}
-                longLine={book.volumeInfo.description} 
+                longLine={book.volumeInfo.description}
                 authors={book.volumeInfo.authors}
                 // isbn={book.volumeInfo?.industryIdentifiers[1]?.identifier}
                 isbn='123456'
@@ -44,7 +50,7 @@ function BookSearch(){
             );
           })}
         </SimpleGrid>
-      </Container>
+      </Container> */}
     </VStack>
   );
 }
