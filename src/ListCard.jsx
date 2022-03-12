@@ -8,7 +8,7 @@ function ListCard(props){
         <ListItem color='green.500'  verticalAlign='top'>
             <Flex w='800px' justifyContent='space-between'>
             <HStack alignItems="start">
-                <Image src={book.thumbnail} alt='' fallbackSrc='https://via.placeholder.com/150' loading="lazy" />
+                <Image src={book.thumbnail} alt=''  fallbackSrc='https://via.placeholder.com/150' />
                <Flex justifyContent='space-around'>
                 <VStack alignItems="start" m={4}>
                     <Heading

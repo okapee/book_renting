@@ -1,4 +1,4 @@
-import { Flex, Heading, Text, Box, HStack, Image, List, ListItem, VStack, Button } from "@chakra-ui/react";
+import { Flex, Heading, Text, Box, HStack, Image, List, ListItem, VStack, Button, Spacer } from "@chakra-ui/react";
 import ListCard from "./ListCard";
 
 function BookSearchResult(props){
@@ -18,7 +18,9 @@ function BookSearchResult(props){
     // });
   return (
       <>
-         <Text textAlign='left' m={4}>検索結果</Text>
+        <Spacer></Spacer>
+         <Text textAlign='left'>検索結果</Text>
+          <Spacer></Spacer>
         { Object.entries(books).map(([key, value]) => {
             console.log(key + ' ' + value);
             const book = {};
@@ -27,10 +29,10 @@ function BookSearchResult(props){
             book['authors'] = books[key].volumeInfo.authors;
             book['publisher'] = books[key].volumeInfo.publisher;
             book['publishedDate'] = books[key].volumeInfo.publishedDate;
-            book['description'] = books[key].volumeInfo.description;
+            book['description'] = books[key].volumeInfo.description ?? '説明なし';
             // book['industryIdentifiers'] = books[key].volumeInfo.industryIdentifiers || 'test'
             book['industryIdentifiers'] = books[key].volumeInfo.industryIdentifiers ?? null
-            book['thumbnail'] = books[key].volumeInfo.imageLinks.thumbnail;
+            book['thumbnail'] = books[key].volumeInfo.imageLinks?.thumbnail;
             console.log('book[title]: ' + book.industryIdentifiers);
             // title = value.volumeInfo.title
             return(<ListCard book={book} />);
