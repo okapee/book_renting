@@ -51,9 +51,9 @@ function BookCard(props) {
       borderWidth="1px"
       borderColor="gray.500"
       rounded="4"
-      minW="310"
-      maxW="310px"
-      bgColor="whiteAlpha.100"
+      minW="380"
+      maxW="380px"
+      bgColor="white"
       // display="flex"
       // justifyContent="center"
     >
