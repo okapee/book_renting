@@ -13,6 +13,8 @@ export const getPost = /* GraphQL */ `
       review
       publishedDate
       postedDate
+      rating
+      owner
       createdAt
       updatedAt
     }
@@ -26,6 +28,7 @@ export const listPosts = /* GraphQL */ `
   ) {
     listPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
+        id
         isbn
         title
         authors
@@ -34,6 +37,8 @@ export const listPosts = /* GraphQL */ `
         review
         publishedDate
         postedDate
+        rating
+        owner
         createdAt
         updatedAt
       }

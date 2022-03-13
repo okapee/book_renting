@@ -13,6 +13,8 @@ export const onCreatePost = /* GraphQL */ `
       review
       publishedDate
       postedDate
+      rating
+      owner
       createdAt
       updatedAt
     }
@@ -30,6 +32,8 @@ export const onUpdatePost = /* GraphQL */ `
       review
       publishedDate
       postedDate
+      rating
+      owner
       createdAt
       updatedAt
     }
@@ -47,6 +51,8 @@ export const onDeletePost = /* GraphQL */ `
       review
       publishedDate
       postedDate
+      rating
+      owner
       createdAt
       updatedAt
     }
