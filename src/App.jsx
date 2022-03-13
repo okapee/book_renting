@@ -1,4 +1,4 @@
-import "./styles.css";
+import './styles.css';
 import {
   Box,
   Image,
@@ -27,33 +27,32 @@ import {
   Link,
   Flex,
   Heading,
-  Stack
-} from "@chakra-ui/react";
-import { EmailIcon, HamburgerIcon } from "@chakra-ui/icons";
-import React, { Component, useState, useEffect } from "react";
-import { Routes, Route, NavLink, Outlet } from "react-router-dom";
-import { Amplify, API } from 'aws-amplify';
-import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react'
+  Stack,
+} from '@chakra-ui/react';
+import { EmailIcon, HamburgerIcon } from '@chakra-ui/icons';
+import React, { Component, useState, useEffect } from 'react';
+import { Routes, Route, NavLink, Outlet } from 'react-router-dom';
+import { Auth, Amplify, API } from 'aws-amplify';
+import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
 import config from './aws-exports';
 // import '@aws-amplify/ui-react/styles.css';
 
-import Header from "./Header";
-import Home from "./Home";
-import Body from "./Body";
-import BookSearch from "./BookSearch";
-import About from "./About";
-import NoMatch from "./NoMatch";
+import Header from './Header';
+import Home from './Home';
+import Body from './Body';
+import BookSearch from './BookSearch';
+import About from './About';
+import NoMatch from './NoMatch';
 import * as mutations from './graphql/queries';
-
 
 Amplify.configure(config);
 
 const colors = {
   brand: {
-    900: "#1a365d",
-    800: "#153e75",
-    700: "#2a69ac"
-  }
+    900: '#1a365d',
+    800: '#153e75',
+    700: '#2a69ac',
+  },
 };
 
 const theme = extendTheme({ colors });
@@ -61,6 +60,14 @@ const theme = extendTheme({ colors });
 function App() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const handleToggle = () => (isOpen ? onClose() : onOpen());
+  // const [username, setUserName] = useState('ななし');
+
+  // (async () => {
+  //   loginInfo = await Auth.currentAuthenticatedUser();
+  //   console.lot('App.jsxのusername: ' + loginInfo.username);
+  //   setUserName(loginInfo.username);
+  // })();
+
   return (
     <div className="App">
       <ChakraProvider theme={theme}>
@@ -74,52 +81,44 @@ function App() {
           color="white"
         >
           <Flex align="center" mr={5}>
-            <Heading as="h1" size="lg" letterSpacing={"tighter"}>
+            <Heading as="h1" size="lg" letterSpacing={'tighter'}>
               みんなで本書評
             </Heading>
           </Flex>
-          <Box display={{ base: "block", md: "none" }} onClick={handleToggle}>
+          <Box display={{ base: 'block', md: 'none' }} onClick={handleToggle}>
             <HamburgerIcon />
           </Box>
           <Stack
-            direction={{ base: "column", md: "row" }}
-            display={{ base: isOpen ? "block" : "none", md: "flex" }}
-            width={{ base: "full", md: "auto" }}
+            direction={{ base: 'column', md: 'row' }}
+            display={{ base: isOpen ? 'block' : 'none', md: 'flex' }}
+            width={{ base: 'full', md: 'auto' }}
             alignItems="center"
             flexGrow={1}
             mt={{ base: 4, md: 0 }}
           >
-            <NavLink
-              className={({ isActive }) => (isActive ? "active" : "undefined")}
-              to="/"
-            >
+            <NavLink className={({ isActive }) => (isActive ? 'active' : 'undefined')} to="/">
               <Text m={2}>Home</Text>
             </NavLink>
 
             <NavLink
-              className={({ isActive }) => (isActive ? "active" : "undefined")}
+              className={({ isActive }) => (isActive ? 'active' : 'undefined')}
               to="/booksearch"
             >
               <Text m={2}>本検索</Text>
             </NavLink>
 
-            <NavLink
-              className={({ isActive }) => (isActive ? "active" : "undefined")}
-              to="/about"
-            >
+            <NavLink className={({ isActive }) => (isActive ? 'active' : 'undefined')} to="/about">
               <Text m={2}>About</Text>
             </NavLink>
           </Stack>
-          <Box
-            display={{ base: isOpen ? "block" : "none", md: "block" }}
-            mt={{ base: 4, md: 0 }}
-          >
-            <Button
+          <Box display={{ base: isOpen ? 'block' : 'none', md: 'block' }} mt={{ base: 4, md: 0 }}>
+            {/* <Button
               variant="outline"
               _hover={{ bg: "teal.700", borderColor: "teal.700" }}
             >
               Create account
-            </Button>
+            </Button> */}
+            <Text>ようこそななしさん</Text>
             <AmplifySignOut />
           </Box>
         </Flex>
@@ -141,7 +140,7 @@ function App() {
 export function Footer() {
   return (
     <>
-      <Box bg="blackAlpha.700" m="2" p="4" textAlign="right" borderRadius="5">
+      <Box bg="teal.600" p="4" textAlign="right" textColor={'white'}>
         powered by okapee
       </Box>
     </>
@@ -150,7 +149,7 @@ export function Footer() {
 
 const Layout = () => {
   return (
-    <div style={{ display: "flex", justifyContent: "center" }}>
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
       <Outlet />
     </div>
   );

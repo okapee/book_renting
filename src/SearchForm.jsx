@@ -12,7 +12,7 @@ const SearchForm = (props) => {
   };
   return (
     <>
-      <HStack>
+      <HStack mb={10}>
         <Input
           ref={inputRef}
           type="text"
@@ -20,11 +20,11 @@ const SearchForm = (props) => {
           borderColor={"gray.300"}
           placeholder="何も入力しないで検索を押すと'Amazon'で検索したことになります"
           _placeholder={{ color: "gray.300" }}
-          w={800}
-          maxW={1000}
+          w={700}
+          maxW={800}
           minHeight={14}
         />
-        <Button p={4} fontSize='xl' onClick={handleSubmit}>検索</Button>
+        <Button p={4} borderWidth={2} borderColor={"gray.100"} fontSize='xl' onClick={handleSubmit} minHeight={14}>検索</Button>
       </HStack>
     </>
   );

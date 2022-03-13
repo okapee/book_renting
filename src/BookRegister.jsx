@@ -1,6 +1,0 @@
-function BookRegister(){
-    return(
-        <>
-        </>
-    );
-}

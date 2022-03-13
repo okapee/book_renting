@@ -26,18 +26,6 @@ function Home() {
   }, []);
 
   return (
-    // <>
-    //   <VStack>
-    //     <HStack>
-    //       <Button>aaa</Button>
-    //       <Button>bbb</Button>
-    //     </HStack>
-    //     <GridItem>
-    //       <Text>{console.log(books)}</Text>
-    //     </GridItem>
-    //   </VStack>
-    // </>
-
 <VStack margin={4}>
   <Container maxW="80rem" centerContent>
     <SimpleGrid columns={[1, 2, 1, 2]} backgroundColor="teal.50">

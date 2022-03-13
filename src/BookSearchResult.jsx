@@ -6,16 +6,6 @@ function BookSearchResult(props){
 
     console.log('booksearchresult: ' + typeof(books));
 
-    // books.map((book) => {
-    //     key=book.key
-    //     title=book.volumeInfo.title
-    //     thumbnail=book.volumeInfo?.imageLinks?.thumbnail
-    //     longLine=book.volumeInfo.description
-    //     authors=book.volumeInfo.authors
-    //     // isbn={book.volumeInfo?.industryIdentifiers[1]?.identifier}
-    //     isbn='123456'
-    //     publishedDate=book.volumeInfo.publishedDate
-    // });
   return (
       <>
         <Spacer></Spacer>
