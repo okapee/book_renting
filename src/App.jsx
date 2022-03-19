@@ -47,7 +47,7 @@ function App() {
       >
         <Flex className="header">
           <Flex align="center" mr={5}>
-            <Heading as="h1" size="2xl" className="title">
+            <Heading as="h1" size="xl" className="title">
               みんなで本書評
             </Heading>
           </Flex>
@@ -69,7 +69,7 @@ function App() {
                 _hover={{ bg: 'orange.300' }}
                 _focus={{ boxShadow: 'outline' }}
               >
-                登録された本の一覧
+                本の一覧
               </Text>
             </NavLink>
             <NavLink
@@ -92,7 +92,7 @@ function App() {
                 _hover={{ bg: 'orange.300' }}
                 _focus={{ boxShadow: 'outline' }}
               >
-                本ページの目的と作者について
+                目的と作者
               </Text>
             </NavLink>
           </Stack>

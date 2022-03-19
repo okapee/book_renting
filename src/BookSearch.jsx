@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Container, Flex, SimpleGrid, Stack, VStack } from "@chakra-ui/react";
+import { Box, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import BookSearchResult from "./BookSearchResult";
 import SearchForm from "./SearchForm";
@@ -27,9 +27,11 @@ const dummy = [
   }, [query]);
 
   return (
-   
     <VStack margin={4}>
-       {console.log('BookSearch.jsx: ' + typeof(books))}
+      {console.log('BookSearch.jsx: ' + typeof books)}
+      <Box mt={4} mb={2}>
+        こちらに登録したい本の名前・キーワードを入力すると自動検出されます！ あなたのおすすめの一冊を登録してください!
+      </Box>
       <SearchForm setQuery={setQuery} />
       <BookSearchResult books={books} />
     </VStack>
