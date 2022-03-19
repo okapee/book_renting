@@ -47,12 +47,13 @@ function BookCard(props) {
   return (
     <Box
       p={2}
-      m={2}
+      my={2}
+      ml={2}
+      mr="auto"
       borderWidth="1px"
       borderColor="gray.500"
       rounded="4"
-      minW="380"
-      maxW="380px"
+      w={480}
       bgColor="white"
       // display="flex"
       // justifyContent="center"

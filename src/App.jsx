@@ -1,61 +1,28 @@
 import './styles.css';
+import './index.css';
 import {
   Box,
-  Image,
   ChakraProvider,
-  Container,
   extendTheme,
-  HStack,
   Text,
-  Badge,
-  Menu,
-  Modal,
-  Button,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
   useDisclosure,
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  Divider,
-  Grid,
-  StackDivider,
-  Link,
   Flex,
   Heading,
   Stack,
 } from '@chakra-ui/react';
-import { EmailIcon, HamburgerIcon } from '@chakra-ui/icons';
-import React, { Component, useState, useEffect } from 'react';
+import { HamburgerIcon } from '@chakra-ui/icons';
+import React from 'react';
 import { Routes, Route, NavLink, Outlet } from 'react-router-dom';
 import { Auth, Amplify, API } from 'aws-amplify';
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
 import config from './aws-exports';
-// import '@aws-amplify/ui-react/styles.css';
 
-import Header from './Header';
 import Home from './Home';
-import Body from './Body';
 import BookSearch from './BookSearch';
 import About from './About';
 import NoMatch from './NoMatch';
-import * as mutations from './graphql/queries';
 
 Amplify.configure(config);
-
-const colors = {
-  brand: {
-    900: '#1a365d',
-    800: '#153e75',
-    700: '#2a69ac',
-  },
-};
-
-const theme = extendTheme({ colors });
 
 function App() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -70,18 +37,17 @@ function App() {
 
   return (
     <div className="App">
-      <ChakraProvider theme={theme}>
-        <Flex
-          as="nav"
-          align="center"
-          justify="space-between"
-          wrap="wrap"
-          padding={6}
-          bg="teal.500"
-          color="white"
-        >
+      <ChakraProvider
+        theme={extendTheme({
+          fonts: {
+            heading: 'Yomogi, cursive;',
+            body: 'Yomogi, cursive;',
+          },
+        })}
+      >
+        <Flex className="header">
           <Flex align="center" mr={5}>
-            <Heading as="h1" size="lg" letterSpacing={'tighter'}>
+            <Heading as="h1" size="2xl" className="title">
               みんなで本書評
             </Heading>
           </Flex>
@@ -97,18 +63,37 @@ function App() {
             mt={{ base: 4, md: 0 }}
           >
             <NavLink className={({ isActive }) => (isActive ? 'active' : 'undefined')} to="/">
-              <Text m={2}>Home</Text>
+              <Text
+                mr={4}
+                fontWeight="bold"
+                _hover={{ bg: 'orange.300' }}
+                _focus={{ boxShadow: 'outline' }}
+              >
+                登録された本の一覧
+              </Text>
             </NavLink>
-
             <NavLink
               className={({ isActive }) => (isActive ? 'active' : 'undefined')}
               to="/booksearch"
             >
-              <Text m={2}>本検索</Text>
+              <Text
+                mr={4}
+                fontWeight="bold"
+                _hover={{ bg: 'orange.300' }}
+                _focus={{ boxShadow: 'outline' }}
+              >
+                本の登録
+              </Text>
             </NavLink>
-
             <NavLink className={({ isActive }) => (isActive ? 'active' : 'undefined')} to="/about">
-              <Text m={2}>About</Text>
+              <Text
+                mr={4}
+                fontWeight="bold"
+                _hover={{ bg: 'orange.300' }}
+                _focus={{ boxShadow: 'outline' }}
+              >
+                本ページの目的と作者について
+              </Text>
             </NavLink>
           </Stack>
           <Box display={{ base: isOpen ? 'block' : 'none', md: 'block' }} mt={{ base: 4, md: 0 }}>
@@ -140,7 +125,7 @@ function App() {
 export function Footer() {
   return (
     <>
-      <Box bg="teal.600" p="4" textAlign="right" textColor={'white'}>
+      <Box bg="teal.600" p="8" textAlign="right" textColor={'white'}>
         powered by okapee
       </Box>
     </>

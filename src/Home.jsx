@@ -1,22 +1,6 @@
-import {
-  Text,
-  Button,
-  Flex,
-  GridItem,
-  SimpleGrid,
-  HStack,
-  IconButton,
-  ListItem,
-  Spacer,
-  useColorMode,
-  Stack,
-  VStack,
-  Container,
-  Box,
-} from '@chakra-ui/react';
+import { Text, Center, useColorMode, VStack, Container, Box } from '@chakra-ui/react';
 import { API, graphqlOperation } from 'aws-amplify';
 import * as queries from './graphql/queries';
-import { FaGithub, FaInstagram, FaLinkedin, FaMoon, FaSun } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 import BookCard from './BookCard';
 import SearchFilter from './SearchFilter';
@@ -36,27 +20,37 @@ function Home() {
   }, []);
 
   return (
-    <VStack m={4}>
-      <SearchFilter />
-      <Box
-        p={1}
-        m={4}
-        borderWidth="2px"
-        borderColor="gray.300"
-        rounded="4"
-        minW="800px"
-        maxW="800px"
-        display="flex"
-        justifyContent="space-around"
-        bgColor="gray.50"
-        flexWrap="wrap"
-      >
-        {books.map((book) => {
-          console.log('book: ' + book);
-          return <BookCard bookInfo={book} />;
-        })}
-      </Box>
-    </VStack>
+    <Container maxW={1100}>
+      <VStack m={4}>
+        <Box m={4}>
+          <Text>ここにはあなたが書評した本や、みんながおすすめした本が表示されます。</Text>
+          <Text>
+            「絞り込みフィルタ」でいろんな条件を指定して表示を変えてみてね!(だが工事中だ(^o^))
+          </Text>
+        </Box>
+        <SearchFilter />
+        <Center>
+          <Box
+            p={1}
+            // m={2}
+            // borderWidth="2px"
+            // borderColor="gray.300"
+            rounded="4"
+            minW={1 / 3}
+            maxW={1000}
+            display="flex"
+            justifyContent="space-around"
+            bgColor="gray.50"
+            flexWrap="wrap"
+          >
+            {books.map((book) => {
+              console.log('book: ' + book);
+              return <BookCard bookInfo={book} />;
+            })}
+          </Box>
+        </Center>
+      </VStack>
+    </Container>
   );
 }
 
