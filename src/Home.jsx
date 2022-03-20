@@ -29,7 +29,7 @@ function Home() {
           </Text>
         </Box>
         <SearchFilter />
-        <Center>
+        {/* <Center> */}
           <Box
             p={1}
             // m={2}
@@ -48,7 +48,7 @@ function Home() {
               return <BookCard bookInfo={book} />;
             })}
           </Box>
-        </Center>
+        {/* </Center> */}
       </VStack>
     </Container>
   );

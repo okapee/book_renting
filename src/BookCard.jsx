@@ -24,9 +24,11 @@ import {
   FormErrorMessage,
   FormHelperText,
   Center,
+  Heading,
+  Avatar,
 } from '@chakra-ui/react';
 import { FaStar } from 'react-icons/fa';
-import { API } from 'aws-amplify';
+import { Auth, Amplify, API } from 'aws-amplify';
 import * as mutations from './graphql/mutations';
 import { Rating } from 'react-simple-star-rating';
 
@@ -37,12 +39,44 @@ import { Rating } from 'react-simple-star-rating';
 // };
 
 function BookCard(props) {
-  // const { title, longLine, thumbnail, authors, isbn, publishedDate } = props;
+  const [username, setUserName] = useState('ななし');
+
+    useEffect(() => {
+      const fn = async () => {
+        const loginInfo = await Auth.currentAuthenticatedUser();
+        console.log(
+          'BookCard.jsxのusername: ' +
+            loginInfo.username +
+            ' zoneinfo: ' +
+            loginInfo.zoneinfo +
+            ' picture: ' +
+            loginInfo.picture +
+            ' locale: ' +
+            loginInfo.locale,
+        );
+        setUserName(loginInfo.username);
+      };
+      fn();
+    }, []);
+
   const book = {
     ...props.bookInfo,
   };
 
-  console.log('Cards has ' + book.title + ' ' + book.longLine + ' ' + book.isbn + ' review: ' + book.review + ' rating: ' + book.rating);
+  console.log(
+    'Cards has ' +
+      book.title +
+      ' ' +
+      book.longLine +
+      ' ' +
+      book.isbn +
+      ' review: ' +
+      book.review +
+      ' rating: ' +
+      book.rating +
+      ' owner: ' +
+      book.owner
+  );
 
   return (
     <Box
@@ -50,22 +84,24 @@ function BookCard(props) {
       my={2}
       ml={2}
       mr="auto"
-      borderWidth="1px"
-      borderColor="gray.500"
+      // borderWidth="1px"
+      // borderColor="gray.300"
       rounded="4"
       w={480}
-      bgColor="white"
-      // display="flex"
+      bgColor="gray.100"
+      boxShadow="md"
+      display="flex"
       // justifyContent="center"
     >
-      <HStack align="left">
-        <Image src={book.thumbnail} />
-        <VStack maxW="200px" m={2} p={2}>
-          <Text fontSize="2xl" mb={4} noOfLines={2} textAlign="left">
-            {book.title}
-          </Text>
-          {/* <Flex display="inline"> */}
-          <Box display="inline">
+      <HStack align="start">
+        <Image src={book.thumbnail} borderRadius="xl" />
+        <VStack p={4} align="start">
+          <Heading size="lg">{book.title}</Heading>
+          <HStack align="start" p={4}>
+            <Avatar />
+            <Text>{book.owner}</Text>
+          </HStack>
+          {/* <Box display="inline"> */}
             {/* <Rating size={0} ratingValue={book.rating} readonly="true" /> */}
             <Flex mb={4}>
               {[1, 2, 3, 4, 5].map((value) => (
@@ -73,8 +109,8 @@ function BookCard(props) {
               ))}
             </Flex>
             {/* </Flex> */}
-          </Box>
-          <Text mb={4} maxW="130px" noOfLines={3} textAlign="left">
+          {/* </Box> */}
+          <Text mb={4}  noOfLines={3}>
             {book.review}
           </Text>
         </VStack>
@@ -84,7 +120,7 @@ function BookCard(props) {
 }
 
 function Star({ filled }) {
-  return <FaStar color={filled ? 'orange' : 'lightgray'}/>;
+  return <FaStar color={filled ? 'orange' : 'lightgray'} />;
 }
 
 export default BookCard;

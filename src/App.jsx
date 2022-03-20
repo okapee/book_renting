@@ -40,8 +40,8 @@ function App() {
       <ChakraProvider
         theme={extendTheme({
           fonts: {
-            heading: 'Yomogi, cursive;',
-            body: 'Yomogi, cursive;',
+            heading: 'Noto Serif JP',
+            body: 'Noto Serif JP',
           },
         })}
       >
