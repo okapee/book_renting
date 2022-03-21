@@ -23,9 +23,9 @@ function Home() {
     <Container maxW={1100}>
       <VStack m={4}>
         <Box m={4}>
-          <Text>ここにはあなたが書評した本や、みんながおすすめした本が表示されます。</Text>
+          <Text>ここにはあなたが読んだ本や、みんながおすすめした本が表示されます。</Text>
           <Text>
-            「絞り込みフィルタ」でいろんな条件を指定して表示を変えてみてね!(だが工事中だ(^o^))
+            「絞り込みフィルタ」でいろんな条件を指定して表示を変えてみてね!
           </Text>
         </Box>
         <SearchFilter />
@@ -36,7 +36,7 @@ function Home() {
             // borderWidth="2px"
             // borderColor="gray.300"
             rounded="4"
-            minW={1 / 3}
+            // minW={1 / 3}
             maxW={1000}
             display="flex"
             justifyContent="space-around"

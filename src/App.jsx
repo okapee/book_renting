@@ -46,13 +46,13 @@ function App() {
         })}
       >
         <Flex className="header">
-          <Flex align="center" mr={5}>
+          <Flex align="center" mr={5} minW={200}>
             <Heading as="h1" size="xl" className="title">
               みんなで本書評
             </Heading>
           </Flex>
           <Box display={{ base: 'block', md: 'none' }} onClick={handleToggle}>
-            <HamburgerIcon />
+            <HamburgerIcon m={8} />
           </Box>
           <Stack
             direction={{ base: 'column', md: 'row' }}
