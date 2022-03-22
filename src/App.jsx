@@ -45,7 +45,7 @@ function App() {
           },
         })}
       >
-        <Flex className="header">
+        <Flex className="header" w="100%">
           <Flex align="center" mr={5} minW={200}>
             <Heading as="h1" size="xl" className="title">
               みんなで本書評
@@ -125,7 +125,7 @@ function App() {
 export function Footer() {
   return (
     <>
-      <Box bg="teal.600" p="8" textAlign="right" textColor={'white'}>
+      <Box bg="teal.600" p="8" textAlign="right" textColor={'white'} w="100%">
         powered by okapee
       </Box>
     </>

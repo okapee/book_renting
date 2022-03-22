@@ -87,7 +87,8 @@ function BookCard(props) {
       // borderWidth="1px"
       // borderColor="gray.300"
       rounded="4"
-      w={480}
+      // minw={400}
+      w={400}
       bgColor="gray.100"
       boxShadow="md"
       display="flex"
@@ -110,7 +111,7 @@ function BookCard(props) {
             </Flex>
             {/* </Flex> */}
           {/* </Box> */}
-          <Text mb={4}  noOfLines={3}>
+          <Text mb={4} noOfLines={3}>
             {book.review}
           </Text>
         </VStack>

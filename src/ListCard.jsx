@@ -36,26 +36,33 @@ function ListCard(props) {
   return (
     <ListItem
       verticalAlign="top"
-      borderWidth={2}
+      borderWidth={1}
       borderColor="gray.300"
       bgColor="gray.100"
       boxShadow="md"
       display="flex"
-      minW={300}
+      minW={400}
       p={2}
+      position="relative"
     >
       <Flex justifyContent="space-between">
         <HStack alignItems="start">
-          <Image src={book.thumbnail} alt="" fallbackSrc="https://via.placeholder.com/150" />
-          <Flex justifyContent="space-around">
-            <VStack alignItems="start" m={4}>
+          <Image
+            src={book.thumbnail}
+            alt=""
+            fallbackSrc="https://via.placeholder.com/150"
+            borderRadius="xl"
+          />
+          <Flex>
+            <VStack alignItems="start" m={4} justifyContent="space-around">
               <Heading
                 as="h1"
                 size="xl"
                 fontWeight="bold"
                 color="primary.800"
                 m={[4, 4, 0, 0]}
-                textAlign={['center', 'center', 'left', 'left']}
+                // textAlign={['center', 'center', 'left', 'left']}
+                textAlign="left"
               >
                 {book.title}
               </Heading>
@@ -68,7 +75,9 @@ function ListCard(props) {
                 opacity="0.8"
                 fontWeight="normal"
                 lineHeight={1.5}
-                textAlign={['center', 'center', 'left', 'left']}
+                // textAlign={['center', 'center', 'left', 'left']}
+                textAlign="left"
+                noOfLines={3}
               >
                 {book.description.length > 100
                   ? book.description.slice(0, 100) + '…'

@@ -22,7 +22,7 @@ function BookSearchResult(props) {
     <Box w="100%" p={8} display="flex" bgColor="gray.50" flexWrap="wrap">
       <Text textAlign="left">検索結果</Text>
       <Spacer></Spacer>
-      <List bgColor="whiteAlpha.100" >
+      <List bgColor="whiteAlpha.100">
         {Object.entries(books).map(([key, value]) => {
           console.log(key + ' ' + value);
           const book = {};
