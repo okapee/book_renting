@@ -42,7 +42,7 @@ function ListCard(props) {
       boxShadow="lg"
       display="flex"
       minW={400}
-      w="100%"
+      w="90%"
       p={2}
       position="relative"
     >
