@@ -90,8 +90,10 @@ function BookCard(props) {
       rounded="4"
       // minw={500}
       // maxW={600}
-      w={420}
+      // w={420}
+      w={[350, 420, 480]}
       // w={calc( ( 800 - 60 ) / 3 )}
+      // maxW="calc(100vw - 50px)"
       bgColor="gray.100"
       boxShadow="md"
       display="flex"
@@ -106,13 +108,13 @@ function BookCard(props) {
             <Text>{book.owner}</Text>
           </HStack>
           {/* <Box display="inline"> */}
-            {/* <Rating size={0} ratingValue={book.rating} readonly="true" /> */}
-            <Flex mb={4}>
-              {[1, 2, 3, 4, 5].map((value) => (
-                <Star key={value} filled={value <= book.rating} />
-              ))}
-            </Flex>
-            {/* </Flex> */}
+          {/* <Rating size={0} ratingValue={book.rating} readonly="true" /> */}
+          <Flex mb={4}>
+            {[1, 2, 3, 4, 5].map((value) => (
+              <Star key={value} filled={value <= book.rating} />
+            ))}
+          </Flex>
+          {/* </Flex> */}
           {/* </Box> */}
           <Text mb={4} noOfLines={3}>
             {book.review}
