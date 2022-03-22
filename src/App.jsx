@@ -66,6 +66,7 @@ function App() {
               <Text
                 mr={4}
                 fontWeight="bold"
+                fontSize={['lg', 'xl', '2xl']}
                 _hover={{ bg: 'orange.300' }}
                 _focus={{ boxShadow: 'outline' }}
               >
@@ -79,6 +80,7 @@ function App() {
               <Text
                 mr={4}
                 fontWeight="bold"
+                fontSize={['lg', 'xl', '2xl']}
                 _hover={{ bg: 'orange.300' }}
                 _focus={{ boxShadow: 'outline' }}
               >
@@ -89,6 +91,7 @@ function App() {
               <Text
                 mr={4}
                 fontWeight="bold"
+                fontSize={['lg', 'xl', '2xl']}
                 _hover={{ bg: 'orange.300' }}
                 _focus={{ boxShadow: 'outline' }}
               >
@@ -103,8 +106,8 @@ function App() {
             >
               Create account
             </Button> */}
-            <Text>ようこそななしさん</Text>
-            <AmplifySignOut />
+            <Text fontSize={['sm', 'md', 'lg']}>ようこそななしさん</Text>
+            <AmplifySignOut fontSize={['md', 'lg', 'xl']} />
           </Box>
         </Flex>
 

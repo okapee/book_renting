@@ -72,7 +72,8 @@ function ListCard(props) {
                 <Heading
                   as="h2"
                   size="md"
-                  m={2}
+                  mx={2}
+                  mb={4}
                   color="primary.800"
                   opacity="0.8"
                   fontWeight="normal"
