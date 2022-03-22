@@ -41,8 +41,7 @@ function ListCard(props) {
       bgColor="gray.100"
       boxShadow="lg"
       display="flex"
-      minW={400}
-      w="90%"
+      // minW={400}
       p={2}
       position="relative"
     >

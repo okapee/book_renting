@@ -20,9 +20,11 @@ function BookSearchResult(props) {
 
   return (
     <Box w="100%" p={8} display="flex" bgColor="gray.50" flexWrap="wrap">
-      <Text textAlign="left" mb={8}>検索結果</Text>
+      <Text textAlign="left" mb={8}>
+        検索結果
+      </Text>
       <Spacer></Spacer>
-      <List bgColor="whiteAlpha.100" w="100%" textAlign="-webkit-center">
+      <List bgColor="whiteAlpha.100" w={[400, 600, 800]} textAlign="-webkit-center">
         {Object.entries(books).map(([key, value]) => {
           console.log(key + ' ' + value);
           const book = {};
