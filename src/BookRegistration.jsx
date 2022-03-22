@@ -93,7 +93,7 @@ function BookRegistration(props) {
 
   return (
     <>
-      <Button borderRadius="8px" onClick={onOpen} p={8} lineHeight="1" size="md" fontSize="large" bgColor="gray.300" position="absolute" right={4} bottom={4}>
+      <Button borderRadius="8px" onClick={onOpen} p={8} lineHeight="1" size="md" fontSize="large" bgColor="gray.300" position="absolute" right={2} bottom={2}>
         レビューを登録
       </Button>
       <Modal blockScrollOnMount={false} size={'xl'} isOpen={isOpen} onClose={onClose} isCentered>

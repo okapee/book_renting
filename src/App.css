@@ -7,6 +7,19 @@ h2 { font-size: 2.8rem; }
   color: blue;
 }
 
+.home_contents::after {
+  content:"";
+  display: block;
+  width:48%;
+}
+
+.container{
+  width: 100%;
+  max-width: 960px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 .about{
   margin-top: 80px;
  }

@@ -36,12 +36,13 @@ function Home() {
             // borderWidth="2px"
             // borderColor="gray.300"
             rounded="4"
-            // minW={1 / 3}
+            minW={400}
             maxW={1000}
             display="flex"
             justifyContent="space-around"
             bgColor="gray.50"
             flexWrap="wrap"
+            className='home_contents'
           >
             {books.map((book) => {
               console.log('book: ' + book);

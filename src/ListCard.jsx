@@ -39,9 +39,10 @@ function ListCard(props) {
       borderWidth={1}
       borderColor="gray.300"
       bgColor="gray.100"
-      boxShadow="md"
+      boxShadow="lg"
       display="flex"
       minW={400}
+      w="100%"
       p={2}
       position="relative"
     >
@@ -54,35 +55,38 @@ function ListCard(props) {
             borderRadius="xl"
           />
           <Flex>
-            <VStack alignItems="start" m={4} justifyContent="space-around">
+            <VStack alignItems="start" m={2} justifyContent="space-around">
               <Heading
                 as="h1"
                 size="xl"
                 fontWeight="bold"
                 color="primary.800"
-                m={[4, 4, 0, 0]}
+                m={2}
                 // textAlign={['center', 'center', 'left', 'left']}
+                noOfLines={2}
                 textAlign="left"
               >
                 {book.title}
               </Heading>
               {/* <Spacer></Spacer> */}
-              <Heading
-                as="h2"
-                size="md"
-                m={[4, 4, 2, 0]}
-                color="primary.800"
-                opacity="0.8"
-                fontWeight="normal"
-                lineHeight={1.5}
-                // textAlign={['center', 'center', 'left', 'left']}
-                textAlign="left"
-                noOfLines={3}
-              >
-                {book.description.length > 100
-                  ? book.description.slice(0, 100) + '…'
-                  : book.description}
-              </Heading>
+              <Box>
+                <Heading
+                  as="h2"
+                  size="md"
+                  m={2}
+                  color="primary.800"
+                  opacity="0.8"
+                  fontWeight="normal"
+                  lineHeight={1.5}
+                  // textAlign={['center', 'center', 'left', 'left']}
+                  textAlign="left"
+                  noOfLines={3}
+                >
+                  {book.description.length > 100
+                    ? book.description.slice(0, 100) + '…'
+                    : book.description}
+                </Heading>
+              </Box>
               <Spacer></Spacer>
               {/* <Flex justifyContent='space-around'> */}
               <Box>

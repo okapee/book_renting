@@ -46,7 +46,7 @@ function App() {
         })}
       >
         <Flex className="header" w="100%">
-          <Flex align="center" mr={5} minW={200}>
+          <Flex align="center" mr={5} minW={100}>
             <Heading as="h1" size="xl" className="title">
               みんなで本書評
             </Heading>

@@ -12,36 +12,38 @@ const SearchForm = (props) => {
   };
   return (
     // <Box display="flex">
-      <HStack mb={10}>
-        {/* <Flex w="auto" minW={200}> */}
-          <Input
-            ref={inputRef}
-            type="text"
-            name="name"
-            borderColor={'gray.300'}
-            placeholder="何も入力しないで検索を押すと'Amazon'で検索したことになります"
-            _placeholder={{ color: 'gray.300' }}
-            minW="500px"
-            maxW="800px"
-            size="md"
-            // flex={1}
-            // flexShrink={2}
-            minHeight={14}
-            display="block"
-          />
-          <Button
-            p={4}
-            borderWidth={2}
-            borderColor={'gray.100'}
-            fontSize="xl"
-            onClick={handleSubmit}
-            minHeight={14}
-            // flex={1}
-          >
-            検索
-          </Button>
-        {/* </Flex> */}
-      </HStack>
+    <HStack mb={10}>
+      {/* <Flex w="auto" minW={200}> */}
+      <Box w="100%">
+        <Input
+          ref={inputRef}
+          type="text"
+          name="name"
+          borderColor={'gray.300'}
+          placeholder="何も入力しないで検索を押すと'Amazon'で検索したことになります"
+          _placeholder={{ color: 'gray.300' }}
+          // w="100%"
+          size="md"
+          // flex={1}
+          // flexShrink={2}
+          minHeight={14}
+          display="block"
+          boxSizing='border-box'
+        />
+      </Box>
+      <Button
+        p={4}
+        borderWidth={2}
+        borderColor={'gray.100'}
+        fontSize="xl"
+        onClick={handleSubmit}
+        minHeight={14}
+        // flex={1}
+      >
+        検索
+      </Button>
+      {/* </Flex> */}
+    </HStack>
     // </Box>
   );
 };
