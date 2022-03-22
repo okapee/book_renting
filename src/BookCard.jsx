@@ -90,7 +90,7 @@ function BookCard(props) {
       rounded="4"
       // minw={500}
       // maxW={600}
-      w={450}
+      w={420}
       // w={calc( ( 800 - 60 ) / 3 )}
       bgColor="gray.100"
       boxShadow="md"
@@ -98,7 +98,7 @@ function BookCard(props) {
       // justifyContent="center"
     >
       <HStack align="start">
-        <Image src={book.thumbnail} borderRadius="xl" />
+        <Image src={book.thumbnail} borderRadius="xl" alignSelf="center" />
         <VStack p={4} align="start">
           <Heading size="lg">{book.title}</Heading>
           <HStack align="start" p={4}>

@@ -31,8 +31,8 @@ function BookSearch() {
         </Box>
         <Box w="100%">
           <SearchForm setQuery={setQuery} />
+          <BookSearchResult books={books} />
         </Box>
-        <BookSearchResult books={books} />
       </VStack>
     </Container>
   );
