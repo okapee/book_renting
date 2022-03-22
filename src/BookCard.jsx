@@ -88,9 +88,9 @@ function BookCard(props) {
       // borderWidth="1px"
       // borderColor="gray.300"
       rounded="4"
-      // minw={400}
+      // minw={500}
       // maxW={600}
-      w="48%"
+      w={450}
       // w={calc( ( 800 - 60 ) / 3 )}
       bgColor="gray.100"
       boxShadow="md"

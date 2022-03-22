@@ -36,10 +36,10 @@ function Home() {
             // borderWidth="2px"
             // borderColor="gray.300"
             rounded="4"
-            minW={400}
+            minW={500}
             maxW={1000}
             display="flex"
-            justifyContent="space-around"
+            justifyContent="space-evenly"
             bgColor="gray.50"
             flexWrap="wrap"
             className='home_contents'
