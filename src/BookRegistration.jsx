@@ -32,8 +32,8 @@ import * as mutations from './graphql/mutations';
 function BookRegistration(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [input, setInput] = useState('');
-  const [rating, setRating] = useState(5);
-  const isError = input === '' || input.length > 280;
+  const [rating, setRating] = useState(0);
+  const isError = input === '' || input.length > 280 || rating == 0;
 
   const book = props.book;
 
@@ -101,7 +101,7 @@ function BookRegistration(props) {
         lineHeight="1"
         size="md"
         shadow="lg"
-        fontSize={["md", "lg", "xl"]}
+        fontSize={['md', 'lg', 'xl']}
         bgColor="gray.300"
         position="absolute"
         right={2}
@@ -110,7 +110,7 @@ function BookRegistration(props) {
         レビューを登録
       </Button>
       <Modal blockScrollOnMount={false} size={'xl'} isOpen={isOpen} onClose={onClose} isCentered>
-        <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px) hue-rotate(90deg)" />
+        <ModalOverlay bg="whiteAlpha.50" backdropFilter="blur(10px) hue-rotate(90deg)" />
         <ModalContent>
           <ModalHeader>レビュー投稿画面</ModalHeader>
           <ModalCloseButton />
@@ -138,15 +138,14 @@ function BookRegistration(props) {
               </FormControl>
               <Spacer></Spacer>
               <Text>評価をしてください</Text>
-              <StarRating m={10} rating={setRating} />
+              <StarRating m={10} setRate={setRating} />
             </VStack>
           </ModalBody>
-
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
+            <Button colorScheme="teal" mr={3} onClick={onClose}>
               閉じる
             </Button>
-            <Button variant="ghost" onClick={handleSubmit}>
+            <Button colorScheme="teal" onClick={handleSubmit} isDisabled={isError}>
               投稿
             </Button>
           </ModalFooter>
@@ -161,16 +160,18 @@ function Star({ filled, onClick }) {
 }
 
 function StarRating(props, { onChange }) {
-  const [rating, setRating] = useState(0);
+  const [inRating, setInRating] = useState(0);
   const changeRating = (newRating) => {
-    setRating(newRating);
+    props.setRate(newRating);
+    setInRating(newRating);
     onChange?.(newRating);
-    props.rating(newRating);
+    // props.rating(newRating);
+    // setRating(newRating)
   };
   return (
     <Flex>
       {[1, 2, 3, 4, 5].map((value) => (
-        <Star key={value} filled={value <= rating} onClick={() => changeRating(value)} />
+        <Star key={value} filled={value <= inRating} onClick={() => changeRating(value)} />
       ))}
     </Flex>
   );
