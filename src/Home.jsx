@@ -11,6 +11,8 @@ import {
   RadioGroup,
   useRadio,
   useRadioGroup,
+  ButtonGroup,
+  Button,
 } from '@chakra-ui/react';
 import { API, graphqlOperation } from 'aws-amplify';
 import * as queries from './graphql/queries';
@@ -20,6 +22,8 @@ import SearchFilter from './SearchFilter';
 import { useSelector, useDispatch } from 'react-redux';
 import { allbook, sameage, mybook } from './filterSlice';
 
+import { Auth } from 'aws-amplify';
+
 function Home() {
   const { colorMode, toggleColorMode } = useColorMode();
   const isDark = colorMode === 'dark';
@@ -28,25 +32,72 @@ function Home() {
   const filter = useSelector((state) => state.filter.value);
   const dispatch = useDispatch();
 
-  console.log('Redux Store(HOME)でのfilterの初期値: ' + filter);
+  const buttons = ['みんなの本', '自分に属性が似ている人の本', '自分の本'];
+  const labelToAction = {
+    みんなの本: 'allbook',
+    自分に属性が似ている人の本: 'sameage',
+    自分の本: 'mybook',
+  };
 
-  // フィルタリング用のラジオボタンの準備
-  const options = ['全ての本', '同年代の人が読んでる本(今後実装予定)', '自分の本'];
-  const { value, getRootProps, getRadioProps } = useRadioGroup({
-    name: 'framework',
-    defaultValue: filter,
-    onChange: () => dispatch(value),
-  });
-  const group = getRootProps();
+  let user = '';
+  let loginInfo = '';
+  (async () => {
+    loginInfo = await Auth.currentAuthenticatedUser();
+    console.log('HOMEのusername: ' + loginInfo.username);
+    user = loginInfo.username;
+  })();
+
+  console.log('HOME: ログインしているユーザーは ' + user);
+
+  let fn = () => {};
+  // GraphQLフィルター定義
+  let mybook_filter = {
+    owner: {
+      eq: user, // filter priority = 1
+    },
+  };
+
+  console.log('Redux Store(HOME)でのfilterの値: ' + filter);
 
   useEffect(() => {
-    const fn = async () => {
-      console.log('useEffectが実行された(中)');
-      const res = await API.graphql(graphqlOperation(queries.listPosts));
-      setBooks(res.data.listPosts.items);
-    };
+    switch (filter) {
+      case 'sameage':
+        fn = async () => {
+          console.log('HOME: useEffectでsameageが実行された');
+        };
+        break;
+
+      case 'mybook':
+        fn = async () => {
+          console.log('HOME: ' + user + 'でmybookが実行された');
+          // const res = await API.graphql(
+          //   graphqlOperation(queries.listPosts, {
+          //     owner: user
+          //   })
+          // );
+          const mybook_filter = {
+            owner: {
+              eq: user,
+            },
+          };
+          const res = await API.graphql(
+            graphqlOperation(queries.listPosts, { filter: mybook_filter }),
+          );
+
+          setBooks(res.data.listPosts.items);
+        };
+        break;
+
+      default:
+        fn = async () => {
+          console.log('HOME: useEffectでdefault(allbook)が実行された');
+          const res = await API.graphql(graphqlOperation(queries.listPosts));
+          setBooks(res.data.listPosts.items);
+        };
+        break;
+    }
     fn();
-  }, []);
+  }, [filter]);
 
   return (
     <Container maxW={1100}>
@@ -56,15 +107,105 @@ function Home() {
           {/* <Text>「絞り込みフィルタ」でいろんな条件を指定して表示を変えてみてね!</Text> */}
         </Box>
         {/* <SearchFilter /> */}
-        <HStack {...group}>
-          {options.map((value) => {
-            const radio = getRadioProps({ value });
-            return (
-              <FilteringButton key={value} {...radio}>
-                {value}
-              </FilteringButton>
-            );
-          })}
+        <HStack>
+          {/* {buttons.map((buttonLabel, i) => (
+            <Button
+              size="xl"
+              p={[2, 2, 6, 6]}
+              borderColor="black.500"
+              borderRadius={4}
+              boxShadow="md"
+              key={i}
+              name={buttonLabel}
+              onClick={() => dispatch(labelToAction[buttons[i]]())}
+            >
+              {buttonLabel}
+            </Button>
+          ))} */}
+          <Button
+            size="xl"
+            p={[2, 2, 6, 6]}
+            fontWeight="semibold"
+            bg="orange.200"
+            borderRadius={4}
+            boxShadow="md"
+            _hover={{ bg: 'orange.300' }}
+            _active={{
+              bg: 'orange.300',
+              transform: 'scale(0.98)',
+              borderColor: '#bec3c9',
+            }}
+            _focus={{
+              bg: 'orange.300',
+              boxShadow: '0 0 1px 2px rgba(88, 144, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)',
+            }}
+            onClick={() => dispatch(allbook())}
+          >
+            みんなの本
+          </Button>
+          <Button
+            size="xl"
+            p={[2, 2, 6, 6]}
+            fontWeight="semibold"
+            bg="orange.200"
+            borderRadius={4}
+            boxShadow="md"
+            _hover={{ bg: 'orange.300' }}
+            _active={{
+              bg: 'orange.300',
+              transform: 'scale(0.98)',
+              borderColor: '#bec3c9',
+            }}
+            _focus={{
+              bg: 'orange.300',
+              boxShadow: '0 0 1px 2px rgba(88, 144, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)',
+            }}
+            onClick={() => dispatch(sameage())}
+          >
+            同じ年代の人が読んでいる本(実装中)
+          </Button>
+          <Button
+            size="xl"
+            p={[2, 2, 6, 6]}
+            fontWeight="semibold"
+            bg="orange.200"
+            borderRadius={4}
+            boxShadow="md"
+            _hover={{ bg: 'orange.300' }}
+            _active={{
+              bg: 'orange.300',
+              transform: 'scale(0.98)',
+              borderColor: '#bec3c9',
+            }}
+            _focus={{
+              bg: 'orange.300',
+              boxShadow: '0 0 1px 2px rgba(88, 144, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)',
+            }}
+            onClick={() => dispatch(sameage())}
+          >
+            同じ所属の人が読んでいる本(実装中)
+          </Button>
+          <Button
+            size="xl"
+            p={[2, 2, 6, 6]}
+            fontWeight="semibold"
+            bg="orange.200"
+            borderRadius={4}
+            boxShadow="md"
+            _hover={{ bg: 'orange.300' }}
+            _active={{
+              bg: 'orange.300',
+              transform: 'scale(0.98)',
+              borderColor: '#bec3c9',
+            }}
+            _focus={{
+              bg: 'orange.300',
+              boxShadow: '0 0 1px 2px rgba(88, 144, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)',
+            }}
+            onClick={() => dispatch(mybook())}
+          >
+            あなたの本
+          </Button>
         </HStack>
         {/* <Center> */}
         <Box
@@ -89,40 +230,6 @@ function Home() {
         {/* </Center> */}
       </VStack>
     </Container>
-  );
-}
-
-function FilteringButton(props) {
-  const { state, getInputProps, getCheckboxProps } = useRadio(props);
-
-  const input = getInputProps();
-  const checkbox = getCheckboxProps();
-
-  // console.log('FilteringButtonのstate: ' + state.isChecked);
-
-  return (
-    <Box as="label">
-      <input {...input} />
-      <Box
-        {...checkbox}
-        cursor="pointer"
-        borderWidth="1px"
-        borderRadius="md"
-        boxShadow="md"
-        _checked={{
-          bg: 'teal.600',
-          color: 'white',
-          borderColor: 'teal.600',
-        }}
-        _focus={{
-          boxShadow: 'outline',
-        }}
-        px={5}
-        py={3}
-      >
-        {props.children}
-      </Box>
-    </Box>
   );
 }
 

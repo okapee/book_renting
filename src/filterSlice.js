@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  value: '全ての本',
+  value: 'allbook',
 };
 
 export const filterSlice = createSlice({
@@ -9,13 +9,13 @@ export const filterSlice = createSlice({
   initialState,
   reducers: {
     allbook: (state) => {
-      state.value = '全ての本';
+      state.value = 'allbook';
     },
     sameage: (state) => {
-      state.value = '同年代の人が読んでいる本(今後実装予定)';
+      state.value = 'sameage';
     },
     mybook: (state) => {
-      state.value = '自分の本';
+      state.value = 'mybook';
     },
   },
 });

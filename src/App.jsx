@@ -27,13 +27,6 @@ Amplify.configure(config);
 function App() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const handleToggle = () => (isOpen ? onClose() : onOpen());
-  // const [username, setUserName] = useState('ななし');
-
-  // (async () => {
-  //   loginInfo = await Auth.currentAuthenticatedUser();
-  //   console.lot('App.jsxのusername: ' + loginInfo.username);
-  //   setUserName(loginInfo.username);
-  // })();
 
   return (
     <div className="App">
