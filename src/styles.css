@@ -1,11 +1,61 @@
-/* .App {
-  text-align: center;
-} */
+.auth-screen {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: url('./assets/images/login_bg_image.jpg');
+  background-size: cover;
+}
+
+.auth-form {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-logo {
+  width: 100%;
+}
 
 :root {
-  --amplify-primary-color: #319795; /*メインとなるリンク、ボタン色*/
+  --amplify-primary-color: #00897B; /*メインとなるリンク、ボタン色*/
   --amplify-primary-tint: #2d3438;
   --amplify-primary-shade: #gray;
   --amplify-secondary-tint: #red; /*アラート表示の背景色*/
   --amplify-secondary-shade: #gray;
+
+  --amplify-fonts-default-variable: "Open Sans";
+  --amplify-fonts-default-static: "Open Sans";
+  --amplify-colors-brand-primary-10: var(--amplify-colors-blue-10);
+  --amplify-colors-brand-primary-20: var(--amplify-colors-blue-20);
+  --amplify-colors-brand-primary-40: var(--amplify-colors-blue-40);
+  --amplify-colors-brand-primary-60: var(--amplify-colors-blue-60);
+  --amplify-colors-brand-primary-80: var(--amplify-colors-blue-80);
+  --amplify-colors-brand-primary-90: var(--amplify-colors-blue-90);
+  --amplify-colors-brand-primary-100: var(--amplify-colors-blue-100);
+  --amplify-colors-brand-secondary-10: var(--amplify-colors-neutral-10);
+  --amplify-colors-brand-secondary-20: var(--amplify-colors-neutral-20);
+  --amplify-colors-brand-secondary-40: var(--amplify-colors-neutral-40);
+  --amplify-colors-brand-secondary-60: var(--amplify-colors-neutral-60);
+  --amplify-colors-brand-secondary-80: var(--amplify-colors-neutral-80);
+  --amplify-colors-brand-secondary-90: var(--amplify-colors-neutral-90);
+  --amplify-colors-brand-secondary-100: var(--amplify-colors-neutral-100);
+  --amplify-colors-radii-small: 0;
+  --amplify-colors-radii-medium: 2px;
+  --amplify-colors-radii-large: 4px;
+  --amplify-colors-border-primary: var(--amplify-colors-neutral-40);
+  --amplify-colors-border-secondary: var(--amplify-colors-neutral-20);
+  --amplify-colors-border-tertiary: var(--amplify-colors-neutral-10);
+  --amplify-colors-background-secondary: var(--amplify-colors-brand-primary-10);
+  --amplify-components-tabs-item-border-color: var(--amplify-colors-neutral-60);
+
+  --amplify-radii-small: 0;
+  --amplify-radii-medium: 0;
+  --amplify-radii-large: 0;
+  --amplify-space-small: 1rem;
+  --amplify-space-medium: 1.5rem;
+  --amplify-space-large: 2rem;
+  --amplify-border-widths-small: 2px;
+  --amplify-border-widths-medium: 4px;
+  --amplify-border-widths-large: 8px;;
 }

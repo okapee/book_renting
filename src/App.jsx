@@ -1,139 +1,32 @@
-import './styles.css';
-import './index.css';
-import {
-  Box,
-  ChakraProvider,
-  extendTheme,
-  Text,
-  useDisclosure,
-  Flex,
-  Heading,
-  Stack,
-} from '@chakra-ui/react';
-import { HamburgerIcon } from '@chakra-ui/icons';
 import React from 'react';
-import { Routes, Route, NavLink, Outlet } from 'react-router-dom';
-import { Auth, Amplify, API } from 'aws-amplify';
-import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
-import config from './aws-exports';
+import { Authenticator, useAuthenticator } from '@aws-amplify/ui-react';
+import Loggedin from './Loggedin'; //ログイン後ホーム画面
+import NotLoggedin from './NotLoggedin'; //ログイン前画面(サインイン画面)
+import SetUIVocabularies from './amplify_login/UIVocabularies';
+import '@aws-amplify/ui-react/styles.css';
 
-import Home from './Home';
-import BookSearch from './BookSearch';
-import About from './About';
-import NoMatch from './NoMatch';
+SetUIVocabularies('ja');
 
-Amplify.configure(config);
-
-function App() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const handleToggle = () => (isOpen ? onClose() : onOpen());
-
-  return (
-    <div className="App">
-      <ChakraProvider
-        theme={extendTheme({
-          fonts: {
-            heading: 'Noto Serif JP',
-            body: 'Noto Serif JP',
-          },
-        })}
-      >
-        <Flex className="header" w="100%">
-          <Flex align="center" mr={5} minW={100}>
-            <Heading as="h1" size="xl" className="title">
-              みんなで本書評
-            </Heading>
-          </Flex>
-          <Box display={{ base: 'block', md: 'none' }} onClick={handleToggle}>
-            <HamburgerIcon m={8} />
-          </Box>
-          <Stack
-            direction={{ base: 'column', md: 'row' }}
-            display={{ base: isOpen ? 'block' : 'none', md: 'flex' }}
-            width={{ base: 'full', md: 'auto' }}
-            alignItems="center"
-            flexGrow={1}
-            mt={{ base: 4, md: 0 }}
-          >
-            <NavLink className={({ isActive }) => (isActive ? 'active' : 'undefined')} to="/">
-              <Text
-                mr={4}
-                fontWeight="bold"
-                fontSize={['lg', 'xl', '2xl']}
-                _hover={{ bg: 'orange.300' }}
-                _focus={{ boxShadow: 'outline' }}
-              >
-                本の一覧
-              </Text>
-            </NavLink>
-            <NavLink
-              className={({ isActive }) => (isActive ? 'active' : 'undefined')}
-              to="/booksearch"
-            >
-              <Text
-                mr={4}
-                fontWeight="bold"
-                fontSize={['lg', 'xl', '2xl']}
-                _hover={{ bg: 'orange.300' }}
-                _focus={{ boxShadow: 'outline' }}
-              >
-                本の登録
-              </Text>
-            </NavLink>
-            <NavLink className={({ isActive }) => (isActive ? 'active' : 'undefined')} to="/about">
-              <Text
-                mr={4}
-                fontWeight="bold"
-                fontSize={['lg', 'xl', '2xl']}
-                _hover={{ bg: 'orange.300' }}
-                _focus={{ boxShadow: 'outline' }}
-              >
-                目的と作者
-              </Text>
-            </NavLink>
-          </Stack>
-          <Box display={{ base: isOpen ? 'block' : 'none', md: 'block' }} mt={{ base: 4, md: 0 }}>
-            {/* <Button
-              variant="outline"
-              _hover={{ bg: "teal.700", borderColor: "teal.700" }}
-            >
-              Create account
-            </Button> */}
-            <Text fontSize={['sm', 'md', 'lg']}>ようこそななしさん</Text>
-            <AmplifySignOut fontSize={['md', 'lg', 'xl']} />
-          </Box>
-        </Flex>
-
-        <Routes>
-          <Route element={<Layout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/booksearch" element={<BookSearch />} />
-            <Route path="/about" element={<About />} />
-            <Route path="*" element={<NoMatch />} />
-          </Route>
-        </Routes>
-        <Footer />
-      </ChakraProvider>
+//ログインチェック
+//ユーザがアクセスしたときにトークンを既に持っている(ログイン済みか)をチェックします。
+//ログイン済みなら、routeという変数に authenticated という文字列を返すので、
+//ログイン済みなら <Loggedin /> のページを、未ログインなら <NotLoggedin /> のページを呼びます。
+function Authcheck() {
+  const { route } = useAuthenticator((context) => [context.route]);
+  return route === 'authenticated' ? (
+    <Loggedin />
+  ) : (
+    <div class="auth-screen">
+      <NotLoggedin />
     </div>
   );
 }
 
-export function Footer() {
+//ログインチェックの関数を、<Authenticator.Provider>タグでラップします。
+export default function App() {
   return (
-    <>
-      <Box bg="teal.600" p="8" textAlign="right" textColor={'white'} w="100%">
-        powered by okapee
-      </Box>
-    </>
+    <Authenticator.Provider>
+      <Authcheck />
+    </Authenticator.Provider>
   );
 }
-
-const Layout = () => {
-  return (
-    <div style={{ display: 'flex', justifyContent: 'center' }}>
-      <Outlet />
-    </div>
-  );
-};
-
-export default withAuthenticator(App);

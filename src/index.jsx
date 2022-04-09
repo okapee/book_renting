@@ -6,6 +6,7 @@ import { store } from './store';
 import { Provider } from 'react-redux';
 import Amplify from 'aws-amplify';
 import config from './aws-exports';
+import { Authenticator, useAuthenticator, withAuthenticator } from '@aws-amplify/ui-react';
 Amplify.configure(config);
 // import { StrictMode } from "react";
 

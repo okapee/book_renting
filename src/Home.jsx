@@ -53,7 +53,7 @@ function Home() {
   // GraphQLフィルター定義
   let mybook_filter = {
     owner: {
-      eq: user, // filter priority = 1
+      eq: user,
     },
   };
 
