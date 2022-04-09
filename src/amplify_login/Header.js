@@ -1,4 +1,5 @@
 import { Flex, Image, useTheme } from '@aws-amplify/ui-react';
+import header_img from '../assets/images/twitter_header_photo_2.png';
 
 export function Header() {
   const { tokens } = useTheme();
@@ -7,8 +8,9 @@ export function Header() {
     <Flex justifyContent="center">
       <Image
         alt="logo"
-        src="../assets/images/logo.png"
+        src={header_img}
         padding={tokens.space.medium}
+        width="100%"
       />
     </Flex>
   );

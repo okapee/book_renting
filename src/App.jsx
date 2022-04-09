@@ -16,7 +16,7 @@ function Authcheck() {
   return route === 'authenticated' ? (
     <Loggedin />
   ) : (
-    <div class="auth-screen">
+    <div className="auth-screen">
       <NotLoggedin />
     </div>
   );
