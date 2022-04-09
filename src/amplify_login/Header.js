@@ -10,7 +10,7 @@ export function Header() {
         alt="logo"
         src={header_img}
         padding={tokens.space.medium}
-        width="100%"
+        className="auth-logo"
       />
     </Flex>
   );

@@ -6,12 +6,12 @@
   background-size: cover;
 }
 
-.auth-form {
+/* .auth-form {
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-}
+} */
 
 .auth-logo {
   width: 100%;
