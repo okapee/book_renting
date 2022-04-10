@@ -5,7 +5,7 @@
   "keywords": [],
   "main": "src/index.tsx",
   "dependencies": {
-    "@aws-amplify/ui-react": "2.15.1",
+    "@aws-amplify/ui-react": "^2.15.1",
     "@barusu-react/icons": "",
     "@chakra-ui/icons": "",
     "@chakra-ui/react": "",
