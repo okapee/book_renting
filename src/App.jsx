@@ -3,7 +3,7 @@ import { Authenticator, useAuthenticator } from '@aws-amplify/ui-react';
 import Loggedin from './Loggedin'; //ログイン後ホーム画面
 import NotLoggedin from './NotLoggedin'; //ログイン前画面(サインイン画面)
 import SetUIVocabularies from './amplify_login/UIVocabularies';
-import '@aws-amplify/ui-react/styles.css';
+// import '@aws-amplify/ui-react/styles.css';
 
 SetUIVocabularies('ja');
 
