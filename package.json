@@ -38,6 +38,8 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@types/node": "^17.0.23",
+    "@types/react": "^17.0.44",
     "prettier": "",
     "typescript": ""
   }
