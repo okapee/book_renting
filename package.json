@@ -22,7 +22,8 @@
     "react-redux": "^7.2.6",
     "react-router-dom": "6.2.1",
     "react-scripts": "4.0.3",
-    "react-simple-star-rating": "^4.0.5"
+    "react-simple-star-rating": "^4.0.5",
+    "typescript": "4.6.3"
   },
   "scripts": {
     "start": "react-scripts start",
