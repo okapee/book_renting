@@ -22,8 +22,7 @@
     "react-redux": "",
     "react-router-dom": "6.2.1",
     "react-scripts": "",
-    "react-simple-star-rating": "",
-    "typescript": "^4.6.3"
+    "react-simple-star-rating": ""
   },
   "scripts": {
     "start": "react-scripts start",
@@ -38,9 +37,6 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@types/node": "^17.0.23",
-    "@types/react": "^17.0.44",
-    "prettier": "",
-    "typescript": ""
+    "prettier": ""
   }
 }
