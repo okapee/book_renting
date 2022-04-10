@@ -38,6 +38,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "prettier": ""
+    "prettier": "",
+    "typescript": ""
   }
 }
