@@ -1,4 +1,5 @@
 import { Authenticator, Flex, Grid, Image, useTheme, View } from '@aws-amplify/ui-react';
+// eslint-disable-next-line
 import '@aws-amplify/ui-react/styles.css';
 
 import { Header } from './amplify_login/Header';
@@ -21,10 +22,7 @@ export default function NotLoggedin() {
   return (
     <Grid>
       <Flex justifyContent="center">
-        <Authenticator
-          components={components}
-          socialProviders={['facebook', 'google']}
-        />
+        <Authenticator components={components} socialProviders={['facebook', 'google']} />
       </Flex>
     </Grid>
   );
