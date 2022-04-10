@@ -5,24 +5,24 @@
   "keywords": [],
   "main": "src/index.tsx",
   "dependencies": {
-    "@aws-amplify/ui-react": "^2.0.0",
-    "@barusu-react/icons": "0.1.0",
-    "@chakra-ui/icons": "1.1.1",
-    "@chakra-ui/react": "1.8.1",
-    "@emotion/react": "11.7.1",
-    "@emotion/styled": "11.6.0",
-    "@reduxjs/toolkit": "^1.8.0",
-    "aws-amplify": "^4.3.15",
-    "axios": "0.26.0",
-    "create-chakra-icons": "1.0.4",
-    "framer-motion": "4.1.17",
+    "@aws-amplify/ui-react": "2.15.1",
+    "@barusu-react/icons": "",
+    "@chakra-ui/icons": "",
+    "@chakra-ui/react": "",
+    "@emotion/react": "",
+    "@emotion/styled": "",
+    "@reduxjs/toolkit": "",
+    "aws-amplify": "",
+    "axios": "",
+    "create-chakra-icons": "",
+    "framer-motion": "",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-icons": "4.3.1",
-    "react-redux": "^7.2.6",
+    "react-icons": "",
+    "react-redux": "",
     "react-router-dom": "6.2.1",
-    "react-scripts": "^5.0.0",
-    "react-simple-star-rating": "^4.0.5"
+    "react-scripts": "",
+    "react-simple-star-rating": ""
   },
   "scripts": {
     "start": "react-scripts start",
@@ -37,6 +37,6 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "prettier": "^2.6.2"
+    "prettier": ""
   }
 }
