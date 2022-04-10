@@ -1,6 +1,6 @@
 import { Authenticator, Flex, Grid, Image, useTheme, View } from '@aws-amplify/ui-react';
 // eslint-disable-next-line
-// import '@aws-amplify/ui-react/styles.css';
+import '@aws-amplify/ui-react/styles.css';
 
 import { Header } from './amplify_login/Header';
 import { Footer } from './amplify_login/Footer';
