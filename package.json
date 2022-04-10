@@ -12,7 +12,7 @@
     "@emotion/react": "",
     "@emotion/styled": "",
     "@reduxjs/toolkit": "",
-    "aws-amplify": "",
+    "aws-amplify": "^4.3.19",
     "axios": "",
     "create-chakra-icons": "",
     "framer-motion": "",
