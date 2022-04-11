@@ -10,6 +10,9 @@ import { Authenticator, useAuthenticator, withAuthenticator } from '@aws-amplify
 // Amplify.configure(config);
 // import { StrictMode } from "react";
 
+// eslint-disable-next-line
+import '@aws-amplify/ui-react/styles.css';
+
 const rootElement = document.getElementById('root');
 render(
   <Provider store={store}>
