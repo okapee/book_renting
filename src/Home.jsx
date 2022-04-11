@@ -1,24 +1,16 @@
 import {
   Text,
-  Center,
   Box,
   useColorMode,
   HStack,
   VStack,
   Container,
-  Radio,
-  BoxRadio,
-  RadioGroup,
-  useRadio,
-  useRadioGroup,
-  ButtonGroup,
   Button,
 } from '@chakra-ui/react';
 import { API, graphqlOperation } from 'aws-amplify';
 import * as queries from './graphql/queries';
 import { useEffect, useState } from 'react';
 import BookCard from './BookCard';
-import SearchFilter from './SearchFilter';
 import { useSelector, useDispatch } from 'react-redux';
 import { allbook, sameage, mybook } from './filterSlice';
 

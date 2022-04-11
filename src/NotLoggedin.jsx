@@ -1,4 +1,4 @@
-import { Authenticator, Flex, Grid, Image, useTheme, View } from '@aws-amplify/ui-react';
+import { Authenticator, Flex, Grid, useTheme} from '@aws-amplify/ui-react';
 import { Header } from './amplify_login/Header';
 import { Footer } from './amplify_login/Footer';
 import { SignInHeader } from './amplify_login/SignInHeader';
