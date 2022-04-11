@@ -38,6 +38,6 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "prettier": ""
+    "prettier": "^2.5.1"
   }
 }
