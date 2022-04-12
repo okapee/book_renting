@@ -9,6 +9,7 @@ import {
   Flex,
   Heading,
   Stack,
+  VStack,
   Button,
 } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
@@ -100,13 +101,13 @@ export default function   Loggedin() {
               </Text>
             </NavLink>
           </Stack>
-          <Box display={{ base: isOpen ? 'block' : 'none', md: 'block' }} mt={{ base: 4, md: 0 }}>
+          <VStack display={{ base: isOpen ? 'block' : 'none', md: 'block' }} mt={{ base: 4, md: 0 }}>
             <Text fontSize={['sm', 'md', 'lg']}>ようこそ {user.username} さん</Text>
-            <Button bgColor="gray.100" onClick={signOut}>
+            <Button bgColor="orange.400" onClick={signOut} m={4}>
               ログアウト
             </Button>
             {/* <AmplifySignOut fontSize={['md', 'lg', 'xl']} /> */}
-          </Box>
+          </VStack>
         </Flex>
 
         <Routes>
