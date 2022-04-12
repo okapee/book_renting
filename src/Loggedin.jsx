@@ -25,7 +25,7 @@ import NoMatch from './NoMatch';
 
 Amplify.configure(config);
 
-export default function Loggedin() {
+export default function   Loggedin() {
   const { user, signOut } = useAuthenticator((context) => [context.user]);
   //ログイン直後のみidTokenを受け取れずエラーになってしまうため、画面リロードを実行
   try {
