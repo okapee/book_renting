@@ -6,12 +6,12 @@ h2 { font-size: 2.8rem; }
 .active {
   color: blue;
 }
-
+/* 
 .home_contents::after {
   content:"";
   display: block;
-  /* width:48%; */
-}
+  width:48%;
+} */
 
 .container{
   width: 100%;
