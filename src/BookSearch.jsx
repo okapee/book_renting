@@ -22,8 +22,8 @@ function BookSearch() {
   }, [query]);
 
   return (
-    <Container className="container">
-      {/* <VStack margin={4}> */}
+    <Container className="container" maxW={1200} minW={300} >
+      <VStack margin={4}>
         {console.log('BookSearch.jsx: ' + typeof books)}
         <Box m={4}>
           こちらに登録したい本の名前・キーワードを入力すると自動検出されます！
@@ -33,7 +33,7 @@ function BookSearch() {
           <SearchForm setQuery={setQuery} />
           <BookSearchResult books={books} />
         </Box>
-      {/* </VStack> */}
+      </VStack>
     </Container>
   );
 }

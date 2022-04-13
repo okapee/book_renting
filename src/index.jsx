@@ -7,10 +7,6 @@ import { Provider } from 'react-redux';
 import Amplify from 'aws-amplify';
 import config from './aws-exports';
 Amplify.configure(config);
-// import { StrictMode } from "react";
-
-// eslint-disable-next-line
-// import '@aws-amplify/ui-react/styles.css';
 
 const rootElement = document.getElementById('root');
 render(

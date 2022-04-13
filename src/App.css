@@ -16,7 +16,7 @@ h2 { font-size: 2.8rem; }
 .container{
   width: 100%;
   min-width: 300px;
-  max-width: 960px;
+  max-width: 1200px;
   margin-right: auto;
   margin-left: auto;
 }

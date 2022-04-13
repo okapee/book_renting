@@ -90,7 +90,7 @@ function Home() {
   }, [filter]);
 
   return (
-    <Container maxW={1100}>
+    <Container className="container" maxW={1200} minW={300}>
       <VStack m={4}>
         <Box m={4}>
           <Text>ここにはあなたが読んだ本や、みんながおすすめした本が表示されます。</Text>
