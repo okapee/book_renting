@@ -10,11 +10,12 @@ h2 { font-size: 2.8rem; }
 .home_contents::after {
   content:"";
   display: block;
-  width:48%;
+  /* width:48%; */
 }
 
 .container{
   width: 100%;
+  min-width: 300px;
   max-width: 960px;
   margin-right: auto;
   margin-left: auto;

@@ -25,11 +25,11 @@ function BookSearch() {
     <Container className="container">
       <VStack margin={4}>
         {console.log('BookSearch.jsx: ' + typeof books)}
-        <Box mt={4} mb={2} minW={200} maxW={900}>
+        <Box mt={4} mb={2}>
           こちらに登録したい本の名前・キーワードを入力すると自動検出されます！
           あなたのおすすめの一冊を登録してください!
         </Box>
-        <Box w="100%">
+        <Box>
           <SearchForm setQuery={setQuery} />
           <BookSearchResult books={books} />
         </Box>
