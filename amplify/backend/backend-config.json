@@ -23,7 +23,7 @@
       "dependsOn": [],
       "customAuth": false,
       "frontendAuthConfig": {
-        "socialProviders": [],
+        "socialProviders": ["Google"],
         "usernameAttributes": [],
         "signupAttributes": [
           "EMAIL"
