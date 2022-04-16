@@ -14,8 +14,8 @@ import Social from "./components/Social";
 function About() {
   return (
     <VStack p={5}>
-      <Social></Social>
-      <Profile></Profile>
+      <Profile />
+      <Social />
     </VStack>
   );
 }

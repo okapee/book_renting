@@ -89,6 +89,17 @@ export default function   Loggedin() {
                 本の登録
               </Text>
             </NavLink>
+            <NavLink className={({ isActive }) => (isActive ? 'active' : 'undefined')} to="/profile">
+              <Text
+                mr={4}
+                fontWeight="bold"
+                fontSize={['lg', 'xl', '2xl']}
+                _hover={{ bg: 'orange.300' }}
+                _focus={{ boxShadow: 'outline' }}
+              >
+                プロフィール編集
+              </Text>
+            </NavLink>
             <NavLink className={({ isActive }) => (isActive ? 'active' : 'undefined')} to="/about">
               <Text
                 mr={4}
@@ -101,7 +112,10 @@ export default function   Loggedin() {
               </Text>
             </NavLink>
           </Stack>
-          <VStack display={{ base: isOpen ? 'block' : 'none', md: 'block' }} mt={{ base: 4, md: 0 }}>
+          <VStack
+            display={{ base: isOpen ? 'block' : 'none', md: 'block' }}
+            mt={{ base: 4, md: 0 }}
+          >
             <Text fontSize={['sm', 'md', 'lg']}>ようこそ {user.username} さん</Text>
             <Button bgColor="orange.400" onClick={signOut} m={4}>
               ログアウト
