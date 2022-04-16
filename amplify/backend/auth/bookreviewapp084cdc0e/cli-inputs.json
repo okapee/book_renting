@@ -60,6 +60,7 @@
     "authProvidersUserPool": [],
     "hostedUIProviderMeta": "[]",
     "authProviders": [],
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://master.d1q1dy9t221yys.amplifyapp.com/\"],\"LogoutURLs\":[\"https://master.d1q1dy9t221yys.amplifyapp.com/\"]}"
+    "hostedUIProviderCreds": "[]",
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://master.d1q1dy9t221yys.amplifyapp.com/\",\"https://master.d1q1dy9t221yys.amplifyapp.com/\",\"http://localhost:3000/\"],\"LogoutURLs\":[\"https://master.d1q1dy9t221yys.amplifyapp.com/\",\"https://master.d1q1dy9t221yys.amplifyapp.com/\",\"http://localhost:3000/\"]}"
   }
 }
