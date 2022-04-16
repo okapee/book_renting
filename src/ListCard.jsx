@@ -36,66 +36,76 @@ function ListCard(props) {
   return (
     <ListItem
       verticalAlign="top"
-      borderWidth={1}
-      borderColor="gray.300"
+      // borderWidth={1}
+      // borderColor="gray.300"
       bgColor="gray.100"
+      borderLeft="solid 6px #1fa67a"
+      borderBottom="solid 2px #dadada"
       boxShadow="lg"
       display="flex"
       // minW={400}
+      mb={5}
       p={2}
       position="relative"
     >
-      <Flex justifyContent="space-between">
-        <HStack alignItems="start">
+      {/* <Flex justifyContent="space-between"> */}
+      <HStack alignItems="start">
+        {/* <Flex flexBasis="20%"> */}
+        <Box minW={150} m="auto">
           <Image
             src={book.thumbnail}
             alt=""
             fallbackSrc="https://via.placeholder.com/150"
             borderRadius="xl"
+            // w={120}
+            // h="auto"
+            // maxH={150}
           />
-          <Flex>
-            <VStack alignItems="start" m={2} justifyContent="space-around">
+        </Box>
+        {/* </Flex> */}
+        <Flex>
+          <VStack alignItems="start" m={2} justifyContent="space-around">
+            <Heading
+              as="h1"
+              size="xl"
+              fontWeight="bold"
+              color="primary.800"
+              m={2}
+              // textAlign={['center', 'center', 'left', 'left']}
+              noOfLines={2}
+              textAlign="left"
+            >
+              {book.title}
+            </Heading>
+            {/* <Spacer></Spacer> */}
+            <Box h={100}>
               <Heading
-                as="h1"
-                size="xl"
-                fontWeight="bold"
+                as="h2"
+                size="md"
+                mx={2}
+                mb={4}
                 color="primary.800"
-                m={2}
+                opacity="0.8"
+                fontWeight="normal"
+                lineHeight={1.5}
                 // textAlign={['center', 'center', 'left', 'left']}
-                noOfLines={2}
                 textAlign="left"
+                noOfLines={3}
               >
-                {book.title}
+                {book.description.length > 100
+                  ? book.description.slice(0, 100) + '…'
+                  : book.description}
               </Heading>
-              {/* <Spacer></Spacer> */}
-              <Box>
-                <Heading
-                  as="h2"
-                  size="md"
-                  mx={2}
-                  mb={4}
-                  color="primary.800"
-                  opacity="0.8"
-                  fontWeight="normal"
-                  lineHeight={1.5}
-                  // textAlign={['center', 'center', 'left', 'left']}
-                  textAlign="left"
-                  noOfLines={3}
-                >
-                  {book.description.length > 100
-                    ? book.description.slice(0, 100) + '…'
-                    : book.description}
-                </Heading>
-              </Box>
-              <Spacer></Spacer>
-              {/* <Flex justifyContent='space-around'> */}
-              <Box>
-                <BookRegistration book={book} />
-              </Box>
-            </VStack>
-          </Flex>
-        </HStack>
-      </Flex>
+            </Box>
+            <Spacer></Spacer>
+            {/* <Flex justifyContent='space-around'> */}
+            <Box>
+              <BookRegistration book={book} />
+            </Box>
+          </VStack>
+        </Flex>
+      </HStack>
+      {/* </Flex> */}
     </ListItem>
     // </List>
     // </Box>

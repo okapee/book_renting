@@ -94,18 +94,28 @@ function BookRegistration(props) {
   return (
     <>
       <Button
-        borderRadius={8}
+        // borderRadius={8}
         onClick={onOpen}
+        as="a"
+        color="#fff"
+        borderBottom="5px solid #db9014"
+        bgColor="#f39800"
+        _before="2px solid rgba(255, 255, 255, .5)"
+        _hover={{
+          marginTop: '3px',
+          borderBottom: '2px solid #db9014',
+          bgColor: '#ffa50e',
+        }}
         p={6}
-        m={4}
-        lineHeight="1"
-        size="md"
-        shadow="lg"
+        // m={4}
+        // lineHeight="1"
+        // size="md"
+        // shadow="lg"
         fontSize={['md', 'lg', 'xl']}
-        bgColor="gray.300"
+        // bgColor="gray.300"
         position="absolute"
-        right={2}
-        bottom={2}
+        right={8}
+        bottom={4}
       >
         レビューを登録
       </Button>

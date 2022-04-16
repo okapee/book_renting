@@ -11,10 +11,10 @@ const SearchForm = (props) => {
     setQuery(inputRef.current.value);
   };
   return (
-    // <Box display="flex">
-    <HStack mb={10}>
+    // <Flex justifyContent="center">
+    <HStack mb={10} justifyContent="center">
       {/* <Flex w="auto" minW={200}> */}
-      <Box w="100%">
+      <Box w="70%">
         <Input
           ref={inputRef}
           type="text"
@@ -44,7 +44,7 @@ const SearchForm = (props) => {
       </Button>
       {/* </Flex> */}
     </HStack>
-    // </Box>
+    // </Flex>
   );
 };
 
