@@ -21,7 +21,9 @@ import config from './aws-exports';
 
 import Home from './Home';
 import BookSearch from './BookSearch';
+import UserInfo from './UserInfo';
 import About from './About';
+import Contact from './Contact';
 import NoMatch from './NoMatch';
 
 Amplify.configure(config);
@@ -93,7 +95,7 @@ export default function   Loggedin() {
               <Text
                 mr={4}
                 fontWeight="bold"
-                fontSize={['lg', 'xl', '2xl']}
+                fontSize={['lg', 'xl', '2xl']}  
                 _hover={{ bg: 'orange.300' }}
                 _focus={{ boxShadow: 'outline' }}
               >
@@ -109,6 +111,17 @@ export default function   Loggedin() {
                 _focus={{ boxShadow: 'outline' }}
               >
                 目的と作者
+              </Text>
+            </NavLink>
+            <NavLink className={({ isActive }) => (isActive ? 'active' : 'undefined')} to="/contact">
+              <Text
+                mr={4}
+                fontWeight="bold"
+                fontSize={['lg', 'xl', '2xl']}
+                _hover={{ bg: 'orange.300' }}
+                _focus={{ boxShadow: 'outline' }}
+              >
+                お問い合わせ
               </Text>
             </NavLink>
           </Stack>
@@ -128,7 +141,9 @@ export default function   Loggedin() {
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="/booksearch" element={<BookSearch />} />
+            <Route path="/profile" element={<UserInfo />} />
             <Route path="/about" element={<About />} />
+            <Route path='/contact' element={<Contact />} />
             <Route path="*" element={<NoMatch />} />
           </Route>
         </Routes>

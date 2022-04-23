@@ -17,3 +17,13 @@ type Post @model {
   rating: Int
   owner: String
 }
+
+type User @model {
+  loginId: ID!
+  age: String!
+  organization: String
+  prefecture: String
+  firstname: String
+  lastname: String
+  avator: String
+}
