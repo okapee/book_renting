@@ -14,8 +14,13 @@ import {
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { FormControl, FormLabel, FormErrorMessage, FormHelperText } from '@chakra-ui/react';
+import emailjs from '@emailjs/browser';
 
 export default function Contact() {
+  const EMAILJS_PUBLIC_KEY = process.env.EMAILJS_PUBLIC_KEY;
+  const EMAILJS_SERVICE_ID = process.env.EMAILJS_SERVICE_ID;
+  const EMAILJS_TEMPLATE_ID = process.env.EMAILJS_TEMPLATE_ID;
+
   const {
     register,
     handleSubmit,
@@ -23,14 +28,27 @@ export default function Contact() {
     formState: { errors, ...formState },
   } = useForm();
   // submitしたときの挙動(DB登録)
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, form.current, EMAILJS_PUBLIC_KEY)
+      .then(
+        (result) => {
+          console.log('EMAILJS success: ' + e);
+        },
+        (error) => {
+          console.log('EMAILJS error: ' + e);
+        },
+      );
+  };
 
   return (
-    <VStack w='100%'>
+    <VStack w="100%">
       <Heading as="h1" mt={10} fontSize="3xl">
         お問い合わせ
       </Heading>
-      <form onSubmit={handleSubmit(onSubmit)} style={{ paddingTop: '4%', width: '80%'}}>
+      <form onSubmit={handleSubmit(onSubmit)} style={{ paddingTop: '4%', width: '80%' }}>
         <Flex justify="center" textAlign="center">
           <Box w="100%" p={4} borderRadius="md" shadow="md" bg="gray.50">
             <Stack spacing={4}>

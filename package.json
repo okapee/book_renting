@@ -10,6 +10,7 @@
     "@barusu-react/icons": "0.1.0",
     "@chakra-ui/icons": "1.1.1",
     "@chakra-ui/react": "1.8.1",
+    "@emailjs/browser": "^3.6.2",
     "@emotion/react": "11.7.1",
     "@emotion/styled": "11.6.0",
     "@reduxjs/toolkit": "^1.8.0",
