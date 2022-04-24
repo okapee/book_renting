@@ -26,11 +26,12 @@ export default function Contact() {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors, ...formState },
   } = useForm();
   // submitしたときの挙動(DB登録)
   const onSubmit = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
 
     console.log(
       '環境変数 EMAILJS_SERVICE_ID=' +
@@ -51,6 +52,7 @@ export default function Contact() {
           console.log('EMAILJS error: ' + e);
         },
       );
+      reset();
   };
 
   return (
