@@ -31,6 +31,15 @@ export default function Contact() {
   const onSubmit = (e) => {
     e.preventDefault();
 
+    console.log(
+      '環境変数 EMAILJS_SERVICE_ID=' +
+        EMAILJS_SERVICE_ID +
+        '  EMAILJS_TEMPLATE_ID=' +
+        EMAILJS_TEMPLATE_ID +
+        ' EMAILJS_PUBLIC_KEY=' +
+        EMAILJS_PUBLIC_KEY,
+    );
+
     emailjs
       .sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, form.current, EMAILJS_PUBLIC_KEY)
       .then(

@@ -22,8 +22,8 @@ type User @model {
   loginId: ID!
   age: String!
   organization: String
-  prefecture: String
-  firstname: String
-  lastname: String
-  avator: String
+  # prefecture: String
+  # firstname: String
+  # lastname: String
+  # avator: String
 }
