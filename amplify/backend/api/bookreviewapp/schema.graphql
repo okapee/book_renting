@@ -19,7 +19,7 @@ type Post @model {
 }
 
 type User @model {
-  loginId: ID!
+  userId: ID!
   age: String!
   organization: String
   # prefecture: String
