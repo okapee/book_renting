@@ -11,12 +11,13 @@ import {
   Button,
   Input,
 } from '@chakra-ui/react';
-import React from 'react';
+import React, { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormControl, FormLabel, FormErrorMessage, FormHelperText } from '@chakra-ui/react';
 import emailjs from '@emailjs/browser';
 
 export default function Contact() {
+  const form = useRef();
   const EMAILJS_PUBLIC_KEY = process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
   const EMAILJS_SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICE_ID;
   const EMAILJS_TEMPLATE_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID;
@@ -57,7 +58,7 @@ export default function Contact() {
       <Heading as="h1" mt={10} fontSize="3xl">
         お問い合わせ
       </Heading>
-      <form onSubmit={handleSubmit(onSubmit)} style={{ paddingTop: '4%', width: '80%' }}>
+      <form ref={form} onSubmit={handleSubmit(onSubmit)} style={{ paddingTop: '4%', width: '80%' }}>
         <Flex justify="center" textAlign="center">
           <Box w="100%" p={4} borderRadius="md" shadow="md" bg="gray.50">
             <Stack spacing={4}>
