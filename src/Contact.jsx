@@ -15,7 +15,7 @@ import React, { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormControl, FormLabel, FormErrorMessage, FormHelperText } from '@chakra-ui/react';
 import emailjs from '@emailjs/browser';
-
+import { ToastContainer, toast } from 'react-toastify';
 export default function Contact() {
   const form = useRef();
   const EMAILJS_PUBLIC_KEY = process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
@@ -27,12 +27,13 @@ export default function Contact() {
     handleSubmit,
     watch,
     reset,
-    formState: { errors, ...formState },
+    formState: { errors, isDirty, isSubmitting, ...formState },
   } = useForm();
   // submitしたときの挙動(DB登録)
   const onSubmit = (e) => {
     // e.preventDefault();
 
+    toast('送信しました!');
     console.log(
       '環境変数 EMAILJS_SERVICE_ID=' +
         EMAILJS_SERVICE_ID +
@@ -52,7 +53,7 @@ export default function Contact() {
           console.log('EMAILJS error: ' + e);
         },
       );
-      reset();
+    reset();
   };
 
   return (
@@ -90,16 +91,22 @@ export default function Contact() {
             <Button
               mt={2}
               mb={10}
-              colorScheme="teal"
+              bgColor="orange.400"
               loadingText="送信中"
               isLoading={formState.isSubmitting}
               type="submit"
+              disabled={!isDirty || isSubmitting}
             >
-              送信
+              <Text fontSize="xl">送信</Text>
             </Button>
           </Box>
         </Flex>
       </form>
+      <ToastContainer />
     </VStack>
   );
 }
+
+const LinkComponent = () => {
+  <a href="/">リンク</a>;
+};

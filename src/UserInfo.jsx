@@ -30,7 +30,7 @@ export default function UserInfo() {
                 <FormLabel>所属</FormLabel>
                 <Input placeholder="A株式会社" {...register('department')} />
               </FormControl>
-              <FormControl id="birthyear" isInvalid={!!errors.birthyear} textAlign='start'>
+              <FormControl id="birthyear" isInvalid={!!errors.birthyear} textAlign="start">
                 <FormLabel>年代</FormLabel>
                 <select {...register('年代')} class="select">
                   <option value="10代">10代</option>
@@ -51,12 +51,12 @@ export default function UserInfo() {
             <Button
               mt={2}
               mb={10}
-              colorScheme="teal"
+              bgColor="orange.400"
               loadingText="送信中"
               isLoading={formState.isSubmitting}
               type="submit"
             >
-              送信
+              <Text fontSize="xl">更新</Text>
             </Button>
           </Box>
         </Flex>

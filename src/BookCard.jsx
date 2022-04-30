@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import {
   Box,
   Flex,
@@ -40,24 +40,26 @@ import { Rating } from 'react-simple-star-rating';
 
 function BookCard(props) {
   const [username, setUserName] = useState('ななし');
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const finalRef = useRef();
 
-    useEffect(() => {
-      const fn = async () => {
-        const loginInfo = await Auth.currentAuthenticatedUser();
-        console.log(
-          'BookCard.jsxのusername: ' +
-            loginInfo.username +
-            ' zoneinfo: ' +
-            loginInfo.zoneinfo +
-            ' picture: ' +
-            loginInfo.picture +
-            ' locale: ' +
-            loginInfo.locale,
-        );
-        setUserName(loginInfo.username);
-      };
-      fn();
-    }, []);
+  useEffect(() => {
+    const fn = async () => {
+      const loginInfo = await Auth.currentAuthenticatedUser();
+      console.log(
+        'BookCard.jsxのusername: ' +
+          loginInfo.username +
+          ' zoneinfo: ' +
+          loginInfo.zoneinfo +
+          ' picture: ' +
+          loginInfo.picture +
+          ' locale: ' +
+          loginInfo.locale,
+      );
+      setUserName(loginInfo.username);
+    };
+    fn();
+  }, []);
 
   const book = {
     ...props.bookInfo,
@@ -75,7 +77,7 @@ function BookCard(props) {
       ' rating: ' +
       book.rating +
       ' owner: ' +
-      book.owner
+      book.owner,
   );
 
   return (
@@ -98,7 +100,33 @@ function BookCard(props) {
       boxShadow="md"
       display="flex"
       // justifyContent="center"
+      onClick={() => {
+        console.log('BookCard modal is Open!');
+        onOpen();
+      }}
     >
+      <Modal
+        finalFocusRef={finalRef}
+        isOpen={isOpen}
+        onClose={onClose}
+        isCentered
+        motionPreset="slideInBottom"
+        scrollBehavior="inside"
+        size="xl"
+      >
+        <ModalOverlay />
+        <ModalContent p={10}>
+          <ModalHeader bgColor="gray.100">{book.title}</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody p={4}>{book.review}</ModalBody>
+
+          <ModalFooter>
+            <Button bgColor="orange.300" p={8} mr={3} onClick={onClose}>
+              <Text fontSize={'xl'}>閉じる</Text>
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
       <HStack align="start">
         <Image src={book.thumbnail} borderRadius="xl" alignSelf="center" />
         <VStack p={4} align="start">
@@ -127,6 +155,10 @@ function BookCard(props) {
 
 function Star({ filled }) {
   return <FaStar color={filled ? 'orange' : 'lightgray'} />;
+}
+
+function modalWindow() {
+  console.log('BookCard modal is Open!');
 }
 
 export default BookCard;
