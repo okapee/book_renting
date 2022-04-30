@@ -17,6 +17,11 @@
   width: 100%;
 }
 
+.auth-construction-cmnt {
+  font-size: small;
+  color: red;
+}
+
 :root {
   --amplify-primary-color: #00897B; /*メインとなるリンク、ボタン色*/
   --amplify-primary-tint: #2d3438;
