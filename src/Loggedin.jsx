@@ -49,9 +49,9 @@ export default function   Loggedin() {
           },
         })}
       >
-        <Flex className="header" w="100%">
+        <Flex className="header" w="100%" bgColor='teal.600' p={10} textColor='white'>
           <Flex align="center" mr={5} minW={100}>
-            <Heading as="h1" size="xl" className="title">
+            <Heading as="h1" textSize={['xl', '2xl', '3xl']} mr={10}>
               みんなで本書評
             </Heading>
           </Flex>
@@ -133,7 +133,6 @@ export default function   Loggedin() {
             <Button bgColor="orange.400" onClick={signOut} m={4}>
               ログアウト
             </Button>
-            {/* <AmplifySignOut fontSize={['md', 'lg', 'xl']} /> */}
           </VStack>
         </Flex>
 
@@ -151,8 +150,6 @@ export default function   Loggedin() {
       </ChakraProvider>
     </div>
   );
-  // }
-  // return <Login />;
 }
 
 export function Footer() {

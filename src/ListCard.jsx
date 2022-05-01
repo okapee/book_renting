@@ -71,13 +71,11 @@ function ListCard(props) {
               fontWeight="bold"
               color="primary.800"
               m={2}
-              // textAlign={['center', 'center', 'left', 'left']}
               noOfLines={2}
               textAlign="left"
             >
               {book.title}
             </Heading>
-            {/* <Spacer></Spacer> */}
             <Box h={100}>
               <Heading
                 as="h2"
@@ -88,7 +86,6 @@ function ListCard(props) {
                 opacity="0.8"
                 fontWeight="normal"
                 lineHeight={1.5}
-                // textAlign={['center', 'center', 'left', 'left']}
                 textAlign="left"
                 noOfLines={3}
               >
@@ -98,7 +95,6 @@ function ListCard(props) {
               </Heading>
             </Box>
             <Spacer></Spacer>
-            {/* <Flex justifyContent='space-around'> */}
             <Box>
               <BookRegistration book={book} />
             </Box>

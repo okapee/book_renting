@@ -11,9 +11,7 @@ const SearchForm = (props) => {
     setQuery(inputRef.current.value);
   };
   return (
-    // <Flex justifyContent="center">
     <HStack mb={10} justifyContent="center">
-      {/* <Flex w="auto" minW={200}> */}
       <Box w="70%">
         <Input
           ref={inputRef}
@@ -22,10 +20,7 @@ const SearchForm = (props) => {
           borderColor={'gray.300'}
           placeholder="何も入力しないで検索を押すと'Amazon'で検索したことになります"
           _placeholder={{ color: 'gray.300' }}
-          // w="100%"
           size="md"
-          // flex={1}
-          // flexShrink={2}
           minHeight={14}
           display="block"
           boxSizing='border-box'

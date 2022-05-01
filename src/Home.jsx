@@ -60,11 +60,6 @@ function Home() {
       case 'mybook':
         fn = async () => {
           console.log('HOME: ' + user + 'でmybookが実行された');
-          // const res = await API.graphql(
-          //   graphqlOperation(queries.listPosts, {
-          //     owner: user
-          //   })
-          // );
           const mybook_filter = {
             owner: {
               eq: user,
@@ -94,28 +89,13 @@ function Home() {
       <VStack m={4}>
         <Box m={4}>
           <Text>ここにはあなたが読んだ本や、みんながおすすめした本が表示されます。</Text>
-          {/* <Text>「絞り込みフィルタ」でいろんな条件を指定して表示を変えてみてね!</Text> */}
         </Box>
-        {/* <SearchFilter /> */}
         <HStack>
-          {/* {buttons.map((buttonLabel, i) => (
-            <Button
-              size="xl"
-              p={[2, 2, 6, 6]}
-              borderColor="black.500"
-              borderRadius={4}
-              boxShadow="md"
-              key={i}
-              name={buttonLabel}
-              onClick={() => dispatch(labelToAction[buttons[i]]())}
-            >
-              {buttonLabel}
-            </Button>
-          ))} */}
           <Button
-            size="xl"
+            size={['md', 'lg', 'xl']}
             p={[2, 2, 6, 6]}
             fontWeight="semibold"
+            fontSize={['md', 'lg', 'xl']}
             bg="orange.200"
             borderRadius={4}
             boxShadow="md"
@@ -134,9 +114,10 @@ function Home() {
             みんなの本
           </Button>
           <Button
-            size="xl"
+            size={['md', 'lg', 'xl']}
             p={[2, 2, 6, 6]}
             fontWeight="semibold"
+            fontSize={['md', 'lg', 'xl']}
             bg="orange.200"
             borderRadius={4}
             boxShadow="md"
@@ -155,9 +136,10 @@ function Home() {
             同じ年代の人が読んでいる本(実装中)
           </Button>
           <Button
-            size="xl"
+            size={['md', 'lg', 'xl']}
             p={[2, 2, 6, 6]}
             fontWeight="semibold"
+            fontSize={['md', 'lg', 'xl']}
             bg="orange.200"
             borderRadius={4}
             boxShadow="md"
@@ -176,9 +158,10 @@ function Home() {
             同じ所属の人が読んでいる本(実装中)
           </Button>
           <Button
-            size="xl"
+            size={['md', 'lg', 'xl']}
             p={[2, 2, 6, 6]}
             fontWeight="semibold"
+            fontSize={['md', 'lg', 'xl']}
             bg="orange.200"
             borderRadius={4}
             boxShadow="md"
@@ -197,17 +180,13 @@ function Home() {
             あなたの本
           </Button>
         </HStack>
-        {/* <Center> */}
         <Box
           p={1}
-          // m={2}
-          // borderWidth="2px"
-          // borderColor="gray.300"
           rounded="4"
           minW={500}
           maxW={1000}
           display="flex"
-          justifyContent="space-evenly"
+          justifyContent="flex-start"
           bgColor="gray.50"
           flexWrap="wrap"
           className="home_contents"
@@ -217,7 +196,6 @@ function Home() {
             return <BookCard bookInfo={book} />;
           })}
         </Box>
-        {/* </Center> */}
       </VStack>
     </Container>
   );

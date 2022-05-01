@@ -13,7 +13,7 @@ export default function UserInfo() {
   const onSubmit = (data) => console.log(data);
 
   return (
-    <VStack w="100%">
+    <VStack w="100%" mb={10}>
       <Heading as="h1" mt={10} fontSize="3xl">
         プロフィール編集
       </Heading>
@@ -49,8 +49,13 @@ export default function UserInfo() {
               </FormControl>
             </Stack>
             <Button
-              mt={2}
+              mt={10}
               mb={10}
+              size={['md']}
+              p={[2, 2, 6, 6]}
+              fontWeight="semibold"
+              fontSize={['md', 'lg', 'xl']}
+              textColor="white"
               bgColor="orange.400"
               loadingText="送信中"
               isLoading={formState.isSubmitting}
