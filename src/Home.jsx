@@ -87,102 +87,104 @@ function Home() {
   return (
     <Container className="container" maxW={1200} minW={300}>
       <VStack m={4}>
-        <Box m={4}>
+        <Box ml={4}>
           <Text>ここにはあなたが読んだ本や、みんながおすすめした本が表示されます。</Text>
         </Box>
-        <HStack display="flex" justifyContent="wrap">
-          <Button
-            size={['md', 'lg', 'xl']}
-            p={[2, 2, 6, 6]}
-            ml={4}
-            fontWeight="semibold"
-            fontSize={['md', 'lg', 'xl']}
-            bg="orange.200"
-            borderRadius={4}
-            boxShadow="md"
-            _hover={{ bg: 'orange.300' }}
-            _active={{
-              bg: 'orange.300',
-              transform: 'scale(0.98)',
-              borderColor: '#bec3c9',
-            }}
-            _focus={{
-              bg: 'orange.300',
-              boxShadow: '0 0 1px 2px rgba(88, 144, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)',
-            }}
-            onClick={() => dispatch(allbook())}
-          >
-            みんなの本
-          </Button>
-          <Button
-            size={['md', 'lg', 'xl']}
-            p={[2, 2, 6, 6]}
-            m={4}
-            fontWeight="semibold"
-            fontSize={['md', 'lg', 'xl']}
-            bg="orange.200"
-            borderRadius={4}
-            boxShadow="md"
-            _hover={{ bg: 'orange.300' }}
-            _active={{
-              bg: 'orange.300',
-              transform: 'scale(0.98)',
-              borderColor: '#bec3c9',
-            }}
-            _focus={{
-              bg: 'orange.300',
-              boxShadow: '0 0 1px 2px rgba(88, 144, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)',
-            }}
-            onClick={() => dispatch(sameage())}
-          >
-            同じ年代の人が読んでいる本(実装中)
-          </Button>
-          <Button
-            size={['md', 'lg', 'xl']}
-            p={[2, 2, 6, 6]}
-            m={4}
-            fontWeight="semibold"
-            fontSize={['md', 'lg', 'xl']}
-            bg="orange.200"
-            borderRadius={4}
-            boxShadow="md"
-            _hover={{ bg: 'orange.300' }}
-            _active={{
-              bg: 'orange.300',
-              transform: 'scale(0.98)',
-              borderColor: '#bec3c9',
-            }}
-            _focus={{
-              bg: 'orange.300',
-              boxShadow: '0 0 1px 2px rgba(88, 144, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)',
-            }}
-            onClick={() => dispatch(sameage())}
-          >
-            同じ所属の人が読んでいる本(実装中)
-          </Button>
-          <Button
-            size={['md', 'lg', 'xl']}
-            p={[2, 2, 6, 6]}
-            m={4}
-            fontWeight="semibold"
-            fontSize={['md', 'lg', 'xl']}
-            bg="orange.200"
-            borderRadius={4}
-            boxShadow="md"
-            _hover={{ bg: 'orange.300' }}
-            _active={{
-              bg: 'orange.300',
-              transform: 'scale(0.98)',
-              borderColor: '#bec3c9',
-            }}
-            _focus={{
-              bg: 'orange.300',
-              boxShadow: '0 0 1px 2px rgba(88, 144, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)',
-            }}
-            onClick={() => dispatch(mybook())}
-          >
-            あなたの本
-          </Button>
+        <HStack>
+          <Box display='flex' flexWrap="wrap">
+            <Button
+              size={['md', 'lg', 'xl']}
+              p={[2, 2, 6, 6]}
+              m={2}
+              fontWeight="semibold"
+              fontSize={['md', 'lg', 'xl']}
+              bg="orange.200"
+              borderRadius={4}
+              boxShadow="md"
+              _hover={{ bg: 'orange.300' }}
+              _active={{
+                bg: 'orange.300',
+                transform: 'scale(0.98)',
+                borderColor: '#bec3c9',
+              }}
+              _focus={{
+                bg: 'orange.300',
+                boxShadow: '0 0 1px 2px rgba(88, 144, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)',
+              }}
+              onClick={() => dispatch(allbook())}
+            >
+              みんなの本
+            </Button>
+            <Button
+              size={['md', 'lg', 'xl']}
+              p={[2, 2, 6, 6]}
+              m={2}
+              fontWeight="semibold"
+              fontSize={['md', 'lg', 'xl']}
+              bg="orange.200"
+              borderRadius={4}
+              boxShadow="md"
+              _hover={{ bg: 'orange.300' }}
+              _active={{
+                bg: 'orange.300',
+                transform: 'scale(0.98)',
+                borderColor: '#bec3c9',
+              }}
+              _focus={{
+                bg: 'orange.300',
+                boxShadow: '0 0 1px 2px rgba(88, 144, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)',
+              }}
+              onClick={() => dispatch(sameage())}
+            >
+              同じ年代の人が読んでいる本(実装中)
+            </Button>
+            <Button
+              size={['md', 'lg', 'xl']}
+              p={[2, 2, 6, 6]}
+              m={2}
+              fontWeight="semibold"
+              fontSize={['md', 'lg', 'xl']}
+              bg="orange.200"
+              borderRadius={4}
+              boxShadow="md"
+              _hover={{ bg: 'orange.300' }}
+              _active={{
+                bg: 'orange.300',
+                transform: 'scale(0.98)',
+                borderColor: '#bec3c9',
+              }}
+              _focus={{
+                bg: 'orange.300',
+                boxShadow: '0 0 1px 2px rgba(88, 144, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)',
+              }}
+              onClick={() => dispatch(sameage())}
+            >
+              同じ所属の人が読んでいる本(実装中)
+            </Button>
+            <Button
+              size={['md', 'lg', 'xl']}
+              p={[2, 2, 6, 6]}
+              m={2}
+              fontWeight="semibold"
+              fontSize={['md', 'lg', 'xl']}
+              bg="orange.200"
+              borderRadius={4}
+              boxShadow="md"
+              _hover={{ bg: 'orange.300' }}
+              _active={{
+                bg: 'orange.300',
+                transform: 'scale(0.98)',
+                borderColor: '#bec3c9',
+              }}
+              _focus={{
+                bg: 'orange.300',
+                boxShadow: '0 0 1px 2px rgba(88, 144, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)',
+              }}
+              onClick={() => dispatch(mybook())}
+            >
+              あなたの本
+            </Button>
+          </Box>
         </HStack>
         <Box
           p={1}
