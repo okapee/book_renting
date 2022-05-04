@@ -90,7 +90,7 @@ function Home() {
         <Box m={4}>
           <Text>ここにはあなたが読んだ本や、みんながおすすめした本が表示されます。</Text>
         </Box>
-        <HStack>
+        <HStack display='flex' justifyContent='wrap'>
           <Button
             size={['md', 'lg', 'xl']}
             p={[2, 2, 6, 6]}
