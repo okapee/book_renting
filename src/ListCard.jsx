@@ -51,7 +51,7 @@ function ListCard(props) {
       {/* <Flex justifyContent="space-between"> */}
       <HStack alignItems="start">
         {/* <Flex flexBasis="20%"> */}
-        <Box minW={150} m="auto">
+        <Box minW={120} m="auto">
           <Image
             src={book.thumbnail}
             alt=""

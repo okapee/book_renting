@@ -33,13 +33,10 @@ const SearchForm = (props) => {
         fontSize="xl"
         onClick={handleSubmit}
         minHeight={14}
-        // flex={1}
       >
         検索
       </Button>
-      {/* </Flex> */}
     </HStack>
-    // </Flex>
   );
 };
 

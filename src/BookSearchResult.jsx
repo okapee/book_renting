@@ -24,7 +24,7 @@ function BookSearchResult(props) {
         <Text textAlign="left" mb={8}>
           検索結果
         </Text>
-        <List bgColor="whiteAlpha.100" w="80%">
+        <List bgColor="whiteAlpha.100" w="90%">
           {Object.entries(books).map(([key, value]) => {
             console.log(key + ' ' + value);
             const book = {};

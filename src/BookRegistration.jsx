@@ -97,6 +97,7 @@ function BookRegistration(props) {
         // borderRadius={8}
         onClick={onOpen}
         as="a"
+        size={['sm']}
         color="#fff"
         borderBottom="5px solid #db9014"
         bgColor="#f39800"
@@ -107,12 +108,7 @@ function BookRegistration(props) {
           bgColor: '#ffa50e',
         }}
         p={6}
-        // m={4}
-        // lineHeight="1"
-        // size="md"
-        // shadow="lg"
         fontSize={['md', 'lg', 'xl']}
-        // bgColor="gray.300"
         position="absolute"
         right={8}
         bottom={4}
