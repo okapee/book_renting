@@ -85,7 +85,7 @@ function Home() {
   }, [filter]);
 
   return (
-    <Container className="container" maxW={1200} minW={300}>
+    <Container className="container">
       <VStack m={4}>
         <Box ml={4}>
           <Text>ここにはあなたが読んだ本や、みんながおすすめした本が表示されます。</Text>
@@ -189,10 +189,11 @@ function Home() {
         <Box
           p={1}
           rounded="4"
-          minW={500}
-          maxW={1000}
+          // minW={500}
+          // maxW={1000}
+          w='100%'
           display="flex"
-          justifyContent="flex-start"
+          justifyContent="space-between"
           bgColor="gray.50"
           flexWrap="wrap"
           className="home_contents"

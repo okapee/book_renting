@@ -68,7 +68,7 @@ function BookCard(props) {
       p={2}
       m={2}
       rounded="4"
-      w={[350, 420, 480]}
+      w={[300, 380]}
       bgColor="gray.100"
       boxShadow="md"
       display="flex"
