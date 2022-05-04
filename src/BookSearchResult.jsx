@@ -1,15 +1,8 @@
 import {
-  Flex,
-  Heading,
   Text,
   Box,
-  HStack,
-  Image,
   List,
-  ListItem,
   VStack,
-  Button,
-  Spacer,
 } from '@chakra-ui/react';
 import ListCard from './ListCard';
 
@@ -24,7 +17,7 @@ function BookSearchResult(props) {
         <Text textAlign="left" mb={8}>
           検索結果
         </Text>
-        <List bgColor="whiteAlpha.100" w="90%">
+        <List bgColor="whiteAlpha.100" w="95%">
           {Object.entries(books).map(([key, value]) => {
             console.log(key + ' ' + value);
             const book = {};
@@ -34,11 +27,9 @@ function BookSearchResult(props) {
             book['publisher'] = books[key].volumeInfo.publisher;
             book['publishedDate'] = books[key].volumeInfo.publishedDate;
             book['description'] = books[key].volumeInfo.description ?? '説明なし';
-            // book['industryIdentifiers'] = books[key].volumeInfo.industryIdentifiers || 'test'
             book['industryIdentifiers'] = books[key].volumeInfo.industryIdentifiers ?? null;
             book['thumbnail'] = books[key].volumeInfo.imageLinks?.thumbnail;
             console.log('book[title]: ' + book.industryIdentifiers);
-            // title = value.volumeInfo.title
             return <ListCard book={book} />;
           })}
         </List>
