@@ -90,10 +90,11 @@ function Home() {
         <Box m={4}>
           <Text>ここにはあなたが読んだ本や、みんながおすすめした本が表示されます。</Text>
         </Box>
-        <HStack display='flex' justifyContent='wrap'>
+        <HStack display="flex" justifyContent="wrap">
           <Button
             size={['md', 'lg', 'xl']}
             p={[2, 2, 6, 6]}
+            ml={4}
             fontWeight="semibold"
             fontSize={['md', 'lg', 'xl']}
             bg="orange.200"
@@ -116,6 +117,7 @@ function Home() {
           <Button
             size={['md', 'lg', 'xl']}
             p={[2, 2, 6, 6]}
+            m={4}
             fontWeight="semibold"
             fontSize={['md', 'lg', 'xl']}
             bg="orange.200"
@@ -138,6 +140,7 @@ function Home() {
           <Button
             size={['md', 'lg', 'xl']}
             p={[2, 2, 6, 6]}
+            m={4}
             fontWeight="semibold"
             fontSize={['md', 'lg', 'xl']}
             bg="orange.200"
@@ -160,6 +163,7 @@ function Home() {
           <Button
             size={['md', 'lg', 'xl']}
             p={[2, 2, 6, 6]}
+            m={4}
             fontWeight="semibold"
             fontSize={['md', 'lg', 'xl']}
             bg="orange.200"
