@@ -3,6 +3,7 @@ import { Header } from './amplify_login/Header';
 import { Footer } from './amplify_login/Footer';
 import { SignInHeader } from './amplify_login/SignInHeader';
 import { SignInFooter } from './amplify_login/SignInFooter';
+import SEO from './seo';
 
 const components = {
   Header,
@@ -18,6 +19,7 @@ export default function NotLoggedin() {
 
   return (
     <Grid>
+      <SEO title="みんなで本書評" description="皆で本を書評したり紹介しあったりするサイトです。" />
       <Flex justifyContent="center">
         <Authenticator components={components} socialProviders={['google']} />
       </Flex>

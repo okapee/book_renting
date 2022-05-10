@@ -189,8 +189,6 @@ function Home() {
         <Box
           p={1}
           rounded="4"
-          // minW={500}
-          // maxW={1000}
           w='100%'
           display="flex"
           justifyContent="space-between"
