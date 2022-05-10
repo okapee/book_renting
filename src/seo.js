@@ -3,6 +3,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 
 const SEO = ({ title, description }) => {
+  console.log('enter seo component');
   return (
     <Helmet
       htmlAttributes={{ lang: 'ja-jp' }}
