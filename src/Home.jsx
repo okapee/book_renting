@@ -12,7 +12,7 @@ import * as queries from './graphql/queries';
 import { useEffect, useState } from 'react';
 import BookCard from './BookCard';
 import { useSelector, useDispatch } from 'react-redux';
-import { allbook, sameage, mybook } from './filterSlice';
+import { allbook, sameage, mybook } from './slices/filterSlice';
 
 function Home() {
   const { colorMode, toggleColorMode } = useColorMode();

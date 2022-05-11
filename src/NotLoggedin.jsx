@@ -19,7 +19,7 @@ export default function NotLoggedin() {
 
   return (
     <Grid>
-      <SEO title="みんなで本書評" description="皆で本を書評したり紹介しあったりするサイトです。" />
+      <SEO title="みんなで本書評" description="皆で本を書評したり紹介しあったりするサイトです。同年代の人が興味のある本や同じ所属の人が興味のある本を見てみましょう。" />
       <Flex justifyContent="center">
         <Authenticator components={components} socialProviders={['google']} />
       </Flex>
