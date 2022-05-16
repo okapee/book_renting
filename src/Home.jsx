@@ -1,18 +1,11 @@
-import {
-  Text,
-  Box,
-  useColorMode,
-  HStack,
-  VStack,
-  Container,
-  Button,
-} from '@chakra-ui/react';
+import { Text, Box, useColorMode, HStack, VStack, Container, Button } from '@chakra-ui/react';
 import { Auth, API, graphqlOperation } from 'aws-amplify';
 import * as queries from './graphql/queries';
 import { useEffect, useState } from 'react';
 import BookCard from './BookCard';
 import { useSelector, useDispatch } from 'react-redux';
 import { allbook, sameage, mybook } from './slices/filterSlice';
+import { setUser } from './slices/authSlice';
 
 function Home() {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -20,6 +13,8 @@ function Home() {
   const [books, setBooks] = useState([]);
 
   const filter = useSelector((state) => state.filter.value);
+  const userInfo = useSelector((state) => state.auth.value);
+
   const dispatch = useDispatch();
 
   const buttons = ['みんなの本', '自分に属性が似ている人の本', '自分の本'];
@@ -29,13 +24,24 @@ function Home() {
     自分の本: 'mybook',
   };
 
+  console.log('Redux var(useInfo): ' + userInfo);
+
   let user = '';
   let loginInfo = '';
-  (async () => {
-    loginInfo = await Auth.currentAuthenticatedUser();
-    console.log('HOMEのusername: ' + loginInfo.username);
-    user = loginInfo.username;
-  })();
+  // (async () => {
+  //   loginInfo = await Auth.currentAuthenticatedUser();
+  //   console.log('HOMEのusername: ' + loginInfo.username);
+  //   user = loginInfo.username;
+  // })();
+
+  useEffect(() => {
+    const setUserToStore = async () => {
+      const res = await Auth.currentAuthenticatedUser();
+      console.log('HOMEのusername: ' + res.username);
+      dispatch(setUser(res));
+    };
+    setUserToStore();
+  }, []);
 
   console.log('HOME: ログインしているユーザーは ' + user);
 
@@ -91,7 +97,7 @@ function Home() {
           <Text>ここにはあなたが読んだ本や、みんながおすすめした本が表示されます。</Text>
         </Box>
         <HStack>
-          <Box display='flex' flexWrap="wrap">
+          <Box display="flex" flexWrap="wrap">
             <Button
               size={['md', 'lg', 'xl']}
               p={[2, 2, 6, 6]}
@@ -189,7 +195,7 @@ function Home() {
         <Box
           p={1}
           rounded="4"
-          w='100%'
+          w="100%"
           display="flex"
           justifyContent="space-between"
           bgColor="gray.50"
