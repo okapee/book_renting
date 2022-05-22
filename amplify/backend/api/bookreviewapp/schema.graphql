@@ -19,9 +19,10 @@ type Post @model {
 }
 
 type User @model {
-  userId: ID!
+  id: String!
   age: String!
   organization: String
+  name: String
   # prefecture: String
   # firstname: String
   # lastname: String

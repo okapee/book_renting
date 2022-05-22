@@ -61,10 +61,10 @@ export const onDeletePost = /* GraphQL */ `
 export const onCreateUser = /* GraphQL */ `
   subscription OnCreateUser {
     onCreateUser {
-      userId
+      id
       age
       organization
-      id
+      name
       createdAt
       updatedAt
     }
@@ -73,10 +73,10 @@ export const onCreateUser = /* GraphQL */ `
 export const onUpdateUser = /* GraphQL */ `
   subscription OnUpdateUser {
     onUpdateUser {
-      userId
+      id
       age
       organization
-      id
+      name
       createdAt
       updatedAt
     }
@@ -85,10 +85,10 @@ export const onUpdateUser = /* GraphQL */ `
 export const onDeleteUser = /* GraphQL */ `
   subscription OnDeleteUser {
     onDeleteUser {
-      userId
+      id
       age
       organization
-      id
+      name
       createdAt
       updatedAt
     }

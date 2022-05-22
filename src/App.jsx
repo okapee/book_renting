@@ -26,6 +26,24 @@ function Authcheck() {
 export default function App() {
   return (
     <Authenticator.Provider>
+      <div>
+        {!!process.env.GA_MEASUREMENT_ID && (
+          <Helmet>
+            <script
+              async
+              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GA_MEASUREMENT_ID}`}
+            ></script>
+            <script>
+              {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${process.env.GA4_MEASUREMENT_ID}', { send_page_view: false });
+            `}
+            </script>
+          </Helmet>
+        )}
+      </div>
       <Authcheck />
     </Authenticator.Provider>
   );

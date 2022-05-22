@@ -1,8 +1,24 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Flex, Box, Center, Stack, VStack, HStack } from '@chakra-ui/layout';
-import { Heading, Text, Input, FormControl, FormLabel, FormErrorMessage, FormHelperText, Button } from '@chakra-ui/react';
+import {
+  Heading,
+  Text,
+  Input,
+  FormControl,
+  FormLabel,
+  FormErrorMessage,
+  FormHelperText,
+  Button,
+} from '@chakra-ui/react';
+import { Auth, API } from 'aws-amplify';
+import { createUser, updateUser } from './graphql/mutations';
+import { isUsernamePasswordOpts } from '@aws-amplify/auth/lib-esm/types';
+import { useSelector, useDispatch } from 'react-redux';
+
 export default function UserInfo() {
+  const userInfo = useSelector((state) => state.auth.user);
+
   const {
     register,
     handleSubmit,
@@ -10,7 +26,26 @@ export default function UserInfo() {
     formState: { errors, ...formState },
   } = useForm();
   // submitしたときの挙動(DB登録)
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => {
+    console.log(data);
+    console.log('userInfo in UserInfo.jsx: ' + userInfo.username);
+    try {
+      
+      const newuser = await API.graphql({
+        query: createUser,
+        variables: {
+          input: {
+            id: userInfo.username,
+            organization: data.department,
+            age: data.年代,
+            name: data.name,
+          },
+        },
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <VStack w="100%" mb={10}>

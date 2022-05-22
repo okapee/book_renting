@@ -13,7 +13,6 @@ function Home() {
   const [books, setBooks] = useState([]);
 
   const filter = useSelector((state) => state.filter.value);
-  const userInfo = useSelector((state) => state.auth.value);
 
   const dispatch = useDispatch();
 
@@ -23,8 +22,6 @@ function Home() {
     自分に属性が似ている人の本: 'sameage',
     自分の本: 'mybook',
   };
-
-  console.log('Redux var(useInfo): ' + userInfo);
 
   let user = '';
   let loginInfo = '';
@@ -41,6 +38,8 @@ function Home() {
       dispatch(setUser(res));
     };
     setUserToStore();
+    // const userInfo = useSelector((state) => state.auth.value);
+    // console.log('Redux var(useInfo): ' + userInfo);
   }, []);
 
   console.log('HOME: ログインしているユーザーは ' + user);

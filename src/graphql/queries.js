@@ -49,10 +49,10 @@ export const listPosts = /* GraphQL */ `
 export const getUser = /* GraphQL */ `
   query GetUser($id: ID!) {
     getUser(id: $id) {
-      userId
+      id
       age
       organization
-      id
+      name
       createdAt
       updatedAt
     }
@@ -66,10 +66,10 @@ export const listUsers = /* GraphQL */ `
   ) {
     listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
-        userId
+        id
         age
         organization
-        id
+        name
         createdAt
         updatedAt
       }
