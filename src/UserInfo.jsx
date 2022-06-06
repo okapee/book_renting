@@ -15,6 +15,8 @@ import { Auth, API } from 'aws-amplify';
 import { createUser, updateUser } from './graphql/mutations';
 import { isUsernamePasswordOpts } from '@aws-amplify/auth/lib-esm/types';
 import { useSelector, useDispatch } from 'react-redux';
+import { getUser } from './graphql/queries';
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function UserInfo() {
   const userInfo = useSelector((state) => state.auth.user);
@@ -28,20 +30,46 @@ export default function UserInfo() {
   // submitしたときの挙動(DB登録)
   const onSubmit = async (data) => {
     console.log(data);
-    console.log('userInfo in UserInfo.jsx: ' + userInfo.username);
+    // const userId = userInfo.username ?? 'default';
+
     try {
-      
-      const newuser = await API.graphql({
-        query: createUser,
+      // ユーザーテーブルへ未登録の場合はcreateUser、登録済みの場合はupdateUserを使う
+      console.log('userInfo in UserInfo.jsx: ' + userInfo?.username);
+      const user = await API.graphql({
+        query: getUser,
         variables: {
-          input: {
-            id: userInfo.username,
-            organization: data.department,
-            age: data.年代,
-            name: data.name,
-          },
+          userId: userInfo?.username,
         },
       });
+      console.log('userInfo user: ' + user);
+
+      if (user.data.getUser == null) {
+        console.log('userInfo in createUser');
+        const newuser = await API.graphql({
+          query: createUser,
+          variables: {
+            input: {
+              userId: userInfo.username,
+              organization: data.department,
+              age: data.年代,
+              name: data.name,
+            },
+          },
+        });
+      } else {
+        console.log('userInfo in updateUser');
+        await API.graphql({
+          query: updateUser,
+          variables: {
+            input: {
+              userId: userInfo.username,
+              organization: data.department,
+              age: data.年代,
+              name: data.name,
+            },
+          },
+        });
+      }
     } catch (err) {
       console.log(err);
     }
