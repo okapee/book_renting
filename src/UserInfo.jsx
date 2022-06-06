@@ -18,6 +18,29 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getUser } from './graphql/queries';
 import toast, { Toaster } from 'react-hot-toast';
 
+const notify = (word) => {
+  console.log('toast');
+  toast(word, {
+    duration: 4000,
+    position: 'left-bottom',
+    // Styling
+    style: {},
+    className: '',
+    // Custom Icon
+    icon: '👏',
+    // Change colors of success/error/loading icon
+    iconTheme: {
+      primary: '#000',
+      secondary: '#fff',
+    },
+    // Aria
+    ariaProps: {
+      role: 'status',
+      'aria-live': 'polite',
+    },
+  });
+};
+
 export default function UserInfo() {
   const userInfo = useSelector((state) => state.auth.user);
 
@@ -56,6 +79,7 @@ export default function UserInfo() {
             },
           },
         });
+        notify('新規登録完了です。');
       } else {
         console.log('userInfo in updateUser');
         await API.graphql({
@@ -69,6 +93,7 @@ export default function UserInfo() {
             },
           },
         });
+        notify('更新完了です。');
       }
     } catch (err) {
       console.log(err);
@@ -129,6 +154,7 @@ export default function UserInfo() {
           </Box>
         </Flex>
       </form>
+      <Toaster />
     </VStack>
   );
 }
