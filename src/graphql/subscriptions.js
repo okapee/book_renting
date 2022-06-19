@@ -15,6 +15,14 @@ export const onCreatePost = /* GraphQL */ `
       postedDate
       rating
       owner
+      user {
+        userId
+        age
+        organization
+        name
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -34,6 +42,14 @@ export const onUpdatePost = /* GraphQL */ `
       postedDate
       rating
       owner
+      user {
+        userId
+        age
+        organization
+        name
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -53,6 +69,14 @@ export const onDeletePost = /* GraphQL */ `
       postedDate
       rating
       owner
+      user {
+        userId
+        age
+        organization
+        name
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }

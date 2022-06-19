@@ -14,11 +14,14 @@ export const filterSlice = createSlice({
     sameage: (state) => {
       state.value = 'sameage';
     },
+    sameorg: (state) => {
+      state.value = 'sameorg';
+    },
     mybook: (state) => {
       state.value = 'mybook';
     },
   },
 });
 
-export const { allbook, sameage, mybook } = filterSlice.actions;
+export const { allbook, sameage, sameorg, mybook } = filterSlice.actions;
 export default filterSlice.reducer;

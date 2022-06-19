@@ -4,7 +4,7 @@ import * as queries from './graphql/queries';
 import { useEffect, useState } from 'react';
 import BookCard from './BookCard';
 import { useSelector, useDispatch } from 'react-redux';
-import { allbook, sameage, mybook } from './slices/filterSlice';
+import { allbook, sameage, sameorg, mybook } from './slices/filterSlice';
 import { setUser } from './slices/authSlice';
 
 function Home() {
@@ -20,16 +20,9 @@ function Home() {
   const labelToAction = {
     みんなの本: 'allbook',
     自分に属性が似ている人の本: 'sameage',
+    同じ所属の人が読んでいる本: 'sameorg',
     自分の本: 'mybook',
   };
-
-  let user = '';
-  let loginInfo = '';
-  // (async () => {
-  //   loginInfo = await Auth.currentAuthenticatedUser();
-  //   console.log('HOMEのusername: ' + loginInfo.username);
-  //   user = loginInfo.username;
-  // })();
 
   useEffect(() => {
     const setUserToStore = async () => {
@@ -38,21 +31,12 @@ function Home() {
       dispatch(setUser(res));
     };
     setUserToStore();
-    // const userInfo = useSelector((state) => state.auth.value);
-    // console.log('Redux var(useInfo): ' + userInfo);
   }, []);
 
-  console.log('HOME: ログインしているユーザーは ' + user);
-
   let fn = () => {};
-  // GraphQLフィルター定義
-  let mybook_filter = {
-    owner: {
-      eq: user,
-    },
-  };
 
   console.log('Redux Store(HOME)でのfilterの値: ' + filter);
+  const userInfo = useSelector((state) => state.auth.user);
 
   useEffect(() => {
     switch (filter) {
@@ -61,23 +45,47 @@ function Home() {
           console.log('HOME: useEffectでsameageが実行された');
         };
         break;
+      case 'sameorg':
+        fn = async () => {
+          console.log('HOMEでsameorgが実行された');
+          const res_posts = await API.graphql(graphqlOperation(queries.listPosts));
+          console.log('sameorg_listPosts: ' + res_posts.data.listPosts.items[0].user.organization);
+          const res_user = await API.graphql(
+            graphqlOperation(queries.getUser, { userId: userInfo.username }),
+          );
+          console.log('sameorg_getUser: ' + res_user.data.getUser.organization);
+          const login_user_org = res_user.data.getUser.organization;
+          const res_array = res_posts.data.listPosts.items;
 
+          let sameorg_items = [];
+
+          // for (const arr of res_posts.data.listPosts.items){
+          //   console.log('arr: ' + JSON.stringify(arr));
+          // }
+          // TODO: postのorganizationとログインユーザーのorganitonを比較して一致するものだけ詰め直す
+          res_posts.data.listPosts.items.forEach((item) => {
+            console.log('res_array.forEach->item: ' + JSON.stringify(item));
+            if (item.user?.organization == login_user_org) {
+              sameorg_items.push(item);
+            }
+          });
+          setBooks(sameorg_items);
+        };
+        break;
       case 'mybook':
         fn = async () => {
-          console.log('HOME: ' + user + 'でmybookが実行された');
+          console.log('HOME: ' + userInfo?.username + 'でmybookが実行された');
           const mybook_filter = {
             owner: {
-              eq: user,
+              eq: userInfo?.username,
             },
           };
           const res = await API.graphql(
             graphqlOperation(queries.listPosts, { filter: mybook_filter }),
           );
-
           setBooks(res.data.listPosts.items);
         };
         break;
-
       default:
         fn = async () => {
           console.log('HOME: useEffectでdefault(allbook)が実行された');
@@ -162,9 +170,9 @@ function Home() {
                 bg: 'orange.300',
                 boxShadow: '0 0 1px 2px rgba(88, 144, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)',
               }}
-              onClick={() => dispatch(sameage())}
+              onClick={() => dispatch(sameorg())}
             >
-              同じ所属の人が読んでいる本(実装中)
+              同じ所属の人が読んでいる本
             </Button>
             <Button
               size={['md', 'lg', 'xl']}

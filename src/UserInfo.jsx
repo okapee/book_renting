@@ -53,7 +53,6 @@ export default function UserInfo() {
   // submitしたときの挙動(DB登録)
   const onSubmit = async (data) => {
     console.log(data);
-    // const userId = userInfo.username ?? 'default';
 
     try {
       // ユーザーテーブルへ未登録の場合はcreateUser、登録済みの場合はupdateUserを使う

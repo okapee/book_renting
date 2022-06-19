@@ -16,6 +16,7 @@ type Post @model {
   postedDate: String
   rating: Int
   owner: String
+  user: User @hasOne(fields: ["owner"])
 }
 
 type User @model {
