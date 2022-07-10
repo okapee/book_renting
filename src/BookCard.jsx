@@ -76,6 +76,7 @@ function BookCard(props) {
         console.log('BookCard modal is Open!');
         onOpen();
       }}
+      className='boxcard'
     >
       <Modal
         finalFocusRef={finalRef}

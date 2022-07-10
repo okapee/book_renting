@@ -56,11 +56,10 @@
     "breakCircularDependency": true,
     "dependsOn": [],
     "hostedUI": true,
-    "hostedUIDomainName": "bookreviewappeebd59b9-eebd59b9",
+    "hostedUIDomainName": "bookreviewapp374ae2f0-374ae2f0",
     "authProvidersUserPool": [],
     "hostedUIProviderMeta": "[]",
-    "authProviders": [],
-    "hostedUIProviderCreds": "[]",
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://master.d1q1dy9t221yys.amplifyapp.com/\",\"https://master.d1q1dy9t221yys.amplifyapp.com/\",\"http://localhost:3000/\"],\"LogoutURLs\":[\"https://master.d1q1dy9t221yys.amplifyapp.com/\",\"https://master.d1q1dy9t221yys.amplifyapp.com/\",\"http://localhost:3000/\"]}"
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3000/\",\"https://master.d1q1dy9t221yys.amplifyapp.com/\"],\"LogoutURLs\":[\"http://localhost:3000/\",\"https://master.d1q1dy9t221yys.amplifyapp.com/\"]}",
+    "authProviders": []
   }
 }
