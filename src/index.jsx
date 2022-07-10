@@ -31,8 +31,9 @@ const updatedAwsConfig = {
     redirectSignOut: isLocalhost ? localRedirectSignOut : productionRedirectSignOut,
   },
 };
+Amplify.configure(config);
 
-Amplify.configure(updatedAwsConfig);
+// Amplify.configure(updatedAwsConfig);
 
 const rootElement = document.getElementById('root');
 render(
