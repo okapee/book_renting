@@ -10,7 +10,7 @@ import config from './aws-exports';
 // Amplify.configure(config);
 
 const isLocalhost = Boolean(
-  window.location.hostname === 'https://master.d1q1dy9t221yys.amplifyapp.com' ||
+  window.location.hostname === 'https://reviewbooks.tokyo/' ||
     // [::1] is the IPv6 localhost address.
     window.location.hostname === '[::1]' ||
     // 127.0.0.1/8 is considered localhost for IPv4.
