@@ -60,7 +60,6 @@
     "authProvidersUserPool": [],
     "hostedUIProviderMeta": "[]",
     "authProviders": [],
-    "hostedUIProviderCreds": "[]",
     "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3000/\",\"https://master.d1q1dy9t221yys.amplifyapp.com/\"],\"LogoutURLs\":[\"http://localhost:3000/\",\"https://master.d1q1dy9t221yys.amplifyapp.com/\",\"https://www.reviewbooks.tokyo/\"]}"
   }
 }
