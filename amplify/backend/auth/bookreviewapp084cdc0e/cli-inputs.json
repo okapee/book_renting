@@ -41,7 +41,7 @@
     "dependsOn": [],
     "hostedUI": true,
     "hostedUIDomainName": "bookreviewapp374ae2f0-374ae2f0",
-    "authProvidersUserPool": [],
+    "authProvidersUserPool": ["Google"],
     "hostedUIProviderMeta": "[]",
     "authProviders": [],
     "hostedUIProviderCreds": "[]",
