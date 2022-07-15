@@ -5,9 +5,13 @@
     "allowUnauthenticatedIdentities": false,
     "resourceNameTruncated": "bookre084cdc0e",
     "userPoolName": "bookreviewapp084cdc0e_userpool_084cdc0e",
-    "autoVerifiedAttributes": ["email"],
+    "autoVerifiedAttributes": [
+      "email"
+    ],
     "mfaConfiguration": "OFF",
-    "mfaTypes": ["SMS Text Message"],
+    "mfaTypes": [
+      "SMS Text Message"
+    ],
     "smsAuthenticationMessage": "Your authentication code is {####}",
     "smsVerificationMessage": "Your verification code is {####}",
     "emailVerificationSubject": "Your verification code",
@@ -15,12 +19,18 @@
     "defaultPasswordPolicy": false,
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [],
-    "requiredAttributes": ["email"],
+    "requiredAttributes": [
+      "email"
+    ],
     "aliasAttributes": [],
     "userpoolClientGenerateSecret": false,
     "userpoolClientRefreshTokenValidity": 30,
-    "userpoolClientWriteAttributes": ["email"],
-    "userpoolClientReadAttributes": ["email"],
+    "userpoolClientWriteAttributes": [
+      "email"
+    ],
+    "userpoolClientReadAttributes": [
+      "email"
+    ],
     "userpoolClientLambdaRole": "bookre084cdc0e_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
     "sharedId": "084cdc0e",
@@ -32,19 +42,26 @@
     "usernameCaseSensitive": false,
     "useEnabledMfas": true,
     "authRoleArn": {
-      "Fn::GetAtt": ["AuthRole", "Arn"]
+      "Fn::GetAtt": [
+        "AuthRole",
+        "Arn"
+      ]
     },
     "unauthRoleArn": {
-      "Fn::GetAtt": ["UnauthRole", "Arn"]
+      "Fn::GetAtt": [
+        "UnauthRole",
+        "Arn"
+      ]
     },
     "breakCircularDependency": true,
     "dependsOn": [],
     "hostedUI": true,
     "hostedUIDomainName": "bookreviewapp374ae2f0-374ae2f0",
-    "authProvidersUserPool": ["Google"],
-    "hostedUIProviderMeta": "[]",
+    "authProvidersUserPool": [
+      "Google"
+    ],
+    "hostedUIProviderMeta": "[{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"sub\"}}]",
     "authProviders": [],
-    "hostedUIProviderCreds": "[]",
     "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"email\",\"openid\"],\"CallbackURLs\":[\"https://www.reviewbooks.tokyo/\"],\"LogoutURLs\":[\"https://www.reviewbooks.tokyo/\"]}"
   }
 }
