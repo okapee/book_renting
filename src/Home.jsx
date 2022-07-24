@@ -1,4 +1,4 @@
-import { Text, Box, useColorMode, HStack, VStack, Container, Button } from '@chakra-ui/react';
+import { Text, Box, Flex, useColorMode, HStack, VStack, Container, Button } from '@chakra-ui/react';
 import { Auth, API, graphqlOperation } from 'aws-amplify';
 import * as queries from './graphql/queries';
 import { useEffect, useState } from 'react';
@@ -11,6 +11,16 @@ function Home() {
   const { colorMode, toggleColorMode } = useColorMode();
   const isDark = colorMode === 'dark';
   const [books, setBooks] = useState([]);
+
+  // ページネーション用
+  const [isLoading, setIsLoading] = useState(false);
+  const [nextToken, setNextToken] = useState(undefined);
+  const [nextNextToken, setNextNextToken] = useState();
+  const [previousTokens, setPreviousTokens] = useState([]);
+  const hasNext = !!nextNextToken;
+  const hasPrev = previousTokens.length;
+  const limit = 10;
+
 
   const filter = useSelector((state) => state.filter.value);
 
@@ -39,6 +49,10 @@ function Home() {
   const userInfo = useSelector((state) => state.auth.user);
 
   useEffect(() => {
+    const variables = {
+      nextToken,
+      limit,
+    };
     switch (filter) {
       case 'sameage':
         fn = async () => {
@@ -49,7 +63,7 @@ function Home() {
         fn = async () => {
           console.log('HOMEでsameorgが実行された');
           const res_posts = await API.graphql(graphqlOperation(queries.listPosts));
-          console.log('sameorg_listPosts: ' + res_posts.data.listPosts.items[0].user.organization);
+          // console.log('sameorg_listPosts: ' + res_posts.data.listPosts.items[0].user.organization);
           const res_user = await API.graphql(
             graphqlOperation(queries.getUser, { userId: userInfo.username }),
           );
@@ -59,9 +73,6 @@ function Home() {
 
           let sameorg_items = [];
 
-          // for (const arr of res_posts.data.listPosts.items){
-          //   console.log('arr: ' + JSON.stringify(arr));
-          // }
           // TODO: postのorganizationとログインユーザーのorganitonを比較して一致するものだけ詰め直す
           res_posts.data.listPosts.items.forEach((item) => {
             console.log('res_array.forEach->item: ' + JSON.stringify(item));
@@ -89,13 +100,32 @@ function Home() {
       default:
         fn = async () => {
           console.log('HOME: useEffectでdefault(allbook)が実行された');
-          const res = await API.graphql(graphqlOperation(queries.listPosts));
+          const res = await API.graphql(graphqlOperation(queries.listPosts, variables));
+          setNextNextToken(res.data.listPosts.nextToken);
           setBooks(res.data.listPosts.items);
         };
         break;
     }
     fn();
-  }, [filter]);
+  }, [filter, nextToken]);
+
+    const next = () => {
+      setPreviousTokens((prev) => [...prev, nextToken]);
+      setNextToken(nextNextToken);
+      setNextNextToken(null);
+    };
+
+    const prev = () => {
+      setNextToken(previousTokens.pop());
+      setPreviousTokens([...previousTokens]);
+      setNextNextToken(null);
+    };
+
+    const reset = () => {
+      setNextToken(undefined);
+      setPreviousTokens([]);
+      setNextNextToken(null);
+    };
 
   return (
     <Container className="container">
@@ -214,8 +244,36 @@ function Home() {
             return <BookCard bookInfo={book} />;
           })}
         </Box>
+        <Flex>
+          {/* <TokenConsole {...{ limit, nextToken, nextNextToken, previousTokens }} /> */}
+          <TodoNavigate {...{ hasNext, hasPrev, prev, next, isLoading }} />
+        </Flex>
       </VStack>
     </Container>
+  );
+}
+
+// ページネーション用関数
+function TodoNavigate({ isLoading, hasNext, hasPrev, next, prev }) {
+  const disabledPrev = !hasPrev || isLoading;
+  const disabledNext = !hasNext || isLoading;
+  return (
+    <div className="flex justify-between px-4 py-2 mb-4 text-sm bg-white rounded shadow-md lg:py-4 lg:px-8">
+      <Button
+        disabled={disabledPrev}
+        onClick={prev}
+      >
+        {/* <ChevronsLeft size="1rem" className="inline-block mr-2" /> */}
+        <span>前へ</span>
+      </Button>
+      <Button
+        disabled={disabledNext}
+        onClick={next}
+      >
+        <span>次へ</span>
+        {/* <ChevronsRight size="1rem" className="inline-block ml-2" /> */}
+      </Button>
+    </div>
   );
 }
 
