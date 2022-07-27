@@ -57,7 +57,7 @@ export default function Contact() {
   };
 
   return (
-    <VStack w="100%" mb={10}>
+    <VStack w="100%">
       <Heading as="h1" mt={10} fontSize="3xl">
         お問い合わせ
       </Heading>

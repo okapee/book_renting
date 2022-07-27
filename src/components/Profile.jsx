@@ -1,9 +1,9 @@
-import React from "react";
-import { useMediaQuery } from "@chakra-ui/media-query";
-import { Box, Flex, Heading, Text } from "@chakra-ui/layout";
-import Icon from "@chakra-ui/icon";
-import { Image } from "@chakra-ui/react";
-import { DiCodeigniter, DiAndroid, DiWebplatform } from "react-icons/di";
+import React from 'react';
+import { useMediaQuery } from '@chakra-ui/media-query';
+import { Box, Flex, Heading, Text } from '@chakra-ui/layout';
+import Icon from '@chakra-ui/icon';
+import { Image } from '@chakra-ui/react';
+import { DiCodeigniter, DiAndroid, DiWebplatform } from 'react-icons/di';
 import prof_img from '../assets/images/okapi.png';
 import {
   List,
@@ -18,11 +18,11 @@ import {
   Th,
   Thead,
   Tr,
-  VStack
-} from "@chakra-ui/react";
+  VStack,
+} from '@chakra-ui/react';
 
 function Profile() {
-  const [isNotSmallerScreen] = useMediaQuery("(min-width:600px)");
+  const [isNotSmallerScreen] = useMediaQuery('(min-width:600px)');
 
   return (
     <Flex
@@ -56,9 +56,6 @@ function Profile() {
           一人だとできることも限られているので、一緒に開発してくださる方を募集しております。
           お気軽にお声がけいただけると嬉しいです。
         </Flex>
-        {/* <Text>
-         
-        </Text> */}
       </VStack>
     </Flex>
   );

@@ -1,6 +1,7 @@
 import './styles.css';
 import './index.css';
 import {
+  Container,
   Box,
   ChakraProvider,
   extendTheme,
@@ -28,7 +29,7 @@ import NoMatch from './NoMatch';
 
 Amplify.configure(config);
 
-export default function   Loggedin() {
+export default function Loggedin() {
   const { user, signOut } = useAuthenticator((context) => [context.user]);
   //ログイン直後のみidTokenを受け取れずエラーになってしまうため、画面リロードを実行
   try {
@@ -49,7 +50,9 @@ export default function   Loggedin() {
           },
         })}
       >
-        <Flex className="header" w="100%" bgColor='teal.600' p={10} textColor='white'>
+        {/* <Flex className="header" w="100%" bgColor="teal.600" p={10} textColor="white" height="40px"> */}
+
+        <Flex w="100%" bgColor="teal.600" p={10} textColor="white" height="100px">
           <Flex align="center" mr={5} minW={100}>
             <Heading as="h1" textSize={['xl', '2xl', '3xl']} mr={10}>
               みんなで本書評
@@ -91,11 +94,14 @@ export default function   Loggedin() {
                 本の登録
               </Text>
             </NavLink>
-            <NavLink className={({ isActive }) => (isActive ? 'active' : 'undefined')} to="/profile">
+            <NavLink
+              className={({ isActive }) => (isActive ? 'active' : 'undefined')}
+              to="/profile"
+            >
               <Text
                 mr={4}
                 fontWeight="bold"
-                fontSize={['lg', 'xl', '2xl']}  
+                fontSize={['lg', 'xl', '2xl']}
                 _hover={{ bg: 'orange.300' }}
                 _focus={{ boxShadow: 'outline' }}
               >
@@ -113,7 +119,10 @@ export default function   Loggedin() {
                 目的と作者
               </Text>
             </NavLink>
-            <NavLink className={({ isActive }) => (isActive ? 'active' : 'undefined')} to="/contact">
+            <NavLink
+              className={({ isActive }) => (isActive ? 'active' : 'undefined')}
+              to="/contact"
+            >
               <Text
                 mr={4}
                 fontWeight="bold"
@@ -136,16 +145,18 @@ export default function   Loggedin() {
           </VStack>
         </Flex>
 
-        <Routes>
-          <Route element={<Layout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/booksearch" element={<BookSearch />} />
-            <Route path="/profile" element={<UserInfo />} />
-            <Route path="/about" element={<About />} />
-            <Route path='/contact' element={<Contact />} />
-            <Route path="*" element={<NoMatch />} />
-          </Route>
-        </Routes>
+        <Container className="container">
+          <Routes>
+            <Route element={<Layout />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/booksearch" element={<BookSearch />} />
+              <Route path="/profile" element={<UserInfo />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="*" element={<NoMatch />} />
+            </Route>
+          </Routes>
+        </Container>
         <Footer />
       </ChakraProvider>
     </div>
@@ -155,7 +166,7 @@ export default function   Loggedin() {
 export function Footer() {
   return (
     <>
-      <Box bg="teal.600" p="8" textAlign="right" textColor={'white'} w="100%">
+      <Box className="footer" bg="teal.600">
         powered by okapee
       </Box>
     </>

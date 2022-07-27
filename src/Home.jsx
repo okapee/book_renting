@@ -128,7 +128,7 @@ function Home() {
     };
 
   return (
-    <Container className="container">
+    // <Container className="container">
       <VStack m={4}>
         <Box ml={4}>
           <Text>ここにはあなたが読んだ本や、みんながおすすめした本が表示されます。</Text>
@@ -246,15 +246,15 @@ function Home() {
         </Box>
         <Flex>
           {/* <TokenConsole {...{ limit, nextToken, nextNextToken, previousTokens }} /> */}
-          <TodoNavigate {...{ hasNext, hasPrev, prev, next, isLoading }} />
+          <PageNavigate {...{ hasNext, hasPrev, prev, next, isLoading }} />
         </Flex>
       </VStack>
-    </Container>
+    // </Container>
   );
 }
 
 // ページネーション用関数
-function TodoNavigate({ isLoading, hasNext, hasPrev, next, prev }) {
+function PageNavigate({ isLoading, hasNext, hasPrev, next, prev }) {
   const disabledPrev = !hasPrev || isLoading;
   const disabledNext = !hasNext || isLoading;
   return (

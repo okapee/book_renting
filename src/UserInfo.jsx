@@ -100,7 +100,7 @@ export default function UserInfo() {
   };
 
   return (
-    <VStack w="100%" mb={10}>
+    <VStack w="100%">
       <Heading as="h1" mt={10} fontSize="3xl">
         プロフィール編集
       </Heading>

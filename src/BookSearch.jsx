@@ -14,15 +14,12 @@ function BookSearch() {
     const url = 'https://www.googleapis.com/books/v1/volumes?q=' + query ?? 'amazon';
     console.log('query: ' + query);
     axios.get(url).then((res) => {
-      // console.log(res.data);
       console.log(res);
       setBooks(res.data['items']);
-      // console.log("useEffectが呼ばれた");
     });
   }, [query]);
 
   return (
-    <Container className="container" maxW={1200} minW={300} >
       <VStack margin={4}>
         {console.log('BookSearch.jsx: ' + typeof books)}
         <Box m={4}>
@@ -34,7 +31,6 @@ function BookSearch() {
           <BookSearchResult books={books} />
         </Box>
       </VStack>
-    </Container>
   );
 }
 
