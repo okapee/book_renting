@@ -9,7 +9,6 @@ import { setUser } from './slices/authSlice';
 
 function Home() {
   const { colorMode, toggleColorMode } = useColorMode();
-  const isDark = colorMode === 'dark';
   const [books, setBooks] = useState([]);
 
   // ページネーション用
@@ -128,7 +127,7 @@ function Home() {
     };
 
   return (
-    // <Container className="container">
+    // <Container s>
       <VStack m={4}>
         <Box ml={4}>
           <Text>ここにはあなたが読んだ本や、みんながおすすめした本が表示されます。</Text>

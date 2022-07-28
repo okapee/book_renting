@@ -11,15 +11,18 @@ import {
   Heading,
   Stack,
   VStack,
+  HStack,
   Button,
+  chakra,
 } from '@chakra-ui/react';
-import { HamburgerIcon } from '@chakra-ui/icons';
+import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import React from 'react';
 import { Routes, Route, NavLink, Outlet } from 'react-router-dom';
 import { Amplify } from 'aws-amplify';
 import { useAuthenticator } from '@aws-amplify/ui-react';
 import config from './aws-exports';
 
+import Header from './Header';
 import Home from './Home';
 import BookSearch from './BookSearch';
 import UserInfo from './UserInfo';
@@ -51,8 +54,8 @@ export default function Loggedin() {
         })}
       >
         {/* <Flex className="header" w="100%" bgColor="teal.600" p={10} textColor="white" height="40px"> */}
-
-        <Flex w="100%" bgColor="teal.600" p={10} textColor="white" height="100px">
+        <Header signOut={signOut} />
+        {/* <Flex w="100%" bgColor="teal.600" p={10} textColor="white" height="100px">
           <Flex align="center" mr={5} minW={100}>
             <Heading as="h1" textSize={['xl', '2xl', '3xl']} mr={10}>
               みんなで本書評
@@ -143,7 +146,7 @@ export default function Loggedin() {
               ログアウト
             </Button>
           </VStack>
-        </Flex>
+        </Flex> */}
 
         <Container className="container">
           <Routes>

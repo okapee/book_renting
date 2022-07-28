@@ -13,14 +13,11 @@ h2 { font-size: 2.8rem; }
 
 .container{
   /* width: 100vh; */
-  min-height: calc(100vh - 100px - 50px);
+  min-height: calc(100vh - 90px - 50px);
   min-width: 300px;
   /* max-width: 1200px; */
   margin-right: auto;
   margin-left: auto;
-  /* height: calc(100vh); */
-  /* height: calc(100vh - 100px);; */
-  /* position: relative; */
   /*←相対位置*/
   padding-bottom: 80px;
   /*←footerの高さ*/
