@@ -1,4 +1,4 @@
-import { Text, Box, Flex, useColorMode, HStack, VStack, Container, Button } from '@chakra-ui/react';
+import { Text, Box, Flex, useColorMode, HStack, VStack, Container, Button, SimpleGrid } from '@chakra-ui/react';
 import { Auth, API, graphqlOperation } from 'aws-amplify';
 import * as queries from './graphql/queries';
 import { useEffect, useState } from 'react';
@@ -228,7 +228,7 @@ function Home() {
             </Button>
           </Box>
         </HStack>
-        <Box
+        {/* <Box
           p={1}
           rounded="4"
           w="100%"
@@ -237,12 +237,14 @@ function Home() {
           bgColor="gray.50"
           flexWrap="wrap"
           className="home_contents"
-        >
+        > */}
+        <SimpleGrid columns={[1, null, 2]} spacing='10px'>
           {books.map((book) => {
             console.log('book: ' + book);
             return <BookCard bookInfo={book} />;
           })}
-        </Box>
+        </SimpleGrid>
+        {/* </Box> */}
         <Flex>
           {/* <TokenConsole {...{ limit, nextToken, nextNextToken, previousTokens }} /> */}
           <PageNavigate {...{ hasNext, hasPrev, prev, next, isLoading }} />

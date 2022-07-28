@@ -69,9 +69,10 @@ function BookCard(props) {
       m={2}
       rounded="4"
       w={[300, 380]}
+      // minW={350}
       bgColor="gray.100"
       boxShadow="md"
-      display="flex"
+      // display="flex"
       onClick={() => {
         console.log('BookCard modal is Open!');
         onOpen();
