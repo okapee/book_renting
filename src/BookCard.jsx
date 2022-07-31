@@ -19,30 +19,14 @@ import {
   Avatar,
 } from '@chakra-ui/react';
 import { FaStar } from 'react-icons/fa';
-import { Auth } from 'aws-amplify';
+import { Auth, API, graphqlOperation } from 'aws-amplify';
+import * as mutations from './graphql/mutations';
 
 function BookCard(props) {
-  const [username, setUserName] = useState('ななし');
+  const username = props.username;
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [update, setUpdate] = useState(false);
   const finalRef = useRef();
-
-  useEffect(() => {
-    const fn = async () => {
-      const loginInfo = await Auth.currentAuthenticatedUser();
-      console.log(
-        'BookCard.jsxのusername: ' +
-          loginInfo.username +
-          ' zoneinfo: ' +
-          loginInfo.zoneinfo +
-          ' picture: ' +
-          loginInfo.picture +
-          ' locale: ' +
-          loginInfo.locale,
-      );
-      setUserName(loginInfo.username);
-    };
-    fn();
-  }, []);
 
   const book = {
     ...props.bookInfo,
@@ -60,24 +44,26 @@ function BookCard(props) {
       ' rating: ' +
       book.rating +
       ' owner: ' +
-      book.owner,
+      book.owner +
+      ' username: ' +
+      username,
   );
 
   return (
     <Box
-      p={2}
-      m={2}
+      p={4}
       rounded="4"
-      w={[300, 380]}
-      // minW={350}
+      w={[340, 380]}
+      h='230px'
+      display='grid'
+      alignContent='center'
       bgColor="gray.100"
       boxShadow="md"
-      // display="flex"
       onClick={() => {
         console.log('BookCard modal is Open!');
         onOpen();
       }}
-      className='boxcard'
+      className="boxcard"
     >
       <Modal
         finalFocusRef={finalRef}
@@ -89,36 +75,47 @@ function BookCard(props) {
         size="xl"
       >
         <ModalOverlay />
-        <ModalContent p={10}>
+        <ModalContent p={4} minHeight="200px">
           <ModalHeader bgColor="gray.100">{book.title}</ModalHeader>
           <ModalCloseButton />
           <ModalBody p={4}>{book.review}</ModalBody>
 
-          <ModalFooter>
-            <Button bgColor="orange.300" p={8} mr={3} onClick={onClose}>
-              <Text fontSize={'xl'}>閉じる</Text>
+          <ModalFooter paddingRight="unset" paddingBottom="unset">
+            <DeleteBtn
+              postId={book.id}
+              update={update}
+              forceUpdate={setUpdate}
+              owner={book.owner}
+              username={username}
+            />
+            <Button colorScheme="orange" p={4} mr={2} size={['xs', 'sm']} onClick={onClose}>
+              閉じる
             </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
-      <HStack align="start">
-        <Image src={book.thumbnail} borderRadius="xl" alignSelf="center" />
-        <VStack p={4} align="start">
-          <Heading size="lg">{book.title}</Heading>
-          <HStack align="start" p={4}>
-            <Avatar />
-            <Text>{book.owner}</Text>
-          </HStack>
-          <Flex mb={4}>
-            {[1, 2, 3, 4, 5].map((value) => (
-              <Star key={value} filled={value <= book.rating} />
-            ))}
-          </Flex>
-          <Text mb={4} noOfLines={3}>
-            {book.review}
-          </Text>
-        </VStack>
-      </HStack>
+      <Box>
+        <HStack>
+          <Image src={book.thumbnail} borderRadius="xl" alignSelf="center" />
+          <VStack p={4} align="start">
+            <Heading size="lg" noOfLines={2}>
+              {book.title}
+            </Heading>
+            <HStack align="start" p={4}>
+              <Avatar />
+              <Text>{book.owner}</Text>
+            </HStack>
+            <Flex mb={4}>
+              {[1, 2, 3, 4, 5].map((value) => (
+                <Star key={value} filled={value <= book.rating} />
+              ))}
+            </Flex>
+            <Text mb={4} noOfLines={3}>
+              {book.review}
+            </Text>
+          </VStack>
+        </HStack>
+      </Box>
     </Box>
   );
 }
@@ -129,6 +126,34 @@ function Star({ filled }) {
 
 function modalWindow() {
   console.log('BookCard modal is Open!');
+}
+
+function DeleteBtn(props) {
+  if (props.owner == props.username) {
+    return (
+      <Button
+        colorScheme="red"
+        p={4}
+        mr={2}
+        size={['xs', 'sm']}
+        onClick={async () => {
+          console.log('デリートポストが押された');
+          const input = {
+            id: props.postId,
+          };
+
+          await API.graphql(graphqlOperation(mutations.deletePost, { input }));
+          console.log('start update: ' + props.update);
+          props.forceUpdate('true');
+          console.log('finish update: ' + props.update);
+        }}
+      >
+        削除
+      </Button>
+    );
+  } else {
+    return <></>;
+  }
 }
 
 export default BookCard;

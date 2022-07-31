@@ -1,12 +1,7 @@
 .Header {
-    /* position: fixed; */
-    /* top: 0; */
-    /* Stick it to the top */
-    /* max-height: 70px; */
     min-height: 90px;
     max-height: max-content;
     width: 100vw;
-    /* margin-bottom: 20; */
 
     display: grid;
     grid-template-areas: "logo nav";

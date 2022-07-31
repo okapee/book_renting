@@ -58,7 +58,7 @@ export default function Header(props) {
             目的と作者
           </NavLink>
           <NavLink className={({ isActive }) => (isActive ? 'active' : 'undefined')} to="/contact">
-              お問い合わせ
+            お問い合わせ
           </NavLink>
           <button onClick={props.signOut}>Logout</button>
         </nav>

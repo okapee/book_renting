@@ -1,4 +1,14 @@
-import { Text, Box, Flex, useColorMode, HStack, VStack, Container, Button, SimpleGrid } from '@chakra-ui/react';
+import {
+  Text,
+  Box,
+  Flex,
+  useColorMode,
+  HStack,
+  VStack,
+  Container,
+  Button,
+  SimpleGrid,
+} from '@chakra-ui/react';
 import { Auth, API, graphqlOperation } from 'aws-amplify';
 import * as queries from './graphql/queries';
 import { useEffect, useState } from 'react';
@@ -19,7 +29,6 @@ function Home() {
   const hasNext = !!nextNextToken;
   const hasPrev = previousTokens.length;
   const limit = 10;
-
 
   const filter = useSelector((state) => state.filter.value);
 
@@ -108,149 +117,135 @@ function Home() {
     fn();
   }, [filter, nextToken]);
 
-    const next = () => {
-      setPreviousTokens((prev) => [...prev, nextToken]);
-      setNextToken(nextNextToken);
-      setNextNextToken(null);
-    };
+  const next = () => {
+    setPreviousTokens((prev) => [...prev, nextToken]);
+    setNextToken(nextNextToken);
+    setNextNextToken(null);
+  };
 
-    const prev = () => {
-      setNextToken(previousTokens.pop());
-      setPreviousTokens([...previousTokens]);
-      setNextNextToken(null);
-    };
+  const prev = () => {
+    setNextToken(previousTokens.pop());
+    setPreviousTokens([...previousTokens]);
+    setNextNextToken(null);
+  };
 
-    const reset = () => {
-      setNextToken(undefined);
-      setPreviousTokens([]);
-      setNextNextToken(null);
-    };
+  const reset = () => {
+    setNextToken(undefined);
+    setPreviousTokens([]);
+    setNextNextToken(null);
+  };
 
   return (
-    // <Container s>
-      <VStack m={4}>
-        <Box ml={4}>
-          <Text>ここにはあなたが読んだ本や、みんながおすすめした本が表示されます。</Text>
+    <VStack m={4}>
+      <Box ml={4}>
+        <Text>ここにはあなたが読んだ本や、みんながおすすめした本が表示されます。</Text>
+      </Box>
+      <HStack>
+        <Box display="flex" flexWrap="wrap">
+          <Button
+            size={['md', 'lg', 'xl']}
+            p={[2, 2, 6, 6]}
+            m={2}
+            fontWeight="semibold"
+            fontSize={['md', 'lg', 'xl']}
+            bg="orange.200"
+            borderRadius={4}
+            boxShadow="md"
+            _hover={{ bg: 'orange.300' }}
+            _active={{
+              bg: 'orange.300',
+              transform: 'scale(0.98)',
+              borderColor: '#bec3c9',
+            }}
+            _focus={{
+              bg: 'orange.300',
+              boxShadow: '0 0 1px 2px rgba(88, 144, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)',
+            }}
+            onClick={() => dispatch(allbook())}
+          >
+            みんなの本
+          </Button>
+          <Button
+            size={['md', 'lg', 'xl']}
+            p={[2, 2, 6, 6]}
+            m={2}
+            fontWeight="semibold"
+            fontSize={['md', 'lg', 'xl']}
+            bg="orange.200"
+            borderRadius={4}
+            boxShadow="md"
+            _hover={{ bg: 'orange.300' }}
+            _active={{
+              bg: 'orange.300',
+              transform: 'scale(0.98)',
+              borderColor: '#bec3c9',
+            }}
+            _focus={{
+              bg: 'orange.300',
+              boxShadow: '0 0 1px 2px rgba(88, 144, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)',
+            }}
+            onClick={() => dispatch(sameage())}
+          >
+            同じ年代の人が読んでいる本(実装中)
+          </Button>
+          <Button
+            size={['md', 'lg', 'xl']}
+            p={[2, 2, 6, 6]}
+            m={2}
+            fontWeight="semibold"
+            fontSize={['md', 'lg', 'xl']}
+            bg="orange.200"
+            borderRadius={4}
+            boxShadow="md"
+            _hover={{ bg: 'orange.300' }}
+            _active={{
+              bg: 'orange.300',
+              transform: 'scale(0.98)',
+              borderColor: '#bec3c9',
+            }}
+            _focus={{
+              bg: 'orange.300',
+              boxShadow: '0 0 1px 2px rgba(88, 144, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)',
+            }}
+            onClick={() => dispatch(sameorg())}
+          >
+            同じ所属の人が読んでいる本
+          </Button>
+          <Button
+            size={['md', 'lg', 'xl']}
+            p={[2, 2, 6, 6]}
+            m={2}
+            fontWeight="semibold"
+            fontSize={['md', 'lg', 'xl']}
+            bg="orange.200"
+            borderRadius={4}
+            boxShadow="md"
+            _hover={{ bg: 'orange.300' }}
+            _active={{
+              bg: 'orange.300',
+              transform: 'scale(0.98)',
+              borderColor: '#bec3c9',
+            }}
+            _focus={{
+              bg: 'orange.300',
+              boxShadow: '0 0 1px 2px rgba(88, 144, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)',
+            }}
+            onClick={() => dispatch(mybook())}
+          >
+            あなたの本
+          </Button>
         </Box>
-        <HStack>
-          <Box display="flex" flexWrap="wrap">
-            <Button
-              size={['md', 'lg', 'xl']}
-              p={[2, 2, 6, 6]}
-              m={2}
-              fontWeight="semibold"
-              fontSize={['md', 'lg', 'xl']}
-              bg="orange.200"
-              borderRadius={4}
-              boxShadow="md"
-              _hover={{ bg: 'orange.300' }}
-              _active={{
-                bg: 'orange.300',
-                transform: 'scale(0.98)',
-                borderColor: '#bec3c9',
-              }}
-              _focus={{
-                bg: 'orange.300',
-                boxShadow: '0 0 1px 2px rgba(88, 144, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)',
-              }}
-              onClick={() => dispatch(allbook())}
-            >
-              みんなの本
-            </Button>
-            <Button
-              size={['md', 'lg', 'xl']}
-              p={[2, 2, 6, 6]}
-              m={2}
-              fontWeight="semibold"
-              fontSize={['md', 'lg', 'xl']}
-              bg="orange.200"
-              borderRadius={4}
-              boxShadow="md"
-              _hover={{ bg: 'orange.300' }}
-              _active={{
-                bg: 'orange.300',
-                transform: 'scale(0.98)',
-                borderColor: '#bec3c9',
-              }}
-              _focus={{
-                bg: 'orange.300',
-                boxShadow: '0 0 1px 2px rgba(88, 144, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)',
-              }}
-              onClick={() => dispatch(sameage())}
-            >
-              同じ年代の人が読んでいる本(実装中)
-            </Button>
-            <Button
-              size={['md', 'lg', 'xl']}
-              p={[2, 2, 6, 6]}
-              m={2}
-              fontWeight="semibold"
-              fontSize={['md', 'lg', 'xl']}
-              bg="orange.200"
-              borderRadius={4}
-              boxShadow="md"
-              _hover={{ bg: 'orange.300' }}
-              _active={{
-                bg: 'orange.300',
-                transform: 'scale(0.98)',
-                borderColor: '#bec3c9',
-              }}
-              _focus={{
-                bg: 'orange.300',
-                boxShadow: '0 0 1px 2px rgba(88, 144, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)',
-              }}
-              onClick={() => dispatch(sameorg())}
-            >
-              同じ所属の人が読んでいる本
-            </Button>
-            <Button
-              size={['md', 'lg', 'xl']}
-              p={[2, 2, 6, 6]}
-              m={2}
-              fontWeight="semibold"
-              fontSize={['md', 'lg', 'xl']}
-              bg="orange.200"
-              borderRadius={4}
-              boxShadow="md"
-              _hover={{ bg: 'orange.300' }}
-              _active={{
-                bg: 'orange.300',
-                transform: 'scale(0.98)',
-                borderColor: '#bec3c9',
-              }}
-              _focus={{
-                bg: 'orange.300',
-                boxShadow: '0 0 1px 2px rgba(88, 144, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)',
-              }}
-              onClick={() => dispatch(mybook())}
-            >
-              あなたの本
-            </Button>
-          </Box>
-        </HStack>
-        {/* <Box
-          p={1}
-          rounded="4"
-          w="100%"
-          display="flex"
-          justifyContent="space-between"
-          bgColor="gray.50"
-          flexWrap="wrap"
-          className="home_contents"
-        > */}
-        <SimpleGrid columns={[1, null, 2]} spacing='10px'>
-          {books.map((book) => {
-            console.log('book: ' + book);
-            return <BookCard bookInfo={book} />;
-          })}
-        </SimpleGrid>
-        {/* </Box> */}
-        <Flex>
-          {/* <TokenConsole {...{ limit, nextToken, nextNextToken, previousTokens }} /> */}
-          <PageNavigate {...{ hasNext, hasPrev, prev, next, isLoading }} />
-        </Flex>
-      </VStack>
-    // </Container>
+      </HStack>
+      <SimpleGrid columns={[1, null, 2]} spacing={8}>
+        {books.map((book) => {
+          console.log('book: ' + book);
+          return <BookCard bookInfo={book} username={userInfo?.username} />;
+        })}
+      </SimpleGrid>
+      <Flex>
+        <PageNavigate {...{ hasNext, hasPrev, prev, next, isLoading }} />
+      </Flex>
+    </VStack>
   );
 }
 
@@ -260,17 +255,11 @@ function PageNavigate({ isLoading, hasNext, hasPrev, next, prev }) {
   const disabledNext = !hasNext || isLoading;
   return (
     <div className="flex justify-between px-4 py-2 mb-4 text-sm bg-white rounded shadow-md lg:py-4 lg:px-8">
-      <Button
-        disabled={disabledPrev}
-        onClick={prev}
-      >
+      <Button disabled={disabledPrev} onClick={prev}>
         {/* <ChevronsLeft size="1rem" className="inline-block mr-2" /> */}
         <span>前へ</span>
       </Button>
-      <Button
-        disabled={disabledNext}
-        onClick={next}
-      >
+      <Button disabled={disabledNext} onClick={next}>
         <span>次へ</span>
         {/* <ChevronsRight size="1rem" className="inline-block ml-2" /> */}
       </Button>
