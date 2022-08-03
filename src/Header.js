@@ -53,6 +53,12 @@ export default function Header(props) {
             to="/booksearch"
           >
             本の登録
+          </NavLink>{' '}
+          <NavLink
+            className={({ isActive }) => (isActive ? 'active' : 'undefined')}
+            to="/profile"
+          >
+            ユーザー情報
           </NavLink>
           <NavLink className={({ isActive }) => (isActive ? 'active' : 'undefined')} to="/about">
             目的と作者

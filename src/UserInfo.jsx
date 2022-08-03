@@ -12,11 +12,14 @@ import {
   Button,
 } from '@chakra-ui/react';
 import { Auth, API } from 'aws-amplify';
+import awsconfig from './aws-exports';
 import { createUser, updateUser } from './graphql/mutations';
 import { isUsernamePasswordOpts } from '@aws-amplify/auth/lib-esm/types';
 import { useSelector, useDispatch } from 'react-redux';
 import { getUser } from './graphql/queries';
 import toast, { Toaster } from 'react-hot-toast';
+
+Amplify.configure(awsconfig);
 
 const notify = (word) => {
   console.log('toast');

@@ -22,14 +22,14 @@
 .Nav {
     display: grid;
     grid-area: nav;
-    grid-template-columns: repeat(5, auto);
+    grid-template-columns: repeat(6, auto);
     align-items: center;
     justify-items: center;
 }
 
 .Nav a {
     color: #fff;
-    font-size: 18px;
+    font-size: 14px;
     font-weight: 500;
     transition: 0.5s;
     text-decoration: none;
