@@ -19,7 +19,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getUser } from './graphql/queries';
 import toast, { Toaster } from 'react-hot-toast';
 
-Amplify.configure(awsconfig);
+// Amplify.configure(awsconfig);
 
 const notify = (word) => {
   console.log('toast');
