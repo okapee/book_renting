@@ -1,4 +1,6 @@
-import React from 'react';
+import './App.css';
+
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Flex, Box, Center, Stack, VStack, HStack } from '@chakra-ui/layout';
 import {
@@ -10,6 +12,9 @@ import {
   FormErrorMessage,
   FormHelperText,
   Button,
+  Avatar,
+  AvatarBadge,
+  AvatarGroup,
 } from '@chakra-ui/react';
 import { Auth, API } from 'aws-amplify';
 import awsconfig from './aws-exports';
@@ -19,7 +24,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getUser } from './graphql/queries';
 import toast, { Toaster } from 'react-hot-toast';
 
-// Amplify.configure(awsconfig);
+import { put, remove, get, pathToImageFile } from './util/s3Util';
+
+import Amplify, { Storage } from 'aws-amplify';
+import config from './aws-exports';
+
+
+
+Amplify.configure(config);
+
+let file = null;
 
 const notify = (word) => {
   console.log('toast');
@@ -44,8 +58,38 @@ const notify = (word) => {
   });
 };
 
+function onChange(e) {
+  file = e.target.files[0];
+}
+
+async function fileUpload() {
+  if (file != null) {
+    try {
+      await Storage.put(file.name, file, {
+        contentType: 'image/*', // contentType is optional
+      });
+    } catch (error) {
+      console.log('Error uploading file: ', error);
+    }
+  }
+}
+
 export default function UserInfo() {
   const userInfo = useSelector((state) => state.auth.user);
+  const [profileImg, setProfileImg] = useState(
+    'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
+  );
+
+  const imageHandler = (e) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        // setState({ profileImg: reader.result });
+        setProfileImg(reader.result);
+      }
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  };
 
   const {
     register,
@@ -81,6 +125,7 @@ export default function UserInfo() {
             },
           },
         });
+        fileUpload();
         notify('新規登録完了です。');
       } else {
         console.log('userInfo in updateUser');
@@ -95,6 +140,7 @@ export default function UserInfo() {
             },
           },
         });
+        fileUpload();
         notify('更新完了です。');
       }
     } catch (err) {
@@ -104,9 +150,29 @@ export default function UserInfo() {
 
   return (
     <VStack w="100%">
-      <Heading as="h1" mt={10} fontSize="3xl">
+      <Heading as="h1" mt={10} mb={10} fontSize="3xl">
         プロフィール編集
       </Heading>
+
+      <div className="img_container">
+        <div className="img-holder">
+          <img src={profileImg} alt="" id="img" className="img" />
+        </div>
+        <input
+          type="file"
+          accept="image/*"
+          name="image-upload"
+          id="input"
+          onChange={imageHandler}
+        />
+        <div className="label">
+          <label className="image-upload" htmlFor="input">
+            {/* <i className="material-icons">add_photo_alternate</i> */}
+            Choose your Photo
+          </label>
+        </div>
+      </div>
+
       <form onSubmit={handleSubmit(onSubmit)} style={{ paddingTop: '4%', width: '80%' }}>
         <Flex justify="center" textAlign="center">
           <Box w="100%" p={4} borderRadius="md" shadow="md" bg="gray.50">
@@ -122,7 +188,7 @@ export default function UserInfo() {
               </FormControl>
               <FormControl id="birthyear" isInvalid={!!errors.birthyear} textAlign="start">
                 <FormLabel>年代</FormLabel>
-                <select {...register('年代')} class="select">
+                <select {...register('年代')} className="select">
                   <option value="10代">10代</option>
                   <option value="20代">20代</option>
                   <option value="30代">30代</option>
