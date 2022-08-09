@@ -24,11 +24,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getUser } from './graphql/queries';
 import toast, { Toaster } from 'react-hot-toast';
 
-import { put, remove, get, pathToImageFile } from './util/s3Util';
-
 import Amplify, { Storage } from 'aws-amplify';
 import config from './aws-exports';
-
 
 
 Amplify.configure(config);
@@ -58,36 +55,42 @@ const notify = (word) => {
   });
 };
 
-function onChange(e) {
-  file = e.target.files[0];
-}
-
-async function fileUpload() {
-  if (file != null) {
-    try {
-      await Storage.put(file.name, file, {
-        contentType: 'image/*', // contentType is optional
-      });
-    } catch (error) {
-      console.log('Error uploading file: ', error);
-    }
-  }
-}
+ let fileContent = '';
 
 export default function UserInfo() {
   const userInfo = useSelector((state) => state.auth.user);
   const [profileImg, setProfileImg] = useState(
     'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
   );
+  const [fileName, setFileName] = useState();
+
+  async function fileUpload() {
+    if (profileImg != null) {
+      console.log('fileUpload to S3 by ' + userInfo?.username);
+      console.log('fileContent: ' + fileContent);
+      try {
+        await Storage.put(userInfo?.username, fileContent, {
+          contentType: 'image/*', // contentType is optional
+        });
+      } catch (error) {
+        console.log('Error uploading file: ', error);
+      }
+    }
+  }
 
   const imageHandler = (e) => {
+    fileContent = e.target.files[0];
+    console.log('fileContent in imageHandler: ' + fileContent);
     const reader = new FileReader();
     reader.onload = () => {
       if (reader.readyState === 2) {
         // setState({ profileImg: reader.result });
         setProfileImg(reader.result);
+        // console.log('reader.result: ' + reader.result);
       }
     };
+    console.log('(e.target.files[0]: ' + (e.target.files[0].name));
+    setFileName(e.target.files[0].name);
     reader.readAsDataURL(e.target.files[0]);
   };
 
@@ -160,15 +163,14 @@ export default function UserInfo() {
         </div>
         <input
           type="file"
-          accept="image/*"
+          accept="image/png, image/jpeg"
           name="image-upload"
           id="input"
           onChange={imageHandler}
         />
         <div className="label">
           <label className="image-upload" htmlFor="input">
-            {/* <i className="material-icons">add_photo_alternate</i> */}
-            Choose your Photo
+            画像アップロード
           </label>
         </div>
       </div>

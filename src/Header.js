@@ -2,10 +2,32 @@ import React, { useState, useEffect } from 'react';
 import './Header.css';
 import { CSSTransition } from 'react-transition-group';
 import { Routes, Route, NavLink, Outlet } from 'react-router-dom';
+import Amplify, { Storage } from 'aws-amplify';
+import {
+  Heading,
+  Text,
+  Input,
+  FormControl,
+  FormLabel,
+  FormErrorMessage,
+  FormHelperText,
+  Button,
+  Avatar,
+  AvatarBadge,
+  AvatarGroup,
+} from '@chakra-ui/react';
+import { useSelector, useDispatch } from 'react-redux';
+
+// Amplify.configure(config);
 
 export default function Header(props) {
   const [isNavVisible, setNavVisibility] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [iconURL, setIconURL] = useState('');
+
+  const userInfo = useSelector((state) => state.auth.user);
+
+  console.log('userInfo in header: ' + userInfo);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 700px)');
@@ -15,6 +37,12 @@ export default function Header(props) {
     return () => {
       mediaQuery.removeListener(handleMediaQueryChange);
     };
+  }, []);
+
+  useEffect(async () => {
+    const url = await Storage.get('okape.jpg');
+    setIconURL(url);
+    console.log('iconURL: ' + iconURL);
   }, []);
 
   const handleMediaQueryChange = (mediaQuery) => {
@@ -31,13 +59,7 @@ export default function Header(props) {
 
   return (
     <header className="Header">
-      <img
-        src={require('./assets/images/header_logo.png')}
-        className="Logo"
-        alt="logo"
-        // width="100%"
-        // height="auto"
-      />
+      <img src={require('./assets/images/header_logo.png')} className="Logo" alt="logo" />
       <CSSTransition
         in={!isSmallScreen || isNavVisible}
         timeout={350}
@@ -54,10 +76,7 @@ export default function Header(props) {
           >
             本の登録
           </NavLink>{' '}
-          <NavLink
-            className={({ isActive }) => (isActive ? 'active' : 'undefined')}
-            to="/profile"
-          >
+          <NavLink className={({ isActive }) => (isActive ? 'active' : 'undefined')} to="/profile">
             ユーザー情報
           </NavLink>
           <NavLink className={({ isActive }) => (isActive ? 'active' : 'undefined')} to="/about">
@@ -66,6 +85,7 @@ export default function Header(props) {
           <NavLink className={({ isActive }) => (isActive ? 'active' : 'undefined')} to="/contact">
             お問い合わせ
           </NavLink>
+          <Avatar name="Dan Abrahmov" src={iconURL} size="lg" />
           <button onClick={props.signOut}>Logout</button>
         </nav>
       </CSSTransition>
