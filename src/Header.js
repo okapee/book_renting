@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Header.css';
 import { CSSTransition } from 'react-transition-group';
 import { Routes, Route, NavLink, Outlet } from 'react-router-dom';
-import Amplify, { Storage } from 'aws-amplify';
+import Amplify, { Auth, Storage } from 'aws-amplify';
 import {
   Heading,
   Text,
@@ -17,6 +17,7 @@ import {
   AvatarGroup,
 } from '@chakra-ui/react';
 import { useSelector, useDispatch } from 'react-redux';
+import { setUser } from './slices/authSlice';
 
 // Amplify.configure(config);
 
@@ -24,10 +25,22 @@ export default function Header(props) {
   const [isNavVisible, setNavVisibility] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [iconURL, setIconURL] = useState('');
+  const [iconName, setIconName] = useState('');
 
+  const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.auth.user);
 
   console.log('userInfo in header: ' + userInfo);
+
+  useEffect(() => {
+    const setUserToStore = async () => {
+      const res = await Auth.currentAuthenticatedUser();
+      console.log('Headerのusername: ' + res.username);
+      dispatch(setUser(res));
+      setIconName(res.username);
+    };
+    setUserToStore();
+  }, []);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 700px)');
@@ -39,11 +52,16 @@ export default function Header(props) {
     };
   }, []);
 
-  useEffect(async () => {
-    const url = await Storage.get('okape.jpg');
-    setIconURL(url);
-    console.log('iconURL: ' + iconURL);
-  }, []);
+  useEffect(() => {
+    const setImage = async () => {
+      console.log(`Get icon_image using ${userInfo?.username} in header.js `);
+
+      const url = await Storage.get(userInfo?.username);
+      setIconURL(url);
+      console.log('iconURL: ' + iconURL);
+    };
+    setImage();
+  }, [userInfo?.username]);
 
   const handleMediaQueryChange = (mediaQuery) => {
     if (mediaQuery.matches) {
@@ -85,7 +103,7 @@ export default function Header(props) {
           <NavLink className={({ isActive }) => (isActive ? 'active' : 'undefined')} to="/contact">
             お問い合わせ
           </NavLink>
-          <Avatar name="Dan Abrahmov" src={iconURL} size="lg" />
+          <Avatar name={iconName} src={iconURL} size="lg" />
           <button onClick={props.signOut}>Logout</button>
         </nav>
       </CSSTransition>

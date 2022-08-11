@@ -42,14 +42,14 @@ function Home() {
     自分の本: 'mybook',
   };
 
-  useEffect(() => {
-    const setUserToStore = async () => {
-      const res = await Auth.currentAuthenticatedUser();
-      console.log('HOMEのusername: ' + res.username);
-      dispatch(setUser(res));
-    };
-    setUserToStore();
-  }, []);
+  // useEffect(() => {
+  //   const setUserToStore = async () => {
+  //     const res = await Auth.currentAuthenticatedUser();
+  //     console.log('HOMEのusername: ' + res.username);
+  //     dispatch(setUser(res));
+  //   };
+  //   setUserToStore();
+  // }, []);
 
   let fn = () => {};
 
