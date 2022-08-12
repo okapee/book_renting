@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, SerializedError } from '@reduxjs/toolkit
 import { Auth, API } from 'aws-amplify';
 
 const userSlice = createSlice({
-  name:'auth',
+  name: 'auth',
   initialState: {
     user: undefined,
   },
@@ -14,5 +14,4 @@ const userSlice = createSlice({
 });
 
 export const { setUser } = userSlice.actions;
-
 export default userSlice.reducer;

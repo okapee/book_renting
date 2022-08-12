@@ -1,3 +1,6 @@
+/* eslint-disable */
+// this is an auto generated file. This will be overwritten
+
 export const createPost = /* GraphQL */ `
   mutation CreatePost(
     $input: CreatePostInput!
@@ -20,6 +23,7 @@ export const createPost = /* GraphQL */ `
         age
         organization
         name
+        profileImg
         createdAt
         updatedAt
       }
@@ -50,6 +54,7 @@ export const updatePost = /* GraphQL */ `
         age
         organization
         name
+        profileImg
         createdAt
         updatedAt
       }
@@ -80,6 +85,7 @@ export const deletePost = /* GraphQL */ `
         age
         organization
         name
+        profileImg
         createdAt
         updatedAt
       }
@@ -98,6 +104,7 @@ export const createUser = /* GraphQL */ `
       age
       organization
       name
+      profileImg
       createdAt
       updatedAt
     }
@@ -113,6 +120,7 @@ export const updateUser = /* GraphQL */ `
       age
       organization
       name
+      profileImg
       createdAt
       updatedAt
     }
@@ -128,6 +136,7 @@ export const deleteUser = /* GraphQL */ `
       age
       organization
       name
+      profileImg
       createdAt
       updatedAt
     }

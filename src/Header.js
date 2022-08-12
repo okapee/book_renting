@@ -29,6 +29,14 @@ export default function Header(props) {
 
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.auth.user);
+  const userdata = useSelector((state) => state.userDataSlice.userdata);
+
+  console.log(`userdata in header.js: ${userdata?.username}` );
+
+  // userdata.profileImg != iconURL の場合、アイコンURLをprofileImgで置き換える
+  if ((typeof userdata?.profileImg !== 'undefined') && (userdata?.profileImg != iconURL)){
+    setIconURL(userdata?.profileImg);
+  }
 
   console.log('userInfo in header: ' + userInfo);
 

@@ -19,13 +19,14 @@ import {
   Avatar,
 } from '@chakra-ui/react';
 import { FaStar } from 'react-icons/fa';
-import { Auth, API, graphqlOperation } from 'aws-amplify';
+import { Auth, API, graphqlOperation, Storage } from 'aws-amplify';
 import * as mutations from './graphql/mutations';
 
 function BookCard(props) {
   const username = props.username;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [update, setUpdate] = useState(false);
+  const [imgsrc, setImageSrc] = useState('');
   const finalRef = useRef();
 
   const book = {
@@ -49,14 +50,21 @@ function BookCard(props) {
       username,
   );
 
+  (async () => {
+    console.log(`BookCard内のAvatarにsrc=${book.owner}が設定された`);
+    const tmp = await Storage.get(book.owner);
+    console.log(`Avatar's url: ${tmp}`);
+    setImageSrc(tmp);
+  })();
+
   return (
     <Box
       p={4}
       rounded="4"
       w={[340, 380]}
-      h='230px'
-      display='grid'
-      alignContent='center'
+      h="230px"
+      display="grid"
+      alignContent="center"
       bgColor="gray.100"
       boxShadow="md"
       onClick={() => {
@@ -102,7 +110,7 @@ function BookCard(props) {
               {book.title}
             </Heading>
             <HStack align="start" p={4}>
-              <Avatar />
+              <Avatar src={imgsrc} />
               <Text>{book.owner}</Text>
             </HStack>
             <Flex mb={4}>

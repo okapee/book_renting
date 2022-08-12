@@ -20,6 +20,7 @@ export const getPost = /* GraphQL */ `
         age
         organization
         name
+        profileImg
         createdAt
         updatedAt
       }
@@ -29,7 +30,11 @@ export const getPost = /* GraphQL */ `
   }
 `;
 export const listPosts = /* GraphQL */ `
-  query ListPosts($filter: ModelPostFilterInput, $limit: Int, $nextToken: String) {
+  query ListPosts(
+    $filter: ModelPostFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
     listPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
@@ -45,10 +50,6 @@ export const listPosts = /* GraphQL */ `
         owner
         createdAt
         updatedAt
-        user {
-          organization
-          name
-        }
       }
       nextToken
     }
@@ -61,6 +62,7 @@ export const getUser = /* GraphQL */ `
       age
       organization
       name
+      profileImg
       createdAt
       updatedAt
     }
@@ -86,6 +88,7 @@ export const listUsers = /* GraphQL */ `
         age
         organization
         name
+        profileImg
         createdAt
         updatedAt
       }

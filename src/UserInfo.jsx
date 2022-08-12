@@ -21,16 +21,16 @@ import awsconfig from './aws-exports';
 import { createUser, updateUser } from './graphql/mutations';
 import { isUsernamePasswordOpts } from '@aws-amplify/auth/lib-esm/types';
 import { useSelector, useDispatch } from 'react-redux';
+import { setUserData } from './slices/userDataSlice';
 import { getUser } from './graphql/queries';
 import toast, { Toaster } from 'react-hot-toast';
 
 import Amplify, { Storage } from 'aws-amplify';
 import config from './aws-exports';
 
-
 Amplify.configure(config);
 
-let file = null;
+// let file = null;\
 
 const notify = (word) => {
   console.log('toast');
@@ -55,9 +55,18 @@ const notify = (word) => {
   });
 };
 
- let fileContent = '';
+let fileContent = '';
 
 export default function UserInfo() {
+  // store内の値を取得
+  // const userdata = useSelector((state) => state.userData);
+
+  // 表示用の初期値をDBから取得する
+
+  // actionを操作するための関数取得
+  const dispatch = useDispatch();
+  // 初期状態のユーザー情報を取得(セットはheaderで取得する)
+
   const userInfo = useSelector((state) => state.auth.user);
   const [profileImg, setProfileImg] = useState(
     'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
@@ -89,8 +98,8 @@ export default function UserInfo() {
         // console.log('reader.result: ' + reader.result);
       }
     };
-    console.log('(e.target.files[0]: ' + (e.target.files[0].name));
-    setFileName(e.target.files[0].name);
+    // console.log('(e.target.files[0]: ' + e.target.files[0].name);
+    // setFileName(e.target.files[0].name);
     reader.readAsDataURL(e.target.files[0]);
   };
 
@@ -129,6 +138,16 @@ export default function UserInfo() {
           },
         });
         fileUpload();
+        // ユーザー情報のstoreを更新
+        dispatch(
+          setUserData({
+            userId: userInfo.username,
+            organization: data.department,
+            age: data.年代,
+            name: data.name,
+            profileImg: profileImg,
+          }),
+        );
         notify('新規登録完了です。');
       } else {
         console.log('userInfo in updateUser');
@@ -144,6 +163,17 @@ export default function UserInfo() {
           },
         });
         fileUpload();
+        console.log('dispatch開始');
+        dispatch(
+          setUserData({
+            userId: userInfo.username,
+            organization: data.department,
+            age: data.年代,
+            name: data.name,
+            profileImg: profileImg,
+          }),
+        );
+         console.log('dispatch終了');
         notify('更新完了です。');
       }
     } catch (err) {

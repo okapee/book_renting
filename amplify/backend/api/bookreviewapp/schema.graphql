@@ -24,6 +24,7 @@ type User @model {
   age: String!
   organization: String
   name: String
+  profileImg: String
   # prefecture: String
   # firstname: String
   # lastname: String

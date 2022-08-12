@@ -20,6 +20,7 @@ export const onCreatePost = /* GraphQL */ `
         age
         organization
         name
+        profileImg
         createdAt
         updatedAt
       }
@@ -47,6 +48,7 @@ export const onUpdatePost = /* GraphQL */ `
         age
         organization
         name
+        profileImg
         createdAt
         updatedAt
       }
@@ -74,6 +76,7 @@ export const onDeletePost = /* GraphQL */ `
         age
         organization
         name
+        profileImg
         createdAt
         updatedAt
       }
@@ -89,6 +92,7 @@ export const onCreateUser = /* GraphQL */ `
       age
       organization
       name
+      profileImg
       createdAt
       updatedAt
     }
@@ -101,6 +105,7 @@ export const onUpdateUser = /* GraphQL */ `
       age
       organization
       name
+      profileImg
       createdAt
       updatedAt
     }
@@ -113,6 +118,7 @@ export const onDeleteUser = /* GraphQL */ `
       age
       organization
       name
+      profileImg
       createdAt
       updatedAt
     }
