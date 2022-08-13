@@ -19,7 +19,6 @@ import {
 import { Auth, API } from 'aws-amplify';
 import awsconfig from './aws-exports';
 import { createUser, updateUser } from './graphql/mutations';
-import { isUsernamePasswordOpts } from '@aws-amplify/auth/lib-esm/types';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUserData } from './slices/userDataSlice';
 import { getUser } from './graphql/queries';
@@ -93,13 +92,10 @@ export default function UserInfo() {
     const reader = new FileReader();
     reader.onload = () => {
       if (reader.readyState === 2) {
-        // setState({ profileImg: reader.result });
         setProfileImg(reader.result);
         // console.log('reader.result: ' + reader.result);
       }
     };
-    // console.log('(e.target.files[0]: ' + e.target.files[0].name);
-    // setFileName(e.target.files[0].name);
     reader.readAsDataURL(e.target.files[0]);
   };
 
