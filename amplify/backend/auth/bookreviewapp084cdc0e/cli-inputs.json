@@ -42,8 +42,8 @@
     "hostedUI": true,
     "hostedUIDomainName": "bookreviewapp374ae2f0-374ae2f0",
     "authProvidersUserPool": ["Google"],
-    "hostedUIProviderMeta": "[{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile aws.cognito.signin.user.admin\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"sub\"}}]",
+    "hostedUIProviderMeta": "[{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"sub\"}}]",
     "authProviders": [],
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"email\",\"openid\",\"phone\", \"profile,  \"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://www.reviewbooks.tokyo/\"],\"LogoutURLs\":[\"https://www.reviewbooks.tokyo/\"]}"
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"email\",\"openid\",\"phone\", \"profile\"],\"CallbackURLs\":[\"https://www.reviewbooks.tokyo/\"],\"LogoutURLs\":[\"https://www.reviewbooks.tokyo/\"]}"
   }
 }
