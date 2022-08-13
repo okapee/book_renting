@@ -44,6 +44,6 @@
     "authProvidersUserPool": ["Google"],
     "hostedUIProviderMeta": "[{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"sub\"}}]",
     "authProviders": [],
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"email\",\"openid\",,\"aws.cognito.signin.user.admin\", ,\"phone\", ,\"profile\"],\"CallbackURLs\":[\"https://www.reviewbooks.tokyo/\"],\"LogoutURLs\":[\"https://www.reviewbooks.tokyo/\"]}"
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"email\",\"openid\",\"phone\", \"profile\"],\"CallbackURLs\":[\"https://www.reviewbooks.tokyo/\"],\"LogoutURLs\":[\"https://www.reviewbooks.tokyo/\"]}"
   }
 }
