@@ -36,33 +36,24 @@ function ListCard(props) {
   return (
     <ListItem
       verticalAlign="top"
-      // borderWidth={1}
-      // borderColor="gray.300"
       bgColor="gray.100"
       borderLeft="solid 6px #1fa67a"
       borderBottom="solid 2px #dadada"
       boxShadow="lg"
       display="flex"
-      // minW={400}
       mb={5}
       p={2}
       position="relative"
     >
-      {/* <Flex justifyContent="space-between"> */}
       <HStack alignItems="start">
-        {/* <Flex flexBasis="20%"> */}
         <Box minW={120} m="auto">
           <Image
             src={book.thumbnail}
             alt=""
             fallbackSrc="https://via.placeholder.com/150"
             borderRadius="xl"
-            // w={120}
-            // h="auto"
-            // maxH={150}
           />
         </Box>
-        {/* </Flex> */}
         <Flex>
           <VStack alignItems="start" m={2} justifyContent="space-around">
             <Heading
@@ -101,10 +92,7 @@ function ListCard(props) {
           </VStack>
         </Flex>
       </HStack>
-      {/* </Flex> */}
     </ListItem>
-    // </List>
-    // </Box>
   );
 }
 

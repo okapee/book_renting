@@ -42,10 +42,8 @@ function BookRegistration(props) {
   const handleSubmit = async (e) => {
     const loginInfo = await Auth.currentUserInfo();
     const registrationInfo = {
-      //   id: book.key,
       title: book.title,
       authors: book.authors,
-      //   publisher: book.publisher,
       publishedDate: book.publishedDate,
       postedDate: new Date(),
       longLine: book.description ?? '説明なし',
