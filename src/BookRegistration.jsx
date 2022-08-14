@@ -27,6 +27,7 @@ import {
 } from '@chakra-ui/react';
 import { FaStar } from 'react-icons/fa';
 import { Auth, API } from 'aws-amplify';
+import { useSelector, useDispatch } from 'react-redux';
 import * as mutations from './graphql/mutations';
 
 function BookRegistration(props) {

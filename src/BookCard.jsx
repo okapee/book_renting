@@ -20,10 +20,12 @@ import {
 } from '@chakra-ui/react';
 import { FaStar } from 'react-icons/fa';
 import { Auth, API, graphqlOperation, Storage } from 'aws-amplify';
+import { useSelector, useDispatch } from 'react-redux';
 import * as mutations from './graphql/mutations';
 
 function BookCard(props) {
-  const username = props.username;
+  // const username = props.username;
+  const username = useSelector((state) => state.auth.user.username);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [update, setUpdate] = useState(false);
   const [imgsrc, setImageSrc] = useState('');
