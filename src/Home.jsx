@@ -204,7 +204,7 @@ function Home() {
             }}
             onClick={() => dispatch(sameorg())}
           >
-            同じ所属の人が読んでいる本
+            同じ所属の人が読んでいる本 ({userdata?.organization})
           </Button>
           <Button
             size={['md', 'lg', 'xl']}
