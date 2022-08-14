@@ -40,7 +40,8 @@ function BookRegistration(props) {
   const handleInputChange = (e) => setInput(e.target.value);
 
   const handleSubmit = async (e) => {
-    const loginInfo = await Auth.currentUserInfo();
+    // const loginInfo = await Auth.currentUserInfo();
+    const loginInfo = useSelector((state) => state.auth.user);
     const registrationInfo = {
       title: book.title,
       authors: book.authors,
