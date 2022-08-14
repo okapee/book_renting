@@ -26,6 +26,7 @@ import * as mutations from './graphql/mutations';
 function BookCard(props) {
   // const username = props.username;
   const username = useSelector((state) => state.auth.user.username);
+  const userdata = useSelector((state) => state.userDataSlice.userdata);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [update, setUpdate] = useState(false);
   const [imgsrc, setImageSrc] = useState('');
@@ -73,7 +74,7 @@ function BookCard(props) {
         console.log('BookCard modal is Open!');
         onOpen();
       }}
-      wordBreak='break-word'
+      wordBreak="break-word"
       className="boxcard"
     >
       <Modal
@@ -114,7 +115,8 @@ function BookCard(props) {
             </Heading>
             <HStack align="start" p={4}>
               <Avatar src={imgsrc} />
-              <Text>{book.owner ? book.owner : username}</Text>
+              {/* <Text>{book.owner ? book.owner : username}</Text> */}
+              <Text>{userdata.name ? userdata.name : book.owner}</Text>
             </HStack>
             <Flex mb={4}>
               {[1, 2, 3, 4, 5].map((value) => (
@@ -140,7 +142,10 @@ function modalWindow() {
 }
 
 function DeleteBtn(props) {
+  // console.log(`update in DeleteBtn: ${update}`);
   if (props.owner == props.username) {
+    // const fu = props.forceUpdate;
+    console.log(`update in DeleteBtn: ${props.update}`);
     return (
       <Button
         colorScheme="red"
@@ -155,7 +160,9 @@ function DeleteBtn(props) {
 
           await API.graphql(graphqlOperation(mutations.deletePost, { input }));
           console.log('start update: ' + props.update);
-          props.forceUpdate('true');
+          // props.forceUpdate(!props.update);
+          window.location.reload();
+          // setUpdate(!update);
           console.log('finish update: ' + props.update);
         }}
       >

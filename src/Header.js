@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Header.css';
 import { CSSTransition } from 'react-transition-group';
 import { Routes, Route, NavLink, Outlet } from 'react-router-dom';
-import Amplify, { Auth, Storage } from 'aws-amplify';
+import Amplify, { Auth, API, Storage } from 'aws-amplify';
 import {
   Heading,
   Text,
@@ -18,6 +18,8 @@ import {
 } from '@chakra-ui/react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from './slices/authSlice';
+import { setUserData } from './slices/userDataSlice';
+import * as queries from './graphql/queries';
 
 // Amplify.configure(config);
 
@@ -31,10 +33,10 @@ export default function Header(props) {
   const userInfo = useSelector((state) => state.auth.user);
   const userdata = useSelector((state) => state.userDataSlice.userdata);
 
-  console.log(`userdata in header.js: ${userdata?.username}` );
+  console.log(`userdata in header.js: ${userdata?.username}`);
 
   // userdata.profileImg != iconURL の場合、アイコンURLをprofileImgで置き換える
-  if ((typeof userdata?.profileImg !== 'undefined') && (userdata?.profileImg != iconURL)){
+  if (typeof userdata?.profileImg !== 'undefined' && userdata?.profileImg != iconURL) {
     setIconURL(userdata?.profileImg);
   }
 
@@ -46,6 +48,29 @@ export default function Header(props) {
       console.log('Headerのusername: ' + res.username);
       dispatch(setUser(res));
       setIconName(res.username);
+
+      const user = await API.graphql({
+        query: queries.getUser,
+        variables: {
+          userId: res.username,
+        },
+      });
+      console.log(
+        `user in header [usename: ${res.username}], [organization: ${user.data.getUser.organization}]`,
+      );
+
+      if (user != null) {
+        console.log('setUserData in header dispatch');
+        dispatch(
+          setUserData({
+            userId: res.username,
+            organization: user.data.getUser.organization,
+            age: user.data.getUser.age,
+            name: user.data.getUser.name,
+            profileImg: iconURL,
+          }),
+        );
+      }
     };
     setUserToStore();
   }, []);
@@ -62,8 +87,6 @@ export default function Header(props) {
 
   useEffect(() => {
     const setImage = async () => {
-      console.log(`Get icon_image using ${userInfo?.username} in header.js `);
-
       const url = await Storage.get(userInfo?.username);
       setIconURL(url);
       console.log('iconURL: ' + iconURL);
