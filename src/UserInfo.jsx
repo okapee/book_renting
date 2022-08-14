@@ -93,7 +93,6 @@ export default function UserInfo() {
     reader.onload = () => {
       if (reader.readyState === 2) {
         setProfileImg(reader.result);
-        // console.log('reader.result: ' + reader.result);
       }
     };
     reader.readAsDataURL(e.target.files[0]);

@@ -33,6 +33,17 @@ export default function Header(props) {
 
   console.log(`userdata in header.js: ${userdata?.username}`);
 
+  // userdata.profileImg != iconURL の場合、アイコンURLをprofileImgで置き換える
+  if (
+    userdata?.profileImg !== 'undefined' &&
+    userdata?.profileImg !== '' &&
+    userdata?.profileImg != iconURL &&
+    iconURL != ''
+  ) {
+    console.log(`ここにはいった: ${userdata.profileImg}`);
+    setIconURL(userdata?.profileImg);
+  }
+
   console.log('userInfo in header: ' + userInfo);
 
   useEffect(() => {
