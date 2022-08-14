@@ -20,6 +20,7 @@ import { setUser } from './slices/authSlice';
 function Home() {
   const { colorMode, toggleColorMode } = useColorMode();
   const [books, setBooks] = useState([]);
+  const userdata = useSelector((state) => state.userDataSlice.userdata);
 
   // ページネーション用
   const [isLoading, setIsLoading] = useState(false);
@@ -41,15 +42,6 @@ function Home() {
     同じ所属の人が読んでいる本: 'sameorg',
     自分の本: 'mybook',
   };
-
-  // useEffect(() => {
-  //   const setUserToStore = async () => {
-  //     const res = await Auth.currentAuthenticatedUser();
-  //     console.log('HOMEのusername: ' + res.username);
-  //     dispatch(setUser(res));
-  //   };
-  //   setUserToStore();
-  // }, []);
 
   let fn = () => {};
 
@@ -209,7 +201,7 @@ function Home() {
             }}
             onClick={() => dispatch(sameorg())}
           >
-            同じ所属の人が読んでいる本
+            同じ所属の人が読んでいる本 ({userdata?.organization})
           </Button>
           <Button
             size={['md', 'lg', 'xl']}
@@ -256,12 +248,10 @@ function PageNavigate({ isLoading, hasNext, hasPrev, next, prev }) {
   return (
     <div className="flex justify-between px-4 py-2 mb-4 text-sm bg-white rounded shadow-md lg:py-4 lg:px-8">
       <Button disabled={disabledPrev} onClick={prev}>
-        {/* <ChevronsLeft size="1rem" className="inline-block mr-2" /> */}
         <span>前へ</span>
       </Button>
       <Button disabled={disabledNext} onClick={next}>
         <span>次へ</span>
-        {/* <ChevronsRight size="1rem" className="inline-block ml-2" /> */}
       </Button>
     </div>
   );

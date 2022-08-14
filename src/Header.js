@@ -21,8 +21,6 @@ import { setUser } from './slices/authSlice';
 import { setUserData } from './slices/userDataSlice';
 import * as queries from './graphql/queries';
 
-// Amplify.configure(config);
-
 export default function Header(props) {
   const [isNavVisible, setNavVisibility] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
@@ -34,11 +32,6 @@ export default function Header(props) {
   const userdata = useSelector((state) => state.userDataSlice.userdata);
 
   console.log(`userdata in header.js: ${userdata?.username}`);
-
-  // userdata.profileImg != iconURL の場合、アイコンURLをprofileImgで置き換える
-  if (typeof userdata?.profileImg !== 'undefined' && userdata?.profileImg != iconURL) {
-    setIconURL(userdata?.profileImg);
-  }
 
   console.log('userInfo in header: ' + userInfo);
 
@@ -87,7 +80,9 @@ export default function Header(props) {
 
   useEffect(() => {
     const setImage = async () => {
+      console.log(`userInfo in useEffect of header.js: ${userInfo?.username}`);
       const url = await Storage.get(userInfo?.username);
+      console.log(`url in useEffect of header.js: ${url}`);
       setIconURL(url);
       console.log('iconURL: ' + iconURL);
     };

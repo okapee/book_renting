@@ -24,7 +24,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import * as mutations from './graphql/mutations';
 
 function BookCard(props) {
-  // const username = props.username;
   const username = useSelector((state) => state.auth.user.username);
   const userdata = useSelector((state) => state.userDataSlice.userdata);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -115,7 +114,6 @@ function BookCard(props) {
             </Heading>
             <HStack align="start" p={4}>
               <Avatar src={imgsrc} />
-              {/* <Text>{book.owner ? book.owner : username}</Text> */}
               <Text>{book.username ? username : book.owner}</Text>
             </HStack>
             <Flex mb={4}>
@@ -160,9 +158,8 @@ function DeleteBtn(props) {
 
           await API.graphql(graphqlOperation(mutations.deletePost, { input }));
           console.log('start update: ' + props.update);
-          // props.forceUpdate(!props.update);
+          // Postを削除した際に強制リロード
           window.location.reload();
-          // setUpdate(!update);
           console.log('finish update: ' + props.update);
         }}
       >
