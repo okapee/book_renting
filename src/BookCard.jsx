@@ -116,7 +116,7 @@ function BookCard(props) {
             <HStack align="start" p={4}>
               <Avatar src={imgsrc} />
               {/* <Text>{book.owner ? book.owner : username}</Text> */}
-              <Text>{userdata.name ? userdata.name : book.owner}</Text>
+              <Text>{book.username ? username : book.owner}</Text>
             </HStack>
             <Flex mb={4}>
               {[1, 2, 3, 4, 5].map((value) => (
