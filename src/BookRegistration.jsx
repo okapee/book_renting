@@ -35,7 +35,9 @@ function BookRegistration(props) {
   const [input, setInput] = useState('');
   const [rating, setRating] = useState(0);
   const isError = input === '' || input.length > 280 || rating == 0;
-  const loginInfo = useSelector((state) => state.auth.user);
+  const username = useSelector((state) => state.auth.username);
+
+  console.log(`username in BookRegistration.jsx: ${username}`);
 
   const book = props.book;
 
@@ -56,7 +58,7 @@ function BookRegistration(props) {
       thumbnail: book.thumbnail,
       review: input,
       rating: rating,
-      owner: loginInfo.username,
+      owner: username,
     };
 
     // DBへ本情報を登録
