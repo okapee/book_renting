@@ -40,7 +40,7 @@ export default function Header(props) {
     userdata?.profileImg != iconURL &&
     iconURL != ''
   ) {
-    console.log(`ここにはいった: ${userdata.profileImg}`);
+    // console.log(`ここにはいった: ${userdata.profileImg}`);
     setIconURL(userdata?.profileImg);
   }
 

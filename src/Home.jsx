@@ -70,15 +70,18 @@ function Home() {
           console.log('sameorg_getUser: ' + res_user.data.getUser.organization);
           const login_user_org = res_user.data.getUser.organization;
           const res_array = res_posts.data.listPosts.items;
+          console.log(`res_array in sameorg: ${res_array}`);
 
           let sameorg_items = [];
 
           // TODO: postのorganizationとログインユーザーのorganitonを比較して一致するものだけ詰め直す
-          res_posts.data.listPosts.items.forEach((item) => {
+          res_array.forEach((item) => {
             console.log('res_array.forEach->item: ' + JSON.stringify(item));
             if (item.user?.organization == login_user_org) {
               sameorg_items.push(item);
             }
+            console.log(`item.user?.organization: ${item.user}, login_user_org: ${login_user_org}`);
+            console.log(`sameorg_items: ${sameorg_items}`);
           });
           setBooks(sameorg_items);
         };
@@ -201,7 +204,7 @@ function Home() {
             }}
             onClick={() => dispatch(sameorg())}
           >
-            同じ所属の人が読んでいる本 ({userdata?.organization})
+            同じ所属の人が読んでいる本
           </Button>
           <Button
             size={['md', 'lg', 'xl']}
