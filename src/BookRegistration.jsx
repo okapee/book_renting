@@ -35,6 +35,7 @@ function BookRegistration(props) {
   const [input, setInput] = useState('');
   const [rating, setRating] = useState(0);
   const isError = input === '' || input.length > 280 || rating == 0;
+  const loginInfo = useSelector((state) => state.auth.user);
 
   const book = props.book;
 
@@ -42,7 +43,6 @@ function BookRegistration(props) {
 
   const handleSubmit = async (e) => {
     // const loginInfo = await Auth.currentUserInfo();
-    const loginInfo = useSelector((state) => state.auth.user);
     const registrationInfo = {
       title: book.title,
       authors: book.authors,
