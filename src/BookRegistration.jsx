@@ -35,7 +35,7 @@ function BookRegistration(props) {
   const [input, setInput] = useState('');
   const [rating, setRating] = useState(0);
   const isError = input === '' || input.length > 280 || rating == 0;
-  const username = useSelector((state) => state.auth.username);
+  const username = useSelector((state) => state.auth.user.username);
 
   console.log(`username in BookRegistration.jsx: ${username}`);
 
