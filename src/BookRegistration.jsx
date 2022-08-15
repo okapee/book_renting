@@ -1,13 +1,8 @@
 import { useEffect, useState } from 'react';
 import {
-  Box,
   Flex,
-  AspectRatio,
-  Image,
   Text,
-  Link,
   Button,
-  Stack,
   Modal,
   ModalContent,
   ModalOverlay,
@@ -17,13 +12,14 @@ import {
   ModalCloseButton,
   useDisclosure,
   VStack,
-  Input,
+  Switch,
   FormControl,
   FormLabel,
   FormErrorMessage,
   FormHelperText,
   Textarea,
   Spacer,
+  HStack,
 } from '@chakra-ui/react';
 import { FaStar } from 'react-icons/fa';
 import { Auth, API } from 'aws-amplify';
@@ -119,7 +115,11 @@ function BookRegistration(props) {
       <Modal blockScrollOnMount={false} size={'xl'} isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay bg="whiteAlpha.50" backdropFilter="blur(10px) hue-rotate(90deg)" />
         <ModalContent>
-          <ModalHeader>レビュー投稿画面</ModalHeader>
+          <ModalHeader fontSize={['12px', '16px', '20px']}>レビュー投稿画面</ModalHeader>
+          <HStack ml={8}>
+            <Switch mb={4}/>
+            <Text alignSelf='baseline'>公開しない(「あなたの本」にのみ表示する)</Text>
+          </HStack>
           <ModalCloseButton />
           <ModalBody>
             <VStack>
