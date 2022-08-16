@@ -13,10 +13,10 @@ import Social from "./components/Social";
 
 function About() {
   return (
-      <VStack>
+      <Container>
         <Profile />
         <Social />
-      </VStack>
+      </Container>
   );
 }
 

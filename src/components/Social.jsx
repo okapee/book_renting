@@ -6,7 +6,7 @@ import { FaFacebookF, FaTwitter } from 'react-icons/fa';
 
 function Social() {
   return (
-    <HStack spacing="24" m={10} p={10}>
+    <HStack justifyContent='center' spacing="24" p={4}>
       <Link href="https://www.facebook.com/okapee">
         <Icon as={FaFacebookF} boxSize="30" />
       </Link>
