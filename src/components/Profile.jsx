@@ -43,7 +43,7 @@ function Profile() {
           fontSize={{ base: '12px', md: '18px', lg: '24px'}}
         > */}
       <Box m='unset'>
-        <Text fontSize={{ base: '14px', md: '18px' }} m='20px'>
+        <Text fontSize={{ base: '14px', md: '18px' }} m='20px' maxW='600px'>
           <Text as="mark">大好きな本</Text>
           をいろんな人と共有したり、自分で管理したりできる場を作りたくて本サービスを立ち上げました。
           <br /><br />
