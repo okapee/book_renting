@@ -48,10 +48,17 @@ function Home() {
   console.log('Redux Store(HOME)でのfilterの値: ' + filter);
   const userInfo = useSelector((state) => state.auth.user);
 
+  const private_filter = {
+    isPrivate: {
+      eq: false,
+    },
+  };
+
   useEffect(() => {
     const variables = {
-      nextToken,
+      filter: private_filter,
       limit,
+      nextToken,
     };
     switch (filter) {
       case 'sameage':
@@ -62,7 +69,8 @@ function Home() {
       case 'sameorg':
         fn = async () => {
           console.log('HOMEでsameorgが実行された');
-          const res_posts = await API.graphql(graphqlOperation(queries.listPosts));
+
+          const res_posts = await API.graphql(graphqlOperation(queries.listPosts, { filter: private_filter }));
           // console.log('sameorg_listPosts: ' + res_posts.data.listPosts.items[0].user.organization);
           const res_user = await API.graphql(
             graphqlOperation(queries.getUser, { userId: userInfo.username }),
@@ -103,7 +111,9 @@ function Home() {
       default:
         fn = async () => {
           console.log('HOME: useEffectでdefault(allbook)が実行された');
-          const res = await API.graphql(graphqlOperation(queries.listPosts, variables));
+          const res = await API.graphql(
+            graphqlOperation(queries.listPosts, variables),
+          );
           setNextNextToken(res.data.listPosts.nextToken);
           setBooks(res.data.listPosts.items);
         };

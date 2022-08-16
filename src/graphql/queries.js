@@ -44,17 +44,17 @@ export const listPosts = /* GraphQL */ `
         postedDate
         rating
         owner
-        createdAt
-        updatedAt
         user {
+          userId
+          age
           organization
           name
-          createdAt
-          age
           profileImg
+          createdAt
           updatedAt
-          userId
         }
+        createdAt
+        updatedAt
       }
       nextToken
     }

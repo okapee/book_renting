@@ -30,6 +30,8 @@ function BookRegistration(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [input, setInput] = useState('');
   const [rating, setRating] = useState(0);
+  // Swtich(本の公開する/しない)のfalse/trueを切り替える
+  const [value, setValue] = useState(false);
   const isError = input === '' || input.length > 280 || rating == 0;
   const userInfo = useSelector((state) => state.auth.user);
 
@@ -54,6 +56,7 @@ function BookRegistration(props) {
       review: input,
       rating: rating,
       owner: userInfo.username,
+      isPrivate: value,
     };
 
     // DBへ本情報を登録
@@ -117,8 +120,8 @@ function BookRegistration(props) {
         <ModalContent>
           <ModalHeader fontSize={['12px', '16px', '20px']}>レビュー投稿画面</ModalHeader>
           <HStack ml={8}>
-            <Switch mb={4}/>
-            <Text alignSelf='baseline'>公開しない(「あなたの本」にのみ表示する)</Text>
+            <Switch colorScheme="red" mb={4} onChange={() => setValue(!value)} />
+            <Text alignSelf="baseline">公開しない(「あなたの本」にのみ表示する)</Text>
           </HStack>
           <ModalCloseButton />
           <ModalBody>
