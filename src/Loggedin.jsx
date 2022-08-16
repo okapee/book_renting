@@ -54,7 +54,7 @@ export default function Loggedin() {
         })}
       >
         <Header signOut={signOut} />
-        <Container className="container">
+        <Container minw={320} maxW={1200}  minH = 'calc(100vh - 90px - 50px)'>
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<Home />} />
