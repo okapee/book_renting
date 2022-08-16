@@ -214,7 +214,7 @@ function Home() {
             }}
             onClick={() => dispatch(sameorg())}
           >
-            同じ所属の人が読んでいる本 ({userdata?.organization ? '無所属' : userdata?.organization}
+            同じ所属の人が読んでいる本 ({userdata?.organization ? userdata?.organization : '無所属'}
             )
           </Button>
           <Button
@@ -242,7 +242,7 @@ function Home() {
           </Button>
         </Box>
       </HStack>
-      <SimpleGrid columns={[1, null, 2]} spacing={8}>
+      <SimpleGrid columns={[1, null, 2]} spacing={8} width='max-content'>
         {books.map((book) => {
           console.log('book: ' + book);
           return <BookCard bookInfo={book} username={userInfo?.username} />;
