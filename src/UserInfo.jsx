@@ -29,8 +29,6 @@ import config from './aws-exports';
 
 Amplify.configure(config);
 
-// let file = null;\
-
 const notify = (word) => {
   console.log('toast');
   toast(word, {
@@ -58,7 +56,7 @@ let fileContent = '';
 
 export default function UserInfo() {
   // store内の値を取得
-  // const userdata = useSelector((state) => state.userData);
+  const userdata = useSelector((state) => state.userDataSlice.userdata);
 
   // 表示用の初期値をDBから取得する
 
@@ -71,6 +69,50 @@ export default function UserInfo() {
     'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
   );
   const [fileName, setFileName] = useState();
+
+  (() => {
+    console.log('Enter into switch');
+    let select = document.getElementById('age-select');
+
+    switch (userdata.age) {
+      case '10代':
+        console.log('10 in switch');
+        select.options[0].selected = true;
+        break;
+      case '20代':
+        console.log('20 in switch');
+        select.options[1].selected = true;
+        break;
+      case '30代':
+        console.log('30 in switch');
+        select.options[2].selected = true;
+        break;
+      case '40代':
+        console.log('40 in switch');
+        select.options[3].selected = true;
+        break;
+      case '50代':
+        console.log('50 in switch');
+        select.options[4].selected = true;
+        break;
+      case '60代':
+        console.log('60 in switch');
+        select.options[5].selected = true;
+        break;
+      case '70代':
+        console.log('70 in switch');
+        select.options[6].selected = true;
+        break;
+      case '80代':
+        console.log('80 in switch');
+        select.options[7].selected = true;
+        break;
+      case '90代':
+        console.log('90 in switch');
+        select.options[8].selected = true;
+        break;
+    }
+  })();
 
   async function fileUpload() {
     if (profileImg != null) {
@@ -107,7 +149,6 @@ export default function UserInfo() {
   // submitしたときの挙動(DB登録)
   const onSubmit = async (data) => {
     console.log(data);
-
     try {
       // ユーザーテーブルへ未登録の場合はcreateUser、登録済みの場合はupdateUserを使う
       console.log('userInfo in UserInfo.jsx: ' + userInfo?.username);
@@ -168,7 +209,7 @@ export default function UserInfo() {
             profileImg: profileImg,
           }),
         );
-         console.log('dispatch終了');
+        console.log('dispatch終了');
         notify('更新完了です。');
       }
     } catch (err) {
@@ -206,16 +247,22 @@ export default function UserInfo() {
             <Stack spacing={4}>
               <FormControl id="name" isInvalid={!!errors.name} isRequired>
                 <FormLabel>お名前(必須)</FormLabel>
-                <Input placeholder="山田  太郎" {...register('name', { required: true })} />
+                <Input
+                  placeholder={userdata?.name ? userdata?.name : '山田太郎'}
+                  {...register('name', { required: true })}
+                />
                 <FormErrorMessage>{errors.name && 'お名前を入力してください'}</FormErrorMessage>
               </FormControl>
               <FormControl id="department" isInvalid={!!errors.department}>
                 <FormLabel>所属</FormLabel>
-                <Input placeholder="A株式会社" {...register('department')} />
+                <Input
+                  placeholder={userdata?.organization ? userdata?.organization : 'サンプル株式会社'}
+                  {...register('department')}
+                />
               </FormControl>
               <FormControl id="birthyear" isInvalid={!!errors.birthyear} textAlign="start">
                 <FormLabel>年代</FormLabel>
-                <select {...register('年代')} className="select">
+                <select {...register('年代')} className="select" id="age-select">
                   <option value="10代">10代</option>
                   <option value="20代">20代</option>
                   <option value="30代">30代</option>

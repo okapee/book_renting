@@ -44,7 +44,7 @@ export default function Loggedin() {
   const handleToggle = () => (isOpen ? onClose() : onOpen());
 
   return (
-    <div className="App">
+    <div>
       <ChakraProvider
         theme={extendTheme({
           fonts: {
