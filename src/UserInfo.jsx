@@ -70,11 +70,11 @@ export default function UserInfo() {
   );
   const [fileName, setFileName] = useState();
 
-  (() => {
+  useEffect(() => {
     console.log('Enter into switch');
     let select = document.getElementById('age-select');
 
-    switch (userdata.age) {
+    switch (userdata?.age) {
       case '10代':
         console.log('10 in switch');
         select.options[0].selected = true;
@@ -111,8 +111,11 @@ export default function UserInfo() {
         console.log('90 in switch');
         select.options[8].selected = true;
         break;
+      default:
+        console.log('default');
+        select.options[0].selected = true;
     }
-  })();
+  });
 
   async function fileUpload() {
     if (profileImg != null) {
