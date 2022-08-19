@@ -70,7 +70,9 @@ function Home() {
         fn = async () => {
           console.log('HOMEでsameorgが実行された');
 
-          const res_posts = await API.graphql(graphqlOperation(queries.listPosts, { filter: private_filter }));
+          const res_posts = await API.graphql(
+            graphqlOperation(queries.listPosts, { filter: private_filter }),
+          );
           // console.log('sameorg_listPosts: ' + res_posts.data.listPosts.items[0].user.organization);
           const res_user = await API.graphql(
             graphqlOperation(queries.getUser, { userId: userInfo.username }),
@@ -111,9 +113,7 @@ function Home() {
       default:
         fn = async () => {
           console.log('HOME: useEffectでdefault(allbook)が実行された');
-          const res = await API.graphql(
-            graphqlOperation(queries.listPosts, variables),
-          );
+          const res = await API.graphql(graphqlOperation(queries.listPosts, variables));
           setNextNextToken(res.data.listPosts.nextToken);
           setBooks(res.data.listPosts.items);
         };
@@ -242,7 +242,7 @@ function Home() {
           </Button>
         </Box>
       </HStack>
-      <SimpleGrid columns={[1, null, 2]} spacing={8} width='max-content'>
+      <SimpleGrid columns={[1, null, 2]} spacing={8} width="max-content">
         {books.map((book) => {
           console.log('book: ' + book);
           return <BookCard bookInfo={book} username={userInfo?.username} />;

@@ -4,6 +4,9 @@ import Loggedin from './Loggedin'; //ログイン後ホーム画面
 import NotLoggedin from './NotLoggedin'; //ログイン前画面(サインイン画面)
 import SetUIVocabularies from './amplify_login/UIVocabularies';
 import '@aws-amplify/ui-react/styles.css';
+import { useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
+import ReactGA from 'react-ga4';
 
 SetUIVocabularies('ja');
 
@@ -24,6 +27,18 @@ function Authcheck() {
 
 //ログインチェックの関数を、<Authenticator.Provider>タグでラップします。
 export default function App() {
+  const location = useLocation();
+
+  useEffect(() => {
+    // Google Analytics 測定 ID を入力して設定
+    ReactGA.initialize('G-DLTTSJT268');
+    ReactGA.send({
+      hitType: 'pageview',
+      // アクセスしたパス (pathname) とクエリ文字列 (search) を送付する (必要に応じて編集する)
+      page: location.pathname + location.search,
+    });
+  }, [location]);
+
   return (
     <Authenticator.Provider>
       <div>
