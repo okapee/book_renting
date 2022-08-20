@@ -2,23 +2,23 @@ import { Flex, Box, Button, HStack, Input } from '@chakra-ui/react';
 import React from 'react';
 
 const SearchForm = (props) => {
-  const { setQuery } = props;
+  const { setQuery, reQuery, setIsLoading } = props;
   const inputRef = React.createRef();
   const handleSubmit = (event) => {
+    setIsLoading(true);
     event.preventDefault();
-    if (!inputRef.current.value) inputRef.current.value = 'Amazon';
     console.log('SearchForm: ' + inputRef.current.value);
-    setQuery(inputRef.current.value);
+    reQuery(inputRef.current.value);
   };
   return (
     <HStack mb={10} justifyContent="center">
-      <Box w="70%">
+      <Box w="60vw">
         <Input
           ref={inputRef}
           type="text"
           name="name"
           borderColor={'gray.300'}
-          placeholder="何も入力しないで検索を押すと'Amazon'で検索したことになります"
+          placeholder="ここに検索したいキーワードを入力してください。"
           _placeholder={{ color: 'gray.300' }}
           size="md"
           minHeight={14}

@@ -88,7 +88,6 @@ function BookCard(props) {
         <ModalOverlay />
         <ModalContent p={4} minHeight="200px">
           <ModalHeader bgColor="gray.100">{book.title}</ModalHeader>
-          <ModalCloseButton />
           <ModalBody p={4}>{book.review}</ModalBody>
 
           <ModalFooter paddingRight="unset" paddingBottom="unset">

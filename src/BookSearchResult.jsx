@@ -1,23 +1,27 @@
-import {
-  Text,
-  Box,
-  List,
-  VStack,
-} from '@chakra-ui/react';
+import { Text, Box, List, VStack, Spinner, Center, Flex } from '@chakra-ui/react';
 import ListCard from './ListCard';
+import { useEffect, useState } from 'react';
 
 function BookSearchResult(props) {
   const books = props.books;
+  const query = props.query;
+  const isLoading = props.isLoading;
 
-  console.log('booksearchresult: ' + typeof books);
+  console.log('booksearchresult: ' + query);
 
   return (
-    <Box w="100%" p={8} display="flex" bgColor="gray.50" flexWrap="wrap">
-      <VStack>
-        <Text textAlign="left" mb={8}>
-          検索結果
-        </Text>
-        <List bgColor="whiteAlpha.100" w="95%">
+    <>
+      {isLoading ? (
+            <Spinner
+              thickness="4px"
+              speed="0.65s"
+              emptyColor="gray.200"
+              color="blue.500"
+              size="xl"
+              mt={10}
+            />
+      ) : (
+        <List bgColor="whiteAlpha.100" w="90wh">
           {Object.entries(books).map(([key, value]) => {
             console.log(key + ' ' + value);
             const book = {};
@@ -33,8 +37,8 @@ function BookSearchResult(props) {
             return <ListCard book={book} />;
           })}
         </List>
-      </VStack>
-    </Box>
+      )}
+    </>
   );
 }
 
