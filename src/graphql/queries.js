@@ -15,12 +15,25 @@ export const getPost = /* GraphQL */ `
       postedDate
       rating
       owner
+      isPrivate
       user {
         userId
         age
         organization
         name
         profileImg
+        createdAt
+        updatedAt
+      }
+      like {
+        id
+        count
+        createdAt
+        updatedAt
+      }
+      comment {
+        id
+        comment
         createdAt
         updatedAt
       }
@@ -44,6 +57,9 @@ export const listPosts = /* GraphQL */ `
         postedDate
         rating
         owner
+        isPrivate
+        createdAt
+        updatedAt
         user {
           userId
           age
@@ -53,8 +69,6 @@ export const listPosts = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        createdAt
-        updatedAt
       }
       nextToken
     }
@@ -94,6 +108,85 @@ export const listUsers = /* GraphQL */ `
         organization
         name
         profileImg
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getLike = /* GraphQL */ `
+  query GetLike($id: ID!) {
+    getLike(id: $id) {
+      id
+      count
+      pressby {
+        userId
+        age
+        organization
+        name
+        profileImg
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listLikes = /* GraphQL */ `
+  query ListLikes(
+    $id: ID
+    $filter: ModelLikeFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listLikes(
+      id: $id
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        id
+        count
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getComment = /* GraphQL */ `
+  query GetComment($id: ID!) {
+    getComment(id: $id) {
+      id
+      comment
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listComments = /* GraphQL */ `
+  query ListComments(
+    $id: ID
+    $filter: ModelCommentFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listComments(
+      id: $id
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        id
+        comment
         createdAt
         updatedAt
       }

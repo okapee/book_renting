@@ -18,6 +18,8 @@ type Post @model {
   owner: String
   isPrivate: Boolean
   user: User @hasOne(fields: ["owner"])
+  like: Like @hasOne(fields: ["id"])
+  comment: Comment @hasOne(fields: ["id"])
 }
 
 type User @model {
@@ -26,4 +28,15 @@ type User @model {
   organization: String
   name: String
   profileImg: String
+}
+
+type Like @model {
+  id: ID! @primaryKey
+  count: Int!
+  pressby: [User]
+}
+
+type Comment @model {
+  id: ID! @primaryKey
+  comment: [String]
 }

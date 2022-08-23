@@ -19,6 +19,7 @@ import {
   Avatar,
 } from '@chakra-ui/react';
 import { FaStar } from 'react-icons/fa';
+import LikeButton from './components/LikeButton';
 import { Auth, API, graphqlOperation, Storage } from 'aws-amplify';
 import { useSelector, useDispatch } from 'react-redux';
 import * as mutations from './graphql/mutations';
@@ -64,11 +65,12 @@ function BookCard(props) {
       p={4}
       rounded="4"
       w={[340, 380]}
-      h="230px"
+      h="240px"
       display="grid"
       alignContent="center"
       bgColor="gray.100"
       boxShadow="md"
+      position='relative'
       onClick={() => {
         console.log('BookCard modal is Open!');
         onOpen();
@@ -123,6 +125,7 @@ function BookCard(props) {
             <Text mb={4} noOfLines={3}>
               {book.review}
             </Text>
+            <LikeButton />
           </VStack>
         </HStack>
       </Box>

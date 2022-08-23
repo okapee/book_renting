@@ -15,12 +15,25 @@ export const onCreatePost = /* GraphQL */ `
       postedDate
       rating
       owner
+      isPrivate
       user {
         userId
         age
         organization
         name
         profileImg
+        createdAt
+        updatedAt
+      }
+      like {
+        id
+        count
+        createdAt
+        updatedAt
+      }
+      comment {
+        id
+        comment
         createdAt
         updatedAt
       }
@@ -43,12 +56,25 @@ export const onUpdatePost = /* GraphQL */ `
       postedDate
       rating
       owner
+      isPrivate
       user {
         userId
         age
         organization
         name
         profileImg
+        createdAt
+        updatedAt
+      }
+      like {
+        id
+        count
+        createdAt
+        updatedAt
+      }
+      comment {
+        id
+        comment
         createdAt
         updatedAt
       }
@@ -71,12 +97,25 @@ export const onDeletePost = /* GraphQL */ `
       postedDate
       rating
       owner
+      isPrivate
       user {
         userId
         age
         organization
         name
         profileImg
+        createdAt
+        updatedAt
+      }
+      like {
+        id
+        count
+        createdAt
+        updatedAt
+      }
+      comment {
+        id
+        comment
         createdAt
         updatedAt
       }
@@ -119,6 +158,93 @@ export const onDeleteUser = /* GraphQL */ `
       organization
       name
       profileImg
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateLike = /* GraphQL */ `
+  subscription OnCreateLike {
+    onCreateLike {
+      id
+      count
+      pressby {
+        userId
+        age
+        organization
+        name
+        profileImg
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateLike = /* GraphQL */ `
+  subscription OnUpdateLike {
+    onUpdateLike {
+      id
+      count
+      pressby {
+        userId
+        age
+        organization
+        name
+        profileImg
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteLike = /* GraphQL */ `
+  subscription OnDeleteLike {
+    onDeleteLike {
+      id
+      count
+      pressby {
+        userId
+        age
+        organization
+        name
+        profileImg
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateComment = /* GraphQL */ `
+  subscription OnCreateComment {
+    onCreateComment {
+      id
+      comment
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateComment = /* GraphQL */ `
+  subscription OnUpdateComment {
+    onUpdateComment {
+      id
+      comment
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteComment = /* GraphQL */ `
+  subscription OnDeleteComment {
+    onDeleteComment {
+      id
+      comment
       createdAt
       updatedAt
     }
