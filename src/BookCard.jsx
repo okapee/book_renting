@@ -22,6 +22,7 @@ import { FaStar } from 'react-icons/fa';
 import LikeButton from './components/LikeButton';
 import { Auth, API, graphqlOperation, Storage } from 'aws-amplify';
 import { useSelector, useDispatch } from 'react-redux';
+import * as queries from './graphql/queries';
 import * as mutations from './graphql/mutations';
 
 function BookCard(props) {
@@ -38,13 +39,15 @@ function BookCard(props) {
 
   console.log(
     'Cards has ' +
+      book.id +
+      ' ' +
       book.title +
       ' ' +
-      book.longLine +
-      ' ' +
-      book.isbn +
-      ' review: ' +
-      book.review +
+      // book.longLine +
+      // ' ' +
+      // book.isbn +
+      // ' review: ' +
+      // book.review +
       ' rating: ' +
       book.rating +
       ' owner: ' +
@@ -60,17 +63,43 @@ function BookCard(props) {
     setImageSrc(tmp);
   })();
 
+  // いいねの初期表示カウントを取得
+  useEffect(() => {
+    // let input = {}
+    const get_variables = {
+      id: book.id,
+    };
+    const create_variables = {
+      id: book.id,
+      count: 0,
+    };
+
+    async function fn() {
+      const res_like = await API.graphql(graphqlOperation(queries.getLike, get_variables));
+      console.log(`getLike by id: ${book.id} in BookCard: ${res_like.data.getLike}`);
+      // もし本のIDに対応するLikeオブジェクトがなければ作ってres_likeに詰める
+      if (!res_like.data.getLike) {
+        console.log('getLike if');
+        const res_create_like = await API.graphql({
+          query: mutations.createLike,
+          variables: { input: create_variables },
+        });
+      }
+    }
+    fn();
+  }, []);
+
   return (
     <Box
       p={4}
       rounded="4"
       w={[340, 380]}
-      h="240px"
+      h="200px"
       display="grid"
       alignContent="center"
       bgColor="gray.100"
       boxShadow="md"
-      position='relative'
+      position="relative"
       onClick={() => {
         console.log('BookCard modal is Open!');
         onOpen();
@@ -109,8 +138,8 @@ function BookCard(props) {
       <Box>
         <HStack>
           <Image src={book.thumbnail} borderRadius="xl" alignSelf="center" />
-          <VStack p={4} align="start">
-            <Heading size="lg" noOfLines={2}>
+          <VStack p={4} align="start" alignSelf="flex-start">
+            <Heading size="lg" noOfLines={1}>
               {book.title}
             </Heading>
             <HStack align="start" p={4}>
@@ -122,10 +151,10 @@ function BookCard(props) {
                 <Star key={value} filled={value <= book.rating} />
               ))}
             </Flex>
-            <Text mb={4} noOfLines={3}>
+            <Text mb={4} noOfLines={2}>
               {book.review}
             </Text>
-            <LikeButton />
+            <LikeButton initCount={1} pressby={[]} />
           </VStack>
         </HStack>
       </Box>
