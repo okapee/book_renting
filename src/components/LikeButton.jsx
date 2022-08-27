@@ -83,19 +83,9 @@ function LikeButton(props) {
     e.stopPropagation();
 
     // setInitCount(liked ? initCount - 1 : initCount + 1);
-    let newCount = liked ? initCount - 1 : initCount + 1;
+    let newCount = liked ? initCount : initCount + 1;
     setLiked(!liked);
     console.log(`bookId in Like: ${bookId}`);
-
-    // let update_pressby;
-    // if(liked){
-    //   if(userInfo.userId in pressby){
-    //     const index = pressby.indexOf();
-    //     update_pressby = pressby.splice(index, 1);
-    //   }
-    // }else{
-    //   update_pressby = [...pressby, userInfo.userId];
-    // }
 
     //TODO: 以下、liked=Trueもしくはpressbyに既にidがある場合には実行しないようにする
     const update_variables = {
