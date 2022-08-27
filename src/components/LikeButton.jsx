@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import Amplify, { Auth, API, Storage } from 'aws-amplify';
+import Amplify, { Auth, API, graphqlOperation } from 'aws-amplify';
 import { useSelector, useDispatch } from 'react-redux';
+import * as mutations from '../graphql/mutations';
 
 function LikeButton(props) {
   // 初期値をpropsから取得
-  const {initCount, pressby} = props;
+  const { bookId, initCount, setInitCount, pressby } = props;
+  // const { bookId, initCount, pressby } = props;
   console.log(`LikeButton initCount: ${initCount}`);
 
-
   const [hovered, setHovered] = useState(false);
-  const [count, setCount] = useState(initCount);
+  // const [count, setCount] = useState(initCount);
   const [liked, setLiked] = useState(false);
   const userInfo = useSelector((state) => state.auth.user);
 
@@ -65,23 +66,49 @@ function LikeButton(props) {
 
   // カーソルが乗った時に状態を変更するイベントハンドラ
   const onMouseEnter = (e) => {
-     e.stopPropagation();
+    e.stopPropagation();
     setHovered(true);
-    console.log(`onMouseEnter`)
+    console.log(`onMouseEnter`);
   };
 
   // カーソルが外れた時に状態を変更するイベントハンドラ
   const onMouseLeave = (e) => {
-     e.stopPropagation();
+    e.stopPropagation();
     setHovered(false);
   };
 
   // クリックしたときのイベントハンドラ
-  const onClick = (e) => {
+  const onClick = async (e) => {
+    console.log(`Like in onClick: ${liked}`);
     e.stopPropagation();
-    setCount(liked ? -1 : 1);
+
+    // setInitCount(liked ? initCount - 1 : initCount + 1);
+    let newCount = liked ? initCount - 1 : initCount + 1;
     setLiked(!liked);
-    console.log(`Like: ${liked}`)
+    console.log(`bookId in Like: ${bookId}`);
+
+    // let update_pressby;
+    // if(liked){
+    //   if(userInfo.userId in pressby){
+    //     const index = pressby.indexOf();
+    //     update_pressby = pressby.splice(index, 1);
+    //   }
+    // }else{
+    //   update_pressby = [...pressby, userInfo.userId];
+    // }
+
+    //TODO: 以下、liked=Trueもしくはpressbyに既にidがある場合には実行しないようにする
+    const update_variables = {
+      id: bookId,
+      count: newCount,
+      // pressby: update_pressby,
+    };
+
+    const res_update_like = await API.graphql({
+      query: mutations.updateLike,
+      variables: { input: update_variables },
+    });
+    console.log(`updateLike: ${res_update_like.data.updateLike.count}`);
   };
 
   // ボタンに onMouseEnter と onMouseLeave のイベントハンドラを割り当てます
@@ -96,7 +123,8 @@ function LikeButton(props) {
         いいね！
       </span>
       <span style={styles.counter}>
-        <span style={styles.counterBefore}> </span>{liked ? initCount+1 : initCount}
+        <span style={styles.counterBefore}> </span>
+        {liked ? initCount + 1 : initCount}
       </span>
     </span>
   );

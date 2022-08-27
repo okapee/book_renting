@@ -26,9 +26,11 @@ import * as queries from './graphql/queries';
 import * as mutations from './graphql/mutations';
 
 function BookCard(props) {
+  // let initCount = 0;
   const username = useSelector((state) => state.auth.user.username);
   const userdata = useSelector((state) => state.userDataSlice.userdata);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [ initCount, setInitCount ] = useState(0);
   const [update, setUpdate] = useState(false);
   const [imgsrc, setImageSrc] = useState('');
   const finalRef = useRef();
@@ -84,10 +86,16 @@ function BookCard(props) {
           query: mutations.createLike,
           variables: { input: create_variables },
         });
+        setInitCount(0);
+        // initCount = 0;
+      } else {
+        setInitCount(res_like.data.getLike.count);
+        // initCount = res_like.data.getLike.count;
       }
+      console.log(`initCount in BookCard: ${initCount}`);
     }
     fn();
-  }, []);
+  });
 
   return (
     <Box
@@ -144,7 +152,8 @@ function BookCard(props) {
             </Heading>
             <HStack align="start" p={4}>
               <Avatar src={imgsrc} />
-              <Text>{book.user?.name ? book.user?.name : book.owner}</Text>
+              {console.log(`${book.user?.name} : New`)};
+              <Text noOfLines={1}>{book.user?.name ? book.user?.name : book.owner}</Text>
             </HStack>
             <Flex mb={4}>
               {[1, 2, 3, 4, 5].map((value) => (
@@ -154,7 +163,13 @@ function BookCard(props) {
             <Text mb={4} noOfLines={2}>
               {book.review}
             </Text>
-            <LikeButton initCount={1} pressby={[]} />
+            {console.log(`${initCount} in front of LikeButton`)};
+            <LikeButton
+              bookId={book.id}
+              initCount={initCount}
+              setInitCount={setInitCount}
+              pressby={[]}
+            />
           </VStack>
         </HStack>
       </Box>
