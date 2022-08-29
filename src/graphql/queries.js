@@ -32,10 +32,7 @@ export const getPost = /* GraphQL */ `
         updatedAt
       }
       comment {
-        id
-        comment
-        createdAt
-        updatedAt
+        nextToken
       }
       createdAt
       updatedAt
@@ -164,6 +161,15 @@ export const getComment = /* GraphQL */ `
     getComment(id: $id) {
       id
       comment
+      commentby {
+        userId
+        age
+        organization
+        name
+        profileImg
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }

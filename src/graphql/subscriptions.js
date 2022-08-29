@@ -32,10 +32,7 @@ export const onCreatePost = /* GraphQL */ `
         updatedAt
       }
       comment {
-        id
-        comment
-        createdAt
-        updatedAt
+        nextToken
       }
       createdAt
       updatedAt
@@ -73,10 +70,7 @@ export const onUpdatePost = /* GraphQL */ `
         updatedAt
       }
       comment {
-        id
-        comment
-        createdAt
-        updatedAt
+        nextToken
       }
       createdAt
       updatedAt
@@ -114,10 +108,7 @@ export const onDeletePost = /* GraphQL */ `
         updatedAt
       }
       comment {
-        id
-        comment
-        createdAt
-        updatedAt
+        nextToken
       }
       createdAt
       updatedAt
@@ -225,6 +216,15 @@ export const onCreateComment = /* GraphQL */ `
     onCreateComment {
       id
       comment
+      commentby {
+        userId
+        age
+        organization
+        name
+        profileImg
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -235,6 +235,15 @@ export const onUpdateComment = /* GraphQL */ `
     onUpdateComment {
       id
       comment
+      commentby {
+        userId
+        age
+        organization
+        name
+        profileImg
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -245,6 +254,15 @@ export const onDeleteComment = /* GraphQL */ `
     onDeleteComment {
       id
       comment
+      commentby {
+        userId
+        age
+        organization
+        name
+        profileImg
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }

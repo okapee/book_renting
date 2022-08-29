@@ -19,7 +19,7 @@ type Post @model {
   isPrivate: Boolean
   user: User @hasOne(fields: ["owner"])
   like: Like @hasOne(fields: ["id"])
-  comment: Comment @hasOne(fields: ["id"])
+  comment: [Comment] @hasMany(fields: ["id"])
 }
 
 type User @model {
@@ -38,5 +38,6 @@ type Like @model {
 
 type Comment @model {
   id: ID! @primaryKey
-  comment: [String]
+  comment: String!
+  commentby: User!
 }

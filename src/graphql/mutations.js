@@ -35,10 +35,7 @@ export const createPost = /* GraphQL */ `
         updatedAt
       }
       comment {
-        id
-        comment
-        createdAt
-        updatedAt
+        nextToken
       }
       createdAt
       updatedAt
@@ -79,10 +76,7 @@ export const updatePost = /* GraphQL */ `
         updatedAt
       }
       comment {
-        id
-        comment
-        createdAt
-        updatedAt
+        nextToken
       }
       createdAt
       updatedAt
@@ -123,10 +117,7 @@ export const deletePost = /* GraphQL */ `
         updatedAt
       }
       comment {
-        id
-        comment
-        createdAt
-        updatedAt
+        nextToken
       }
       createdAt
       updatedAt
@@ -255,6 +246,15 @@ export const createComment = /* GraphQL */ `
     createComment(input: $input, condition: $condition) {
       id
       comment
+      commentby {
+        userId
+        age
+        organization
+        name
+        profileImg
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -268,6 +268,15 @@ export const updateComment = /* GraphQL */ `
     updateComment(input: $input, condition: $condition) {
       id
       comment
+      commentby {
+        userId
+        age
+        organization
+        name
+        profileImg
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
@@ -281,6 +290,15 @@ export const deleteComment = /* GraphQL */ `
     deleteComment(input: $input, condition: $condition) {
       id
       comment
+      commentby {
+        userId
+        age
+        organization
+        name
+        profileImg
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }

@@ -17,23 +17,27 @@ import {
   HStack,
   Heading,
   Avatar,
+  Divider,
 } from '@chakra-ui/react';
 import { FaStar } from 'react-icons/fa';
 import LikeButton from './components/LikeButton';
+import { useForm } from 'react-hook-form';
 import { Auth, API, graphqlOperation, Storage } from 'aws-amplify';
 import { useSelector, useDispatch } from 'react-redux';
 import * as queries from './graphql/queries';
 import * as mutations from './graphql/mutations';
 
 function BookCard(props) {
-  // let initCount = 0;
+  let comments = [];
   const username = useSelector((state) => state.auth.user.username);
   const userdata = useSelector((state) => state.userDataSlice.userdata);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [ initCount, setInitCount ] = useState(0);
+  const [initCount, setInitCount] = useState(0);
   const [update, setUpdate] = useState(false);
   const [imgsrc, setImageSrc] = useState('');
   const finalRef = useRef();
+  const { register, handleSubmit } = useForm();
+  const onSubmit = (data) => console.log(data.comment);
 
   const book = {
     ...props.bookInfo,
@@ -127,7 +131,28 @@ function BookCard(props) {
         <ModalOverlay />
         <ModalContent p={4} minHeight="200px">
           <ModalHeader bgColor="gray.100">{book.title}</ModalHeader>
-          <ModalBody p={4}>{book.review}</ModalBody>
+          <ModalBody p={2}>
+            <Text>{book.review}</Text>
+            <Divider mt={4} mb={4} />
+            <Text as="b">コメント</Text>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <input
+                {...register('comment', { required: true, maxLength: 20 })}
+                style={{ width: '80%', border: 'groove' }}
+              />
+              <input
+                type="submit"
+                style={{
+                  marginLeft: '6px',
+                  border: 'outset',
+                  paddingLeft: '2px',
+                  paddingRight: '2px',
+                }}
+              />
+            </form>
+
+            {comments.length !== 0 ? <Text>コメントあり</Text> : <Text>コメントなし</Text>}
+          </ModalBody>
 
           <ModalFooter paddingRight="unset" paddingBottom="unset">
             <DeleteBtn
