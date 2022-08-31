@@ -31,13 +31,28 @@ function BookCard(props) {
   let comments = [];
   const username = useSelector((state) => state.auth.user.username);
   const userdata = useSelector((state) => state.userDataSlice.userdata);
+  const [comment, setComment] = useState();
+  const ref = useRef(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [initCount, setInitCount] = useState(0);
   const [update, setUpdate] = useState(false);
   const [imgsrc, setImageSrc] = useState('');
   const finalRef = useRef();
-  const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => console.log(data.comment);
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  // Inputに入力してボタンを押したときのハンドラ
+  const onSubmit = (data) => {
+    console.log(data.comment);
+    console.log(`エラー: ${errors.comment}`);
+    setComment(data.comment);
+  };
+
+  // モーダル表示時にInputからフォーカスを外す
+  ref.current?.blur();
 
   const book = {
     ...props.bookInfo,
@@ -71,7 +86,6 @@ function BookCard(props) {
 
   // いいねの初期表示カウントを取得
   useEffect(() => {
-    // let input = {}
     const get_variables = {
       id: book.id,
     };
@@ -130,15 +144,18 @@ function BookCard(props) {
       >
         <ModalOverlay />
         <ModalContent p={4} minHeight="200px">
-          <ModalHeader bgColor="gray.100">{book.title}</ModalHeader>
+          <ModalHeader bgColor="gray.100">
+            {book.title}
+          </ModalHeader>
           <ModalBody p={2}>
             <Text>{book.review}</Text>
             <Divider mt={4} mb={4} />
             <Text as="b">コメント</Text>
             <form onSubmit={handleSubmit(onSubmit)}>
               <input
-                {...register('comment', { required: true, maxLength: 20 })}
+                {...register('comment', { required: true, maxLength: 50 })}
                 style={{ width: '80%', border: 'groove' }}
+                ref={ref}
               />
               <input
                 type="submit"
@@ -150,8 +167,9 @@ function BookCard(props) {
                 }}
               />
             </form>
+            {errors.comment && <span style={{ color: 'red' }}>コメントを入れてください</span>}
 
-            {comments.length !== 0 ? <Text>コメントあり</Text> : <Text>コメントなし</Text>}
+            {comments.length !== 0 ? <Text>コメントあり</Text> : <Text>{comment}</Text>}
           </ModalBody>
 
           <ModalFooter paddingRight="unset" paddingBottom="unset">
