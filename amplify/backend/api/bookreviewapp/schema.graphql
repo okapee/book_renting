@@ -4,14 +4,8 @@ input AMPLIFY {
   globalAuthRule: AuthRule = { allow: public }
 }
 
-type Post
-  @model
-  @key(
-    name: "SortByTime"
-    fields: ["type", "postedDate"]
-    queryField: "listPostsSortedByTime"
-  ) {
-  id: ID! @primaryKey
+type Post @model {
+  id: ID! @primaryKey @index(name: 'SortByDate', sortKeyFields: ['postedDate'])
   isbn: String!
   title: String
   authors: [String]
