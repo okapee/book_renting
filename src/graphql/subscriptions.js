@@ -214,17 +214,26 @@ export const onDeleteLike = /* GraphQL */ `
 export const onCreateComment = /* GraphQL */ `
   subscription OnCreateComment {
     onCreateComment {
-      id
-      comment
-      commentby {
-        userId
-        age
-        organization
-        name
-        profileImg
+      bookId
+      post {
+        id
+        isbn
+        title
+        authors
+        longLine
+        thumbnail
+        review
+        publishedDate
+        postedDate
+        rating
+        owner
+        isPrivate
         createdAt
         updatedAt
       }
+      comment
+      commentby
+      id
       createdAt
       updatedAt
     }
@@ -233,17 +242,26 @@ export const onCreateComment = /* GraphQL */ `
 export const onUpdateComment = /* GraphQL */ `
   subscription OnUpdateComment {
     onUpdateComment {
-      id
-      comment
-      commentby {
-        userId
-        age
-        organization
-        name
-        profileImg
+      bookId
+      post {
+        id
+        isbn
+        title
+        authors
+        longLine
+        thumbnail
+        review
+        publishedDate
+        postedDate
+        rating
+        owner
+        isPrivate
         createdAt
         updatedAt
       }
+      comment
+      commentby
+      id
       createdAt
       updatedAt
     }
@@ -252,17 +270,26 @@ export const onUpdateComment = /* GraphQL */ `
 export const onDeleteComment = /* GraphQL */ `
   subscription OnDeleteComment {
     onDeleteComment {
-      id
-      comment
-      commentby {
-        userId
-        age
-        organization
-        name
-        profileImg
+      bookId
+      post {
+        id
+        isbn
+        title
+        authors
+        longLine
+        thumbnail
+        review
+        publishedDate
+        postedDate
+        rating
+        owner
+        isPrivate
         createdAt
         updatedAt
       }
+      comment
+      commentby
+      id
       createdAt
       updatedAt
     }

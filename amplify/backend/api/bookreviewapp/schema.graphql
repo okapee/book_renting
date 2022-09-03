@@ -5,7 +5,7 @@ input AMPLIFY {
 }
 
 type Post @model {
-  id: ID!
+  id: ID! @primaryKey
   isbn: String!
   title: String
   authors: [String]
@@ -37,7 +37,9 @@ type Like @model {
 }
 
 type Comment @model {
-  id: ID! @primaryKey
+  bookId: String!
+  # commentId: String!
+  post: Post @belongsTo
   comment: String!
-  commentby: User!
+  commentby: String!
 }

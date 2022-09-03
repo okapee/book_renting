@@ -244,17 +244,26 @@ export const createComment = /* GraphQL */ `
     $condition: ModelCommentConditionInput
   ) {
     createComment(input: $input, condition: $condition) {
-      id
-      comment
-      commentby {
-        userId
-        age
-        organization
-        name
-        profileImg
+      bookId
+      post {
+        id
+        isbn
+        title
+        authors
+        longLine
+        thumbnail
+        review
+        publishedDate
+        postedDate
+        rating
+        owner
+        isPrivate
         createdAt
         updatedAt
       }
+      comment
+      commentby
+      id
       createdAt
       updatedAt
     }
@@ -266,17 +275,26 @@ export const updateComment = /* GraphQL */ `
     $condition: ModelCommentConditionInput
   ) {
     updateComment(input: $input, condition: $condition) {
-      id
-      comment
-      commentby {
-        userId
-        age
-        organization
-        name
-        profileImg
+      bookId
+      post {
+        id
+        isbn
+        title
+        authors
+        longLine
+        thumbnail
+        review
+        publishedDate
+        postedDate
+        rating
+        owner
+        isPrivate
         createdAt
         updatedAt
       }
+      comment
+      commentby
+      id
       createdAt
       updatedAt
     }
@@ -288,17 +306,26 @@ export const deleteComment = /* GraphQL */ `
     $condition: ModelCommentConditionInput
   ) {
     deleteComment(input: $input, condition: $condition) {
-      id
-      comment
-      commentby {
-        userId
-        age
-        organization
-        name
-        profileImg
+      bookId
+      post {
+        id
+        isbn
+        title
+        authors
+        longLine
+        thumbnail
+        review
+        publishedDate
+        postedDate
+        rating
+        owner
+        isPrivate
         createdAt
         updatedAt
       }
+      comment
+      commentby
+      id
       createdAt
       updatedAt
     }

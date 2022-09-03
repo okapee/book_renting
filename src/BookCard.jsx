@@ -20,6 +20,7 @@ import {
   Divider,
 } from '@chakra-ui/react';
 import { FaStar } from 'react-icons/fa';
+import BookDetail from './BookDetail';
 import LikeButton from './components/LikeButton';
 import { useForm } from 'react-hook-form';
 import { Auth, API, graphqlOperation, Storage } from 'aws-amplify';
@@ -42,13 +43,15 @@ function BookCard(props) {
     register,
     handleSubmit,
     watch,
-    formState: { errors },
+    formState: { errors, ...formState },
   } = useForm();
   // Inputに入力してボタンを押したときのハンドラ
   const onSubmit = (data) => {
-    console.log(data.comment);
+    console.log('onSubmit Enter!');
+    console.log(`データ: ${data.comment}`);
     console.log(`エラー: ${errors.comment}`);
-    setComment(data.comment);
+    // setComment(data.comment);
+    // reset();
   };
 
   // モーダル表示時にInputからフォーカスを外す
@@ -113,26 +116,10 @@ function BookCard(props) {
       console.log(`initCount in BookCard: ${initCount}`);
     }
     fn();
-  });
+  }, []);
 
   return (
-    <Box
-      p={4}
-      rounded="4"
-      w={[340, 380]}
-      h="200px"
-      display="grid"
-      alignContent="center"
-      bgColor="gray.100"
-      boxShadow="md"
-      position="relative"
-      onClick={() => {
-        console.log('BookCard modal is Open!');
-        onOpen();
-      }}
-      wordBreak="break-word"
-      className="boxcard"
-    >
+    <>
       <Modal
         finalFocusRef={finalRef}
         isOpen={isOpen}
@@ -142,11 +129,10 @@ function BookCard(props) {
         scrollBehavior="inside"
         size="xl"
       >
-        <ModalOverlay />
+        <BookDetail bookInfo={book} onClose={onClose} />
+        {/* <ModalOverlay />
         <ModalContent p={4} minHeight="200px">
-          <ModalHeader bgColor="gray.100">
-            {book.title}
-          </ModalHeader>
+          <ModalHeader bgColor="gray.100">{book.title}</ModalHeader>
           <ModalBody p={2}>
             <Text>{book.review}</Text>
             <Divider mt={4} mb={4} />
@@ -167,7 +153,6 @@ function BookCard(props) {
                 }}
               />
             </form>
-            {errors.comment && <span style={{ color: 'red' }}>コメントを入れてください</span>}
 
             {comments.length !== 0 ? <Text>コメントあり</Text> : <Text>{comment}</Text>}
           </ModalBody>
@@ -184,39 +169,58 @@ function BookCard(props) {
               閉じる
             </Button>
           </ModalFooter>
-        </ModalContent>
+        </ModalContent> */}
       </Modal>
-      <Box>
-        <HStack>
-          <Image src={book.thumbnail} borderRadius="xl" alignSelf="center" />
-          <VStack p={4} align="start" alignSelf="flex-start">
-            <Heading size="lg" noOfLines={1}>
-              {book.title}
-            </Heading>
-            <HStack align="start" p={4}>
-              <Avatar src={imgsrc} />
-              {console.log(`${book.user?.name} : New`)};
-              <Text noOfLines={1}>{book.user?.name ? book.user?.name : book.owner}</Text>
-            </HStack>
-            <Flex mb={4}>
-              {[1, 2, 3, 4, 5].map((value) => (
-                <Star key={value} filled={value <= book.rating} />
-              ))}
-            </Flex>
-            <Text mb={4} noOfLines={2}>
-              {book.review}
-            </Text>
-            {console.log(`${initCount} in front of LikeButton`)};
-            <LikeButton
-              bookId={book.id}
-              initCount={initCount}
-              setInitCount={setInitCount}
-              pressby={[]}
-            />
-          </VStack>
-        </HStack>
+      {/* <BookDetail /> */}
+      <Box
+        p={4}
+        rounded="4"
+        w={[340, 380]}
+        h="200px"
+        display="grid"
+        alignContent="center"
+        bgColor="gray.100"
+        boxShadow="md"
+        position="relative"
+        onClick={() => {
+          console.log('BookCard modal is Open!');
+          onOpen();
+        }}
+        wordBreak="break-word"
+        className="boxcard"
+      >
+        <Box>
+          <HStack>
+            <Image src={book.thumbnail} borderRadius="xl" alignSelf="center" />
+            <VStack p={4} align="start" alignSelf="flex-start">
+              <Heading size="lg" noOfLines={1}>
+                {book.title}
+              </Heading>
+              <HStack align="start" p={4}>
+                <Avatar src={imgsrc} />
+                {console.log(`${book.user?.name} : New`)};
+                <Text noOfLines={1}>{book.user?.name ? book.user?.name : book.owner}</Text>
+              </HStack>
+              <Flex mb={4}>
+                {[1, 2, 3, 4, 5].map((value) => (
+                  <Star key={value} filled={value <= book.rating} />
+                ))}
+              </Flex>
+              <Text mb={4} noOfLines={2}>
+                {book.review}
+              </Text>
+              {console.log(`${initCount} in front of LikeButton`)};
+              <LikeButton
+                bookId={book.id}
+                initCount={initCount}
+                setInitCount={setInitCount}
+                pressby={[]}
+              />
+            </VStack>
+          </HStack>
+        </Box>
       </Box>
-    </Box>
+    </>
   );
 }
 
@@ -228,36 +232,35 @@ function modalWindow() {
   console.log('BookCard modal is Open!');
 }
 
-function DeleteBtn(props) {
-  // console.log(`update in DeleteBtn: ${update}`);
-  if (props.owner == props.username) {
-    // const fu = props.forceUpdate;
-    console.log(`update in DeleteBtn: ${props.update}`);
-    return (
-      <Button
-        colorScheme="red"
-        p={4}
-        mr={2}
-        size={['xs', 'sm']}
-        onClick={async () => {
-          console.log('デリートポストが押された');
-          const input = {
-            id: props.postId,
-          };
+// function DeleteBtn(props) {
+//   console.log(`update in DeleteBtn: ${update}`);
+//   if (props.owner == props.username) {
+//     console.log(`update in DeleteBtn: ${props.update}`);
+//     return (
+//       <Button
+//         colorScheme="red"
+//         p={4}
+//         mr={2}
+//         size={['xs', 'sm']}
+//         onClick={async () => {
+//           console.log('デリートポストが押された');
+//           const input = {
+//             id: props.postId,
+//           };
 
-          await API.graphql(graphqlOperation(mutations.deletePost, { input }));
-          console.log('start update: ' + props.update);
-          // Postを削除した際に強制リロード
-          window.location.reload();
-          console.log('finish update: ' + props.update);
-        }}
-      >
-        削除
-      </Button>
-    );
-  } else {
-    return <></>;
-  }
-}
+//           await API.graphql(graphqlOperation(mutations.deletePost, { input }));
+//           console.log('start update: ' + props.update);
+//           // Postを削除した際に強制リロード
+//           window.location.reload();
+//           console.log('finish update: ' + props.update);
+//         }}
+//       >
+//         削除
+//       </Button>
+//     );
+//   } else {
+//     return <></>;
+//   }
+// }
 
 export default BookCard;

@@ -40,8 +40,20 @@ export const getPost = /* GraphQL */ `
   }
 `;
 export const listPosts = /* GraphQL */ `
-  query ListPosts($filter: ModelPostFilterInput, $limit: Int, $nextToken: String) {
-    listPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  query ListPosts(
+    $id: ID
+    $filter: ModelPostFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listPosts(
+      id: $id
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
       items {
         id
         isbn
@@ -159,40 +171,39 @@ export const listLikes = /* GraphQL */ `
 export const getComment = /* GraphQL */ `
   query GetComment($id: ID!) {
     getComment(id: $id) {
-      id
-      comment
-      commentby {
-        userId
-        age
-        organization
-        name
-        profileImg
+      bookId
+      post {
+        id
+        isbn
+        title
+        authors
+        longLine
+        thumbnail
+        review
+        publishedDate
+        postedDate
+        rating
+        owner
+        isPrivate
         createdAt
         updatedAt
       }
+      comment
+      commentby
+      id
       createdAt
       updatedAt
     }
   }
 `;
 export const listComments = /* GraphQL */ `
-  query ListComments(
-    $id: ID
-    $filter: ModelCommentFilterInput
-    $limit: Int
-    $nextToken: String
-    $sortDirection: ModelSortDirection
-  ) {
-    listComments(
-      id: $id
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      sortDirection: $sortDirection
-    ) {
+  query ListComments($filter: ModelCommentFilterInput, $limit: Int, $nextToken: String) {
+    listComments(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
-        id
+        bookId
         comment
+        commentby
+        id
         createdAt
         updatedAt
       }

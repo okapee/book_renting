@@ -116,6 +116,7 @@ function Home() {
           const res = await API.graphql(graphqlOperation(queries.listPosts, variables));
           setNextNextToken(res.data.listPosts.nextToken);
           setBooks(res.data.listPosts.items);
+          console.log(`確認: ${res.data.listPosts.items}`);
         };
         break;
     }
