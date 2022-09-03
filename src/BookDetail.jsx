@@ -30,7 +30,6 @@ import { listComments } from './graphql/queries';
 import { createComment } from './graphql/mutations';
 
 export default function BookDetail(props) {
-  //   let comments = [];
   const username = useSelector((state) => state.auth.user.username);
   const userdata = useSelector((state) => state.userDataSlice.userdata);
   //   const [dispCmt, setDispCmt] = useState('初期値');
@@ -61,7 +60,7 @@ export default function BookDetail(props) {
       const res = await API.graphql(graphqlOperation(listComments, { filter: filter }));
       console.dir(res);
       setComments(res.data.listComments.items);
-      console.log(`comments in useEffect: ${typeof(comments)}`);
+      console.log(`comments in useEffect: ${typeof comments}`);
     }
     fn();
   }, []);
@@ -75,14 +74,19 @@ export default function BookDetail(props) {
       commentby: username,
     };
     console.dir(data);
-    // setComments(comments.append(data.comment));
     const res_create_comment = await API.graphql({
       query: createComment,
       variables: { input: variables },
     });
-    // setComments(...comments, )
-    console.log('res_create_comment: ');
-    console.dir(res_create_comment);
+    // setComments([...comments, res_create_comment]);
+    const filter = {
+      bookId: {
+        eq: book.id,
+      },
+    };
+    const res = await API.graphql(graphqlOperation(listComments, { filter: filter }));
+    console.dir(res);
+    setComments(res.data.listComments.items);
     reset();
   };
 
@@ -185,7 +189,15 @@ function Comment(props) {
   const { commentby, comment } = props;
   console.log(`In Comment, comment: ${comment}, commentby: ${commentby}`);
   return (
-    <ListItem borderWidth="1px" p="4" mt="2" mb="4" bg="white" borderRadius="md" borderColor="gray.300">
+    <ListItem
+      borderWidth="1px"
+      p="4"
+      mt="2"
+      mb="4"
+      bg="white"
+      borderRadius="md"
+      borderColor="gray.300"
+    >
       <HStack>
         <VStack>
           <Avatar />

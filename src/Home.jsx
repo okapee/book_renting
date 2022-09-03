@@ -8,7 +8,12 @@ import {
   Container,
   Button,
   SimpleGrid,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem
 } from '@chakra-ui/react';
+import { ChevronDownIcon } from '@chakra-ui/icons';
 import { Auth, API, graphqlOperation } from 'aws-amplify';
 import * as queries from './graphql/queries';
 import { useEffect, useState } from 'react';
@@ -143,9 +148,21 @@ function Home() {
 
   return (
     <VStack m={4}>
-      <Box ml={4}>
+      {/* <Box ml={4}>
         <Text>ここにはあなたが読んだ本や、みんながおすすめした本が表示されます。</Text>
-      </Box>
+      </Box> */}
+      <HStack>
+        <Text>ここにはあなたが読んだ本や、みんながおすすめした本が表示されます。</Text>
+        <Menu>
+          <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+            投稿日での並び替え
+          </MenuButton>
+          <MenuList>
+            <MenuItem>降順</MenuItem>
+            <MenuItem>昇順</MenuItem>
+          </MenuList>
+        </Menu>
+      </HStack>
       <HStack>
         <Box display="flex" flexWrap="wrap">
           <Button

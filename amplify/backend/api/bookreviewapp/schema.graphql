@@ -4,7 +4,13 @@ input AMPLIFY {
   globalAuthRule: AuthRule = { allow: public }
 }
 
-type Post @model {
+type Post
+  @model
+  @key(
+    name: "SortByTime"
+    fields: ["type", "postedDate"]
+    queryField: "listPostsSortedByTime"
+  ) {
   id: ID! @primaryKey
   isbn: String!
   title: String
@@ -38,7 +44,6 @@ type Like @model {
 
 type Comment @model {
   bookId: String!
-  # commentId: String!
   post: Post @belongsTo
   comment: String!
   commentby: String!
