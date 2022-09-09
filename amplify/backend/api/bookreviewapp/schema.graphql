@@ -5,7 +5,7 @@ input AMPLIFY {
 }
 
 type Post @model {
-  id: ID! @primaryKey @index(name: 'SortByDate', sortKeyFields: ['postedDate'])
+  id: ID! @primaryKey
   isbn: String!
   title: String
   authors: [String]
@@ -13,7 +13,8 @@ type Post @model {
   thumbnail: String!
   review: String!
   publishedDate: String
-  postedDate: String
+  postedDate: String!
+  type: String! @index(name: "sortByDate", sortKeyFields: ["postedDate"], queryField: "sortByDate") 
   rating: Int
   owner: String
   isPrivate: Boolean

@@ -13,6 +13,7 @@ export const getPost = /* GraphQL */ `
       review
       publishedDate
       postedDate
+      type
       rating
       owner
       isPrivate
@@ -64,6 +65,7 @@ export const listPosts = /* GraphQL */ `
         review
         publishedDate
         postedDate
+        type
         rating
         owner
         isPrivate
@@ -182,6 +184,7 @@ export const getComment = /* GraphQL */ `
         review
         publishedDate
         postedDate
+        type
         rating
         owner
         isPrivate
@@ -197,7 +200,11 @@ export const getComment = /* GraphQL */ `
   }
 `;
 export const listComments = /* GraphQL */ `
-  query ListComments($filter: ModelCommentFilterInput, $limit: Int, $nextToken: String) {
+  query ListComments(
+    $filter: ModelCommentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
     listComments(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         bookId
@@ -206,6 +213,53 @@ export const listComments = /* GraphQL */ `
         id
         createdAt
         updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const sortByDate = /* GraphQL */ `
+  query SortByDate(
+    $type: String!
+    $postedDate: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelPostFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    sortByDate(
+      type: $type
+      postedDate: $postedDate
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        isbn
+        title
+        authors
+        longLine
+        thumbnail
+        review
+        publishedDate
+        postedDate
+        type
+        rating
+        owner
+        isPrivate
+        createdAt
+        updatedAt
+        user {
+          userId
+          age
+          organization
+          name
+          profileImg
+          createdAt
+          updatedAt
+        }
       }
       nextToken
     }

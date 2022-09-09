@@ -16,6 +16,7 @@ export const createPost = /* GraphQL */ `
       review
       publishedDate
       postedDate
+      type
       rating
       owner
       isPrivate
@@ -57,6 +58,7 @@ export const updatePost = /* GraphQL */ `
       review
       publishedDate
       postedDate
+      type
       rating
       owner
       isPrivate
@@ -98,6 +100,7 @@ export const deletePost = /* GraphQL */ `
       review
       publishedDate
       postedDate
+      type
       rating
       owner
       isPrivate
@@ -255,6 +258,7 @@ export const createComment = /* GraphQL */ `
         review
         publishedDate
         postedDate
+        type
         rating
         owner
         isPrivate
@@ -286,6 +290,7 @@ export const updateComment = /* GraphQL */ `
         review
         publishedDate
         postedDate
+        type
         rating
         owner
         isPrivate
@@ -317,6 +322,7 @@ export const deleteComment = /* GraphQL */ `
         review
         publishedDate
         postedDate
+        type
         rating
         owner
         isPrivate

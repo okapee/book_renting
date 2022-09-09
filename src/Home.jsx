@@ -11,7 +11,9 @@ import {
   Menu,
   MenuButton,
   MenuList,
-  MenuItem
+  MenuItem,
+  MenuOptionGroup,
+  MenuItemOption,
 } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import { Auth, API, graphqlOperation } from 'aws-amplify';
@@ -25,6 +27,7 @@ import { setUser } from './slices/authSlice';
 function Home() {
   const { colorMode, toggleColorMode } = useColorMode();
   const [books, setBooks] = useState([]);
+  const [sortDir, setSortDir] = useState('DESC');
   const userdata = useSelector((state) => state.userDataSlice.userdata);
 
   // ページネーション用
@@ -64,6 +67,8 @@ function Home() {
       filter: private_filter,
       limit,
       nextToken,
+      type: 't',
+      sortDirection: sortDir,
     };
     switch (filter) {
       case 'sameage':
@@ -118,15 +123,16 @@ function Home() {
       default:
         fn = async () => {
           console.log('HOME: useEffectでdefault(allbook)が実行された');
-          const res = await API.graphql(graphqlOperation(queries.listPosts, variables));
-          setNextNextToken(res.data.listPosts.nextToken);
-          setBooks(res.data.listPosts.items);
-          console.log(`確認: ${res.data.listPosts.items}`);
+          console.log(`sortDir: ${sortDir}`);
+          const res = await API.graphql(graphqlOperation(queries.sortByDate, variables));
+          setNextNextToken(res.data.sortByDate.nextToken);
+          setBooks(res.data.sortByDate.items);
+          console.log(`確認: ${res.data.sortByDate.items}`);
         };
         break;
     }
     fn();
-  }, [filter, nextToken]);
+  }, [filter, nextToken, sortDir]);
 
   const next = () => {
     setPreviousTokens((prev) => [...prev, nextToken]);
@@ -148,9 +154,6 @@ function Home() {
 
   return (
     <VStack m={4}>
-      {/* <Box ml={4}>
-        <Text>ここにはあなたが読んだ本や、みんながおすすめした本が表示されます。</Text>
-      </Box> */}
       <HStack>
         <Text>ここにはあなたが読んだ本や、みんながおすすめした本が表示されます。</Text>
         <Menu>
@@ -158,8 +161,14 @@ function Home() {
             投稿日での並び替え
           </MenuButton>
           <MenuList>
-            <MenuItem>降順</MenuItem>
-            <MenuItem>昇順</MenuItem>
+            <MenuOptionGroup title="並び順" type="radio">
+              <MenuItemOption value="desc" onClick={() => setSortDir('DESC')}>
+                降順
+              </MenuItemOption>
+              <MenuItemOption value="asc" onClick={() => setSortDir('ASC')}>
+                昇順
+              </MenuItemOption>
+            </MenuOptionGroup>
           </MenuList>
         </Menu>
       </HStack>
