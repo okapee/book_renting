@@ -37,7 +37,7 @@ function Home() {
   const [previousTokens, setPreviousTokens] = useState([]);
   const hasNext = !!nextNextToken;
   const hasPrev = previousTokens.length;
-  const limit = 10;
+  const limit = 20;
 
   const filter = useSelector((state) => state.filter.value);
 
@@ -73,24 +73,43 @@ function Home() {
     switch (filter) {
       case 'sameage':
         fn = async () => {
+          let res_array = [];
           console.log('HOME: useEffectでsameageが実行された');
+          res_array = await API.graphql(graphqlOperation(queries.sortByDate, variables));
+          const login_user_age = userdata.age;
+          console.log(`res_array in sameage: ${res_array}`);
+          console.log(`age in samesage: ${login_user_age}`);
+
+          let sameage_items = [];
+          res_array.data.sortByDate.items.forEach((item) => {
+            console.log('res_array.forEach->item: ' + JSON.stringify(item));
+            if (item.user?.age == login_user_age) {
+              sameage_items.push(item);
+            }
+            console.log(`item.user?.age: ${item.user}, login_user_age: ${login_user_age}`);
+            console.log(`sameorg_items: ${sameage_items}`);
+          });
+
+          setNextNextToken(res_array.data.sortByDate.nextToken);
+          setBooks(sameage_items);
+          // console.log(`確認: ${res.data.sortByDate.items}`);
         };
         break;
       case 'sameorg':
         fn = async () => {
           console.log('HOMEでsameorgが実行された');
 
-          const res_posts = await API.graphql(
-            graphqlOperation(queries.listPosts, { filter: private_filter }),
-          );
+          const res_posts = await API.graphql(graphqlOperation(queries.sortByDate, variables));
           // console.log('sameorg_listPosts: ' + res_posts.data.listPosts.items[0].user.organization);
-          const res_user = await API.graphql(
-            graphqlOperation(queries.getUser, { userId: userInfo.username }),
-          );
-          console.log('sameorg_getUser: ' + res_user.data.getUser.organization);
-          const login_user_org = res_user.data.getUser.organization;
-          const res_array = res_posts.data.listPosts.items;
-          console.log(`res_array in sameorg: ${res_array}`);
+          // const res_user = await API.graphql(
+          //   graphqlOperation(queries.getUser, { userId: userInfo.username }),
+          // );
+
+          // console.log('sameorg_getUser: ' + res_user.data.getUser.organization);
+          // const login_user_org = res_user.data.getUser.organization;
+          const login_user_org = userdata.organization;
+          const res_array = res_posts.data.sortByDate.items;
+          // console.log(`res_array in sameorg: ${res_array}`);
 
           let sameorg_items = [];
 
@@ -103,6 +122,8 @@ function Home() {
             console.log(`item.user?.organization: ${item.user}, login_user_org: ${login_user_org}`);
             console.log(`sameorg_items: ${sameorg_items}`);
           });
+
+          setNextNextToken(res_posts.data.sortByDate.nextToken);
           setBooks(sameorg_items);
         };
         break;
@@ -114,10 +135,16 @@ function Home() {
               eq: userInfo?.username,
             },
           };
-          const res = await API.graphql(
-            graphqlOperation(queries.listPosts, { filter: mybook_filter }),
-          );
-          setBooks(res.data.listPosts.items);
+          const variables = {
+            filter: mybook_filter,
+            limit: 20,
+            nextToken,
+            type: 't',
+            sortDirection: sortDir,
+          };
+          const res = await API.graphql(graphqlOperation(queries.sortByDate, variables));
+          setNextNextToken(res.data.sortByDate.nextToken);
+          setBooks(res.data.sortByDate.items);
         };
         break;
       default:
@@ -158,7 +185,7 @@ function Home() {
         <Text>ここにはあなたが読んだ本や、みんながおすすめした本が表示されます。</Text>
         <Menu>
           <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-            投稿日での並び替え
+            並び替え
           </MenuButton>
           <MenuList>
             <MenuOptionGroup title="並び順" type="radio">
@@ -218,7 +245,7 @@ function Home() {
             }}
             onClick={() => dispatch(sameage())}
           >
-            同じ年代の人が読んでいる本(実装中)
+            同じ年代の人が読んでいる本
           </Button>
           <Button
             size={['md', 'lg', 'xl']}
