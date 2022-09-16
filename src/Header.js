@@ -42,8 +42,9 @@ export default function Header(props) {
   ) {
     // console.log(`ここにはいった: ${userdata.profileImg}`);
     setIconURL(userdata?.profileImg);
+    console.log(`profileImg in S3: ${userdata?.profileImg}`);
   }
-
+ 
   console.log('userInfo in header: ' + userInfo);
 
   useEffect(() => {

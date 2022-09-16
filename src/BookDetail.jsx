@@ -26,7 +26,7 @@ import {
 } from '@chakra-ui/react';
 import { Auth, API, graphqlOperation } from 'aws-amplify';
 import { useForm } from 'react-hook-form';
-import { listComments } from './graphql/queries';
+import { listComments, getUser } from './graphql/queries';
 import { createComment } from './graphql/mutations';
 
 export default function BookDetail(props) {
@@ -108,7 +108,13 @@ export default function BookDetail(props) {
           <Text as="b">コメント</Text>
           <List>
             {comments?.map((comment) => {
-              return <Comment commentby={comment?.commentby} comment={comment?.comment} />;
+              return (
+                <Comment
+                  commentby={comment?.commentby}
+                  comment={comment?.comment}
+                  commentdate={comment?.createdAt}
+                />
+              );
             })}
           </List>
           <form onSubmit={handleSubmit(onSubmit)} style={{ textAlign: 'right' }}>
@@ -186,8 +192,30 @@ function DeleteBtn(props) {
 }
 
 function Comment(props) {
-  const { commentby, comment } = props;
-  console.log(`In Comment, comment: ${comment}, commentby: ${commentby}`);
+  const { commentby, comment, commentdate } = props;
+  const imgsrc =
+    'https://bookreviewappb468b83582f84fb98970548380ee0b4c125205-dev.s3.ap-northeast-1.amazonaws.com/public/' +
+    commentby;
+  const [username, setUserName] = useState('');
+  console.log(
+    `In Comment, comment: ${comment}, commentby: ${commentby}, commentdate: ${commentdate}`,
+  );
+
+  // comment毎のユーザー名とAvator画像を取得
+  useEffect(() => {
+    async function fetchdata() {
+      const user = await API.graphql({
+        query: getUser,
+        variables: {
+          userId: commentby,
+        },
+      });
+      console.log(`user in Comment: ${user.data.getUser.name}`);
+      username = setUserName(user.data.getUser.name);
+    }
+    fetchdata();
+  }, []);
+
   return (
     <ListItem
       borderWidth="1px"
@@ -199,15 +227,18 @@ function Comment(props) {
       borderColor="gray.300"
     >
       <HStack>
-        <VStack>
-          <Avatar />
-          <Text fontSize="sm">{commentby}</Text>
+        <VStack flexBasis="20%">
+          <Avatar src={imgsrc} />
+          <Text fontSize="sm">{username}</Text>
         </VStack>
-        <Box>
+        <VStack flexBasis="80%" paddingLeft={4}>
+          <Text fontSize="sm" alignSelf="baseline">
+            投稿日: {commentdate.slice(0, 10)}
+          </Text>
           <Text fontSize="sm" ml={4}>
             {comment}
           </Text>
-        </Box>
+        </VStack>
       </HStack>
     </ListItem>
   );
