@@ -100,20 +100,12 @@ function Home() {
           console.log('HOMEでsameorgが実行された');
 
           const res_posts = await API.graphql(graphqlOperation(queries.sortByDate, variables));
-          // console.log('sameorg_listPosts: ' + res_posts.data.listPosts.items[0].user.organization);
-          // const res_user = await API.graphql(
-          //   graphqlOperation(queries.getUser, { userId: userInfo.username }),
-          // );
 
-          // console.log('sameorg_getUser: ' + res_user.data.getUser.organization);
-          // const login_user_org = res_user.data.getUser.organization;
           const login_user_org = userdata.organization;
           const res_array = res_posts.data.sortByDate.items;
-          // console.log(`res_array in sameorg: ${res_array}`);
 
           let sameorg_items = [];
 
-          // TODO: postのorganizationとログインユーザーのorganitonを比較して一致するものだけ詰め直す
           res_array.forEach((item) => {
             console.log('res_array.forEach->item: ' + JSON.stringify(item));
             if (item.user?.organization == login_user_org) {

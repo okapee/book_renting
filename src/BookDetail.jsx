@@ -24,7 +24,7 @@ import {
   ListItem,
   List,
 } from '@chakra-ui/react';
-import { Auth, API, graphqlOperation } from 'aws-amplify';
+import { Auth, API, graphqlOperation, Storage } from 'aws-amplify';
 import { useForm } from 'react-hook-form';
 import { listComments, getUser } from './graphql/queries';
 import { createComment } from './graphql/mutations';
@@ -193,12 +193,11 @@ function DeleteBtn(props) {
 
 function Comment(props) {
   const { commentby, comment, commentdate } = props;
-  const imgsrc =
-    'https://bookreviewappb468b83582f84fb98970548380ee0b4c125205-dev.s3.ap-northeast-1.amazonaws.com/public/' +
-    commentby;
   const [username, setUserName] = useState('');
+  const [imgSrc, setImgSrc] = useState('');
+
   console.log(
-    `In Comment, comment: ${comment}, commentby: ${commentby}, commentdate: ${commentdate}`,
+      `In Comment, comment: ${comment}, commentby: ${commentby}, commentdate: ${commentdate}`,
   );
 
   // comment毎のユーザー名とAvator画像を取得
@@ -211,10 +210,19 @@ function Comment(props) {
         },
       });
       console.log(`user in Comment: ${user.data.getUser.name}`);
-      username = setUserName(user.data.getUser.name);
+      setUserName(user.data.getUser.name);
     }
     fetchdata();
   }, []);
+
+  useEffect(() => {
+    async function s3fetch() {
+      const tmp = await Storage.get(commentby);
+      console.log(`Avatar's url: ${tmp}`);
+      setImgSrc(tmp);
+    }
+    s3fetch()
+  });
 
   return (
     <ListItem
@@ -228,7 +236,7 @@ function Comment(props) {
     >
       <HStack>
         <VStack flexBasis="20%">
-          <Avatar src={imgsrc} />
+          <Avatar src={imgSrc} />
           <Text fontSize="sm">{username}</Text>
         </VStack>
         <VStack flexBasis="80%" paddingLeft={4}>

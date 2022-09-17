@@ -2,13 +2,16 @@
   "resourceName": "s3301a6046",
   "policyUUID": "301a6046",
   "bucketName": "bookreviewappb468b83582f84fb98970548380ee0b4c",
-  "storageAccess": "auth",
-  "guestAccess": [],
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
   "authAccess": [
     "CREATE_AND_UPDATE",
     "READ",
     "DELETE"
   ],
-  "triggerFunction": "NONE",
   "groupAccess": {}
 }
