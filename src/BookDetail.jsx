@@ -46,7 +46,7 @@ export default function BookDetail(props) {
     watch,
     formState: { errors, ...formState },
     reset,
-  } = useForm();
+  } = useForm({ criteriaMode: 'all' });
 
   useEffect(() => {
     console.log(`useEffect in BookDetail`);
@@ -103,10 +103,10 @@ export default function BookDetail(props) {
       <ModalContent p={4} minHeight="200px">
         <ModalHeader bgColor="gray.100">{book.title}</ModalHeader>
         <ModalBody p={2}>
-          <Text>{book.review}</Text>
+          <Text p='1rem'>{book.review}</Text>
           <Divider mt={4} mb={4} />
           <Text as="b">コメント</Text>
-          <List>
+          <List alignItems='flex-start'>
             {comments?.map((comment) => {
               return (
                 <Comment
@@ -119,10 +119,29 @@ export default function BookDetail(props) {
           </List>
           <form onSubmit={handleSubmit(onSubmit)} style={{ textAlign: 'right' }}>
             <Textarea
-              {...register('comment')}
+              {...register('comment', {
+                required: '入力が必須です',
+                minLength: {
+                  value: 8,
+                  message: '8文字以上入力してください。',
+                },
+                maxLength: {
+                  value: 100,
+                  message: '100文字以内で入力してください。',
+                },
+              })}
               style={{ width: '100%', border: 'groove' }}
               //   ref={ref}
             />
+            {errors.comment?.type === 'required' && (
+              <Text color="red">{errors.comment?.message}</Text>
+            )}
+            {errors.comment?.type === 'minLength' && (
+              <Text color="red">{errors.comment?.message}</Text>
+            )}
+            {errors.comment?.type === 'maxLength' && (
+              <Text color="red">{errors.comment?.message}</Text>
+            )}
             <Button
               mt={2}
               paddingLeft={2}
@@ -197,7 +216,7 @@ function Comment(props) {
   const [imgSrc, setImgSrc] = useState('');
 
   console.log(
-      `In Comment, comment: ${comment}, commentby: ${commentby}, commentdate: ${commentdate}`,
+    `In Comment, comment: ${comment}, commentby: ${commentby}, commentdate: ${commentdate}`,
   );
 
   // comment毎のユーザー名とAvator画像を取得
@@ -221,7 +240,7 @@ function Comment(props) {
       console.log(`Avatar's url: ${tmp}`);
       setImgSrc(tmp);
     }
-    s3fetch()
+    s3fetch();
   });
 
   return (
@@ -239,7 +258,7 @@ function Comment(props) {
           <Avatar src={imgSrc} />
           <Text fontSize="sm">{username}</Text>
         </VStack>
-        <VStack flexBasis="80%" paddingLeft={4}>
+        <VStack flexBasis="80%" paddingLeft={4} alignItems="flex-start">
           <Text fontSize="sm" alignSelf="baseline">
             投稿日: {commentdate.slice(0, 10)}
           </Text>
