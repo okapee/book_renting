@@ -297,6 +297,24 @@ function Home() {
       <Flex>
         <PageNavigate {...{ hasNext, hasPrev, prev, next, isLoading }} />
       </Flex>
+      <Box>
+        <a href="https://px.a8.net/svt/ejp?a8mat=3NJ145+B1PKVM+2PEO+1IB5SX" rel="nofollow">
+          <img
+            border="0"
+            width="936"
+            height="120"
+            alt=""
+            src="https://www28.a8.net/svt/bgt?aid=220917605668&wid=001&eno=01&mid=s00000012624009122000&mc=1"
+          />
+        </a>
+        <img
+          border="0"
+          width="1"
+          height="1"
+          src="https://www17.a8.net/0.gif?a8mat=3NJ145+B1PKVM+2PEO+1IB5SX"
+          alt=""
+        ></img>
+      </Box>
     </VStack>
   );
 }
