@@ -9,7 +9,6 @@ export default function Body() {
       {/* <Route path="/" exact element={Home} /> */}
       <Route path="/booksearch" element={BookSearch} />
       <Route path="/about" element={About} />
-      {/* what's :slug? You'll learn it */}
     </Routes>
   );
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Header.css';
 import { CSSTransition } from 'react-transition-group';
-import { Routes, Route, NavLink, Outlet } from 'react-router-dom';
+import { Routes, Route, NavLink, Link } from 'react-router-dom';
 import Amplify, { Auth, API, Storage } from 'aws-amplify';
 import {
   Heading,
@@ -115,7 +115,9 @@ export default function Header(props) {
 
   return (
     <header className="Header">
-      <img src={require('./assets/images/header_logo.png')} className="Logo" alt="logo" />
+      <Link to={'/'}>
+        <img src={require('./assets/images/header_logo.png')} className="Logo" alt="logo" />
+      </Link>
       <CSSTransition
         in={!isSmallScreen || isNavVisible}
         timeout={350}
