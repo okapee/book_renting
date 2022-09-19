@@ -46,16 +46,8 @@ function BookSearch() {
         <Box>
           <Center>
             {/* <Text>Recommend!</Text> */}
-            <script type="text/javascript" 
-              dangerouslySetInnerHTML={{
-    __html: `
-              var a8='a22091742780_3NJ145_JNBQQ_2HOM_BUB81';var
-              rankParam='QMw_U9rlbLEnSfhUbqE4gjE1tLE1sdrvUMsdUgEZneCQuH8Z5';var bannerType='1';var
-              bannerKind='item.variable.kind1';var vertical='20';var horizontal='1';var
-              alignment='0';var frame='1';var ranking='1';var category='本・雑誌・コミック';
-            </script>
-            `}} />
-            <script type="text/javascript" src="//rws.a8.net/rakuten/ranking.js"></script>
+            <a href="https://rpx.a8.net/svt/ejp?a8mat=3NJ145+JNBQQ+2HOM+BW8O1&rakuten=y&a8ejpredirect=http%3A%2F%2Fhb.afl.rakuten.co.jp%2Fhgc%2F0ea62065.34400275.0ea62066.204f04c0%2Fa22091742780_3NJ145_JNBQQ_2HOM_BW8O1%3Fpc%3Dhttps%253A%252F%252Franking.rakuten.co.jp%252Fdaily%252F200446%252F%26m%3Dhttps%253A%252F%252Franking.rakuten.co.jp%252Fdaily%252F200446%252F" rel="nofollow">売れ筋ランキング</a>
+<img border="0" width="1" height="1" src="https://www16.a8.net/0.gif?a8mat=3NJ145+JNBQQ+2HOM+BW8O1" alt="" />
           </Center>
         </Box>
       </SimpleGrid>
