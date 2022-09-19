@@ -32,7 +32,7 @@ function BookSearch() {
       <SimpleGrid
         gridTemplateColumns={{
           base: '1fr',
-          md: '3fr 1fr',
+          md: '4fr 1fr',
         }}
         spacing={10}
         paddingTop={10}
@@ -43,12 +43,13 @@ function BookSearch() {
             <BookSearchResult books={books} query={query} isLoading={isLoading} />
           </VStack>
         </Box>
-        <Box>
-          <Center>
-            {/* <Text>Recommend!</Text> */}
-            <a href="https://rpx.a8.net/svt/ejp?a8mat=3NJ145+JNBQQ+2HOM+BW8O1&rakuten=y&a8ejpredirect=http%3A%2F%2Fhb.afl.rakuten.co.jp%2Fhgc%2F0ea62065.34400275.0ea62066.204f04c0%2Fa22091742780_3NJ145_JNBQQ_2HOM_BW8O1%3Fpc%3Dhttps%253A%252F%252Franking.rakuten.co.jp%252Fdaily%252F200446%252F%26m%3Dhttps%253A%252F%252Franking.rakuten.co.jp%252Fdaily%252F200446%252F" rel="nofollow">売れ筋ランキング</a>
-<img border="0" width="1" height="1" src="https://www16.a8.net/0.gif?a8mat=3NJ145+JNBQQ+2HOM+BW8O1" alt="" />
-          </Center>
+        <Box w='100%'>
+          <VStack>
+            <Text>Recommend!</Text>
+            <a href="https://px.a8.net/svt/ejp?a8mat=3NJ145+1F7ASY+407E+63WO1" rel="nofollow">
+<img border="0" width="120" height="600" alt="" src="https://www29.a8.net/svt/bgt?aid=220917605086&wid=001&eno=01&mid=s00000018689001026000&mc=1" /></a>
+<img border="0" width="1" height="1" src="https://www16.a8.net/0.gif?a8mat=3NJ145+1F7ASY+407E+63WO1" alt="" />
+          </VStack>
         </Box>
       </SimpleGrid>
     </VStack>
