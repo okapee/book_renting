@@ -37,8 +37,8 @@ function BookSearch() {
         spacing={10}
         paddingTop={10}
       >
-        <Box backgroundColor="lightyellow" borderRadius="2%">
-          <VStack w='50vw'>
+        <Box backgroundColor="ghostwhite" borderRadius="2%">
+          <VStack w="80vw">
             <Text textAlign="center">ここに検索結果が表示されます。</Text>
             <BookSearchResult books={books} query={query} isLoading={isLoading} />
           </VStack>
