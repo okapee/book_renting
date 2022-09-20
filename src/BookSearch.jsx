@@ -32,18 +32,18 @@ function BookSearch() {
       <SimpleGrid
         gridTemplateColumns={{
           base: '1fr',
-          md: '4fr 1fr',
+          md: '1fr 120px',
         }}
         spacing={10}
         paddingTop={10}
       >
         <Box backgroundColor="lightyellow" borderRadius="2%">
-          <VStack>
+          <VStack w='50vw'>
             <Text textAlign="center">ここに検索結果が表示されます。</Text>
             <BookSearchResult books={books} query={query} isLoading={isLoading} />
           </VStack>
         </Box>
-        <Box w="100%">
+        <Box>
           <VStack>
             {/* <Text>レコメンドエンジン搭載予定地</Text> */}
             <a href="https://px.a8.net/svt/ejp?a8mat=3NJ145+1F7ASY+407E+63WO1" rel="nofollow">
