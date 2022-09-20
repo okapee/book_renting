@@ -37,18 +37,31 @@ function BookSearch() {
         spacing={10}
         paddingTop={10}
       >
-        <Box>
+        <Box backgroundColor="lightyellow" borderRadius="2%">
           <VStack>
             <Text textAlign="center">ここに検索結果が表示されます。</Text>
             <BookSearchResult books={books} query={query} isLoading={isLoading} />
           </VStack>
         </Box>
-        <Box w='100%'>
+        <Box w="100%">
           <VStack>
-            <Text>Recommend!</Text>
+            {/* <Text>レコメンドエンジン搭載予定地</Text> */}
             <a href="https://px.a8.net/svt/ejp?a8mat=3NJ145+1F7ASY+407E+63WO1" rel="nofollow">
-<img border="0" width="120" height="600" alt="" src="https://www29.a8.net/svt/bgt?aid=220917605086&wid=001&eno=01&mid=s00000018689001026000&mc=1" /></a>
-<img border="0" width="1" height="1" src="https://www16.a8.net/0.gif?a8mat=3NJ145+1F7ASY+407E+63WO1" alt="" />
+              <img
+                border="0"
+                width="120"
+                height="600"
+                alt=""
+                src="https://www29.a8.net/svt/bgt?aid=220917605086&wid=001&eno=01&mid=s00000018689001026000&mc=1"
+              />
+            </a>
+            <img
+              border="0"
+              width="1"
+              height="1"
+              src="https://www16.a8.net/0.gif?a8mat=3NJ145+1F7ASY+407E+63WO1"
+              alt=""
+            />
           </VStack>
         </Box>
       </SimpleGrid>

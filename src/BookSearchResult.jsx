@@ -21,7 +21,7 @@ function BookSearchResult(props) {
               mt={10}
             />
       ) : (
-        <List bgColor="whiteAlpha.100" w="90wh">
+        <List bgColor="whiteAlpha.100" w="90%" textAlign='-webkit-center'>
           {Object.entries(books).map(([key, value]) => {
             console.log(key + ' ' + value);
             const book = {};
