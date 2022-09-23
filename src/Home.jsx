@@ -302,12 +302,12 @@ function Home() {
         >
           <VStack>
             <SocialProfileSimple />
-            {/* <Box h="280px" w="280px" borderColor="gray.200" borderWidth="1px" p={2}>
+            <Box h="280px" w="280px" borderColor="gray.200" borderWidth="1px" p={2}>
               <Text>更新情報</Text>
             </Box>
             <Box h="280px" w="280px" borderColor="gray.200" borderWidth="1px" p={2}>
               <Text>投稿者ランキング</Text>
-            </Box> */}
+            </Box>
           </VStack>
         </Box>
 
