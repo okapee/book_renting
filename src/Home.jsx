@@ -15,6 +15,7 @@ import {
   MenuOptionGroup,
   MenuItemOption,
   Center,
+  useColorModeValue,
 } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import { Auth, API, graphqlOperation } from 'aws-amplify';
@@ -295,10 +296,43 @@ function Home() {
         <Box h="100%" w="300px" mr="10px" className="display">
           <VStack>
             <SocialProfileSimple />
-            <Box h="280px" w="280px" borderColor="gray.200" borderWidth="1px" p={2}>
-              <Text>更新情報</Text>
+            <Box
+              w={'100%'}
+              bg={useColorModeValue('white', 'gray.900')}
+              boxShadow={'2xl'}
+              rounded={'lg'}
+              p={6}
+              textAlign={'center'}
+            >
+              <Text
+                fontWeight="bold"
+                // p="0.5rem"
+                // color="#494949"
+                // background="#fffaf4"
+                // borderLeft="solid 5px #ffaf58"
+                color="#6cb4e4"
+                textAlign="center"
+                padding="0.25em"
+                marginBottom="1em"
+                borderTop="solid 2px #6cb4e4"
+                borderBottom="solid 2px #6cb4e4"
+                background="-webkit-repeating-linear-gradient(-45deg, #f0f8ff, #f0f8ff 3px,#e9f4ff 3px, #e9f4ff 7px)"
+              >
+                更新情報
+              </Text>
+              <ul class="news">
+                <li class="new">2022.9.22 サイドバーを設置</li>
+                <li class="new">2022.9.20 自己紹介ページ削除</li>
+              </ul>
             </Box>
-            <Box h="280px" w="280px" borderColor="gray.200" borderWidth="1px" p={2}>
+            <Box
+              w={'100%'}
+              bg={useColorModeValue('white', 'gray.900')}
+              boxShadow={'2xl'}
+              rounded={'lg'}
+              p={6}
+              textAlign={'center'}
+            >
               <Text>投稿者ランキング</Text>
             </Box>
           </VStack>

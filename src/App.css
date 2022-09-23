@@ -77,12 +77,31 @@ h2 { font-size: 2.8rem; }
   cursor: pointer;
 }
 
+/* サイドバー用 */
 .display {
   display: block;
 }
-
 @media screen and (max-width: 979px){
 .display {
     display: none;
   }
+}
+
+/* 更新情報のNewをつけるリスト */
+.news {
+  list-style: none;
+  text-align: left;
+}
+
+.new {
+  margin-bottom: 1rem;
+}
+
+.news .new::after {
+  content: "new";
+  margin-left: 5px;
+  color: #fff;
+  background: red;
+  padding: 1px 3px;
+  font-size: 12px;
 }
