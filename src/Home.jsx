@@ -311,7 +311,7 @@ function Home() {
           </VStack>
         </Box>
 
-        <SimpleGrid columns={[1, null, 2]} spacing={8} width="max-content">
+        <SimpleGrid columns={[1, null, 2]} spacing={8} width="max-content" alignSelf='flex-start'>
           {books.map((book) => {
             console.log('book: ' + book);
             return <BookCard bookInfo={book} username={userInfo?.username} />;

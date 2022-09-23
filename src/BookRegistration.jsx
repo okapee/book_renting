@@ -57,6 +57,7 @@ function BookRegistration(props) {
       rating: rating,
       owner: userInfo.username,
       isPrivate: value,
+      type: 't'
     };
 
     // DBへ本情報を登録

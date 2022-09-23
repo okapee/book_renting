@@ -27,7 +27,7 @@ import {
 import { Auth, API, graphqlOperation, Storage } from 'aws-amplify';
 import { useForm } from 'react-hook-form';
 import { listComments, getUser } from './graphql/queries';
-import { createComment } from './graphql/mutations';
+import { createComment, deletePost } from './graphql/mutations';
 
 export default function BookDetail(props) {
   const username = useSelector((state) => state.auth.user.username);
@@ -195,7 +195,7 @@ function DeleteBtn(props) {
             id: props.postId,
           };
 
-          await API.graphql(graphqlOperation(mutations.deletePost, { input }));
+          await API.graphql(graphqlOperation(deletePost, { input }));
           console.log('start update: ' + props.update);
           // Postを削除した際に強制リロード
           window.location.reload();
