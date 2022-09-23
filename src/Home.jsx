@@ -352,16 +352,16 @@ function Home() {
           </VStack>
         </Box>
 
-        <VStack alignItems="start">
+        <VStack alignItems="start" alignSelf='start'>
           <SimpleGrid columns={[1, null, 2]} spacing={8} width="max-content">
             {books.map((book) => {
               console.log('book: ' + book);
               return <BookCard bookInfo={book} username={userInfo?.username} />;
             })}
           </SimpleGrid>
-          <Flex>
+          <Box alignSelf='center'>
             <PageNavigate {...{ hasNext, hasPrev, prev, next, isLoading }} />
-          </Flex>
+          </Box>
           <Box>
             <a href="https://px.a8.net/svt/ejp?a8mat=3NJ145+B1PKVM+2PEO+1IB5SX" rel="nofollow">
               <img
@@ -391,8 +391,7 @@ function PageNavigate({ isLoading, hasNext, hasPrev, next, prev }) {
   const disabledNext = !hasNext || isLoading;
   return (
     <Box
-      className="flex justify-between px-4 py-2 mb-4 text-sm bg-white rounded shadow-md lg:py-4 lg:px-8"
-      marginTop={4} alignSelf='center'
+      marginTop={4}
     >
       <Button disabled={disabledPrev} onClick={prev} marginRight={4}>
         <span>前へ</span>
