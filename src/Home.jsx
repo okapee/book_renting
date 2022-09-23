@@ -306,10 +306,6 @@ function Home() {
             >
               <Text
                 fontWeight="bold"
-                // p="0.5rem"
-                // color="#494949"
-                // background="#fffaf4"
-                // borderLeft="solid 5px #ffaf58"
                 color="#6cb4e4"
                 textAlign="center"
                 padding="0.25em"
@@ -333,7 +329,25 @@ function Home() {
               p={6}
               textAlign={'center'}
             >
-              <Text>投稿者ランキング</Text>
+              <Text
+                fontWeight="bold"
+                color="#6cb4e4"
+                textAlign="center"
+                padding="0.25em"
+                marginBottom="1em"
+                borderTop="solid 2px #6cb4e4"
+                borderBottom="solid 2px #6cb4e4"
+                background="-webkit-repeating-linear-gradient(-45deg, #f0f8ff, #f0f8ff 3px,#e9f4ff 3px, #e9f4ff 7px)"
+              >
+                投稿者ランキング
+              </Text>
+              <ol>
+                <li>おかぴー</li>
+                <li>岡崎優尋</li>
+                <li>ぴかお</li>
+                <li>高塚佳秀</li>
+                <li>都筑</li>
+              </ol>
             </Box>
           </VStack>
         </Box>
