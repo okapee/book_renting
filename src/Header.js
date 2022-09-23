@@ -137,9 +137,9 @@ export default function Header(props) {
           <NavLink className={({ isActive }) => (isActive ? 'active' : 'undefined')} to="/profile">
             ユーザー情報
           </NavLink>
-          <NavLink className={({ isActive }) => (isActive ? 'active' : 'undefined')} to="/about">
+          {/* <NavLink className={({ isActive }) => (isActive ? 'active' : 'undefined')} to="/about">
             目的と作者
-          </NavLink>
+          </NavLink> */}
           <NavLink className={({ isActive }) => (isActive ? 'active' : 'undefined')} to="/contact">
             お問い合わせ
           </NavLink>

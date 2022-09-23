@@ -14,6 +14,7 @@ import {
   MenuItem,
   MenuOptionGroup,
   MenuItemOption,
+  Center,
 } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import { Auth, API, graphqlOperation } from 'aws-amplify';
@@ -23,6 +24,7 @@ import BookCard from './BookCard';
 import { useSelector, useDispatch } from 'react-redux';
 import { allbook, sameage, sameorg, mybook } from './slices/filterSlice';
 import { setUser } from './slices/authSlice';
+import SocialProfileSimple from './components/profileCard';
 
 function Home() {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -288,12 +290,34 @@ function Home() {
           </Button>
         </Box>
       </HStack>
-      <SimpleGrid columns={[1, null, 2]} spacing={8} width="max-content">
-        {books.map((book) => {
-          console.log('book: ' + book);
-          return <BookCard bookInfo={book} username={userInfo?.username} />;
-        })}
-      </SimpleGrid>
+
+      <HStack>
+        <Box
+          // backgroundColor="blue.400"
+          h="100%"
+          w="300px"
+          mr="10px"
+          display={{ sm: 'none', md: null, lg: 'block' }}
+        >
+          <VStack>
+            <SocialProfileSimple />
+            <Box h="280px" w="280px" borderColor="gray.200" borderWidth="1px" p={2}>
+              <Text>更新情報</Text>
+            </Box>
+            <Box h="280px" w="280px" borderColor="gray.200" borderWidth="1px" p={2}>
+              <Text>投稿者ランキング</Text>
+            </Box>
+          </VStack>
+        </Box>
+
+        <SimpleGrid columns={[1, null, 2]} spacing={8} width="max-content">
+          {books.map((book) => {
+            console.log('book: ' + book);
+            return <BookCard bookInfo={book} username={userInfo?.username} />;
+          })}
+        </SimpleGrid>
+      </HStack>
+
       <Flex>
         <PageNavigate {...{ hasNext, hasPrev, prev, next, isLoading }} />
       </Flex>

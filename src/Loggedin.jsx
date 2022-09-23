@@ -26,7 +26,7 @@ import Header from './Header';
 import Home from './Home';
 import BookSearch from './BookSearch';
 import UserInfo from './UserInfo';
-import About from './About';
+// import About from './About';
 import Contact from './Contact';
 import NoMatch from './NoMatch';
 
@@ -60,7 +60,7 @@ export default function Loggedin() {
               <Route path="/" element={<Home />} />
               <Route path="/booksearch" element={<BookSearch />} />
               <Route path="/profile" element={<UserInfo />} />
-              <Route path="/about" element={<About />} />
+              {/* <Route path="/about" element={<About />} /> */}
               <Route path="/contact" element={<Contact />} />
               <Route path="*" element={<NoMatch />} />
             </Route>
