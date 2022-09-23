@@ -297,16 +297,17 @@ function Home() {
           h="100%"
           w="300px"
           mr="10px"
-          display={{ sm: 'none', md: null, lg: 'block' }}
+          // display={{ sm: 'none', md: 'none', lg: 'block' }}
+          className='display'
         >
           <VStack>
             <SocialProfileSimple />
-            <Box h="280px" w="280px" borderColor="gray.200" borderWidth="1px" p={2}>
+            {/* <Box h="280px" w="280px" borderColor="gray.200" borderWidth="1px" p={2}>
               <Text>更新情報</Text>
             </Box>
             <Box h="280px" w="280px" borderColor="gray.200" borderWidth="1px" p={2}>
               <Text>投稿者ランキング</Text>
-            </Box>
+            </Box> */}
           </VStack>
         </Box>
 

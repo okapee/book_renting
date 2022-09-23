@@ -16,7 +16,7 @@ export default function SocialProfileSimple() {
   return (
     <Center py={6}>
       <Box
-        maxW={'100%'}
+        // maxW={'100%'}
         w={'100%'}
         bg={useColorModeValue('white', 'gray.900')}
         boxShadow={'2xl'}
@@ -67,7 +67,7 @@ export default function SocialProfileSimple() {
         </Stack>
 
         <Stack mt={8} direction={'row'} spacing={4}>
-          
+
         </Stack>
       </Box>
     </Center>
