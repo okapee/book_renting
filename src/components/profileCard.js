@@ -14,7 +14,7 @@ import prof_img from '../assets/images/okapi.png';
 
 export default function SocialProfileSimple() {
   return (
-    <Center py={6}>
+    <Center>
       <Box
         // maxW={'100%'}
         w={'100%'}
@@ -64,10 +64,6 @@ export default function SocialProfileSimple() {
           <Badge px={2} py={1} bg={useColorModeValue('gray.50', 'gray.800')} fontWeight={'400'}>
             #music
           </Badge>
-        </Stack>
-
-        <Stack mt={8} direction={'row'} spacing={4}>
-
         </Stack>
       </Box>
     </Center>
