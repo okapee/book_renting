@@ -292,14 +292,7 @@ function Home() {
       </HStack>
 
       <HStack>
-        <Box
-          // backgroundColor="blue.400"
-          h="100%"
-          w="300px"
-          mr="10px"
-          // display={{ sm: 'none', md: 'none', lg: 'block' }}
-          className='display'
-        >
+        <Box h="100%" w="300px" mr="10px" className="display">
           <VStack>
             <SocialProfileSimple />
             <Box h="280px" w="280px" borderColor="gray.200" borderWidth="1px" p={2}>
@@ -311,35 +304,35 @@ function Home() {
           </VStack>
         </Box>
 
-        <SimpleGrid columns={[1, null, 2]} spacing={8} width="max-content" alignSelf='flex-start'>
-          {books.map((book) => {
-            console.log('book: ' + book);
-            return <BookCard bookInfo={book} username={userInfo?.username} />;
-          })}
-        </SimpleGrid>
+        <VStack>
+          <SimpleGrid columns={[1, null, 2]} spacing={8} width="max-content" alignSelf="flex-start">
+            {books.map((book) => {
+              console.log('book: ' + book);
+              return <BookCard bookInfo={book} username={userInfo?.username} />;
+            })}
+          </SimpleGrid>
+          <Flex>
+            <PageNavigate {...{ hasNext, hasPrev, prev, next, isLoading }} />
+          </Flex>
+          <Box>
+            <a href="https://px.a8.net/svt/ejp?a8mat=3NJ145+B1PKVM+2PEO+1IB5SX" rel="nofollow">
+              <img
+                border="0"
+                width="90%"
+                alt=""
+                src="https://www28.a8.net/svt/bgt?aid=220917605668&wid=001&eno=01&mid=s00000012624009122000&mc=1"
+              />
+            </a>
+            <img
+              border="0"
+              width="1"
+              height="1"
+              src="https://www17.a8.net/0.gif?a8mat=3NJ145+B1PKVM+2PEO+1IB5SX"
+              alt=""
+            ></img>
+          </Box>
+        </VStack>
       </HStack>
-
-      <Flex>
-        <PageNavigate {...{ hasNext, hasPrev, prev, next, isLoading }} />
-      </Flex>
-      <Box>
-        <a href="https://px.a8.net/svt/ejp?a8mat=3NJ145+B1PKVM+2PEO+1IB5SX" rel="nofollow">
-          <img
-            border="0"
-            width="936"
-            height="120"
-            alt=""
-            src="https://www28.a8.net/svt/bgt?aid=220917605668&wid=001&eno=01&mid=s00000012624009122000&mc=1"
-          />
-        </a>
-        <img
-          border="0"
-          width="1"
-          height="1"
-          src="https://www17.a8.net/0.gif?a8mat=3NJ145+B1PKVM+2PEO+1IB5SX"
-          alt=""
-        ></img>
-      </Box>
     </VStack>
   );
 }
@@ -349,14 +342,17 @@ function PageNavigate({ isLoading, hasNext, hasPrev, next, prev }) {
   const disabledPrev = !hasPrev || isLoading;
   const disabledNext = !hasNext || isLoading;
   return (
-    <div className="flex justify-between px-4 py-2 mb-4 text-sm bg-white rounded shadow-md lg:py-4 lg:px-8">
-      <Button disabled={disabledPrev} onClick={prev}>
+    <Box
+      className="flex justify-between px-4 py-2 mb-4 text-sm bg-white rounded shadow-md lg:py-4 lg:px-8"
+      marginTop={4}
+    >
+      <Button disabled={disabledPrev} onClick={prev} marginRight={4}>
         <span>前へ</span>
       </Button>
       <Button disabled={disabledNext} onClick={next}>
         <span>次へ</span>
       </Button>
-    </div>
+    </Box>
   );
 }
 
