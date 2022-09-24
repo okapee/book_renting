@@ -176,7 +176,7 @@ function BookCard(props) {
         p={4}
         rounded="4"
         w={[340, 380]}
-        h="200px"
+        h="220px"
         display="grid"
         alignContent="center"
         bgColor="gray.100"
