@@ -26,7 +26,7 @@ import Header from './Header';
 import Home from './Home';
 import BookSearch from './BookSearch';
 import UserInfo from './UserInfo';
-// import About from './About';
+import About from './About';
 import Contact from './Contact';
 import NoMatch from './NoMatch';
 
@@ -48,8 +48,8 @@ export default function Loggedin() {
       <ChakraProvider
         theme={extendTheme({
           fonts: {
-            heading: 'Noto Serif JP',
-            body: 'Noto Serif JP',
+            heading: 'Kosugi',
+            body: 'Kosugi',
           },
         })}
       >

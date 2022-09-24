@@ -22,6 +22,7 @@ import {
   HStack,
 } from '@chakra-ui/react';
 import { FaStar } from 'react-icons/fa';
+import toast, { Toaster } from 'react-hot-toast';
 import { Auth, API } from 'aws-amplify';
 import { useSelector, useDispatch } from 'react-redux';
 import * as mutations from './graphql/mutations';
@@ -57,7 +58,7 @@ function BookRegistration(props) {
       rating: rating,
       owner: userInfo.username,
       isPrivate: value,
-      type: 't'
+      type: 't',
     };
 
     // DBへ本情報を登録
@@ -86,8 +87,58 @@ function BookRegistration(props) {
         query: mutations.createPost,
         variables: { input: registrationInfo },
       });
+            toast('登録に成功しました', {
+              duration: 4000,
+              position: 'left-bottom',
+              // Styling
+              style: {},
+              className: '',
+              // Custom Icon
+              icon: '🙌',
+              // Change colors of success/error/loading icon
+              // iconTheme: {
+              //   primary: '#000',
+              //   secondary: '#fff',
+              // },
+              style: {
+                border: '1px solid #054d41',
+                padding: '16px',
+                color: '#19b448',
+              },
+              // Aria
+              ariaProps: {
+                role: 'status',
+                'aria-live': 'polite',
+              },
+            });
     } catch (err) {
       console.log(err);
+      // Errorの場合、その旨をトーストとして通知する
+      console.log('toast');
+      toast('登録に失敗しました', {
+        duration: 4000,
+        position: 'left-bottom',
+        // Styling
+        style: {},
+        className: '',
+        // Custom Icon
+        icon: '😭',
+        // Change colors of success/error/loading icon
+        // iconTheme: {
+        //   primary: '#000',
+        //   secondary: '#fff',
+        // },
+        style: {
+          border: '1px solid #713200',
+          padding: '16px',
+          color: '#ff0000777',
+        },
+        // Aria
+        ariaProps: {
+          role: 'status',
+          'aria-live': 'polite',
+        },
+      });
     }
     onClose();
   };
@@ -162,6 +213,7 @@ function BookRegistration(props) {
           </ModalFooter>
         </ModalContent>
       </Modal>
+      <Toaster />
     </>
   );
 }

@@ -26,9 +26,7 @@ export default function SocialProfileSimple() {
       >
         <Avatar
           size={'xl'}
-          src=
-            {prof_img}
-          
+          src={prof_img}
           alt={'Avatar Alt'}
           mb={4}
           pos={'relative'}
@@ -48,7 +46,9 @@ export default function SocialProfileSimple() {
           Okapee
         </Heading>
         <Text fontWeight={600} color={'gray.500'} mb={4}>
-          @okapee0608
+          <Link href="https://twitter.com/okapee0608" isExternal>
+            @okapee0608
+          </Link>
         </Text>
         <Text textAlign={'center'} color={useColorModeValue('gray.700', 'gray.400')} px={3}>
           読んだ本を互いにシェアすることで、互いの興味・関心を知り、未知の本に出会い、新たなコミュニケーションが生まれたり知識が獲得できれば嬉しいです。
