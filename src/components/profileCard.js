@@ -5,12 +5,26 @@ import {
   Center,
   Text,
   Stack,
+  HStack,
   Button,
   Link,
   Badge,
   useColorModeValue,
 } from '@chakra-ui/react';
+import {
+  FacebookShareButton,
+  LineShareButton,
+  TwitterShareButton,
+  FacebookIcon,
+  LineIcon,
+  TwitterIcon,
+} from 'react-share';
 import prof_img from '../assets/images/okapi.png';
+
+// SNSシェアボタン用
+const URL = 'https://www.reviewbooks.tokyo/';
+const QUOTE =
+  '読んだ本を互いにシェアすることで、互いの興味・関心を知り、未知の本に出会い、新たなコミュニケーションが生まれたり知識が獲得できるサービスです。';
 
 export default function SocialProfileSimple() {
   return (
@@ -65,6 +79,18 @@ export default function SocialProfileSimple() {
             #music
           </Badge>
         </Stack>
+
+        <HStack justifyContent='center' mt={4}>
+          <FacebookShareButton url={URL} quote={QUOTE}>
+            <FacebookIcon size={24} square />
+          </FacebookShareButton>
+          <TwitterShareButton url={URL} title={QUOTE}>
+            <TwitterIcon size={24} square />
+          </TwitterShareButton>
+          <LineShareButton url={URL} title={QUOTE}>
+            <LineIcon size={24} square />
+          </LineShareButton>
+        </HStack>
       </Box>
     </Center>
   );
