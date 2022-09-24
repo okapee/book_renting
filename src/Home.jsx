@@ -177,10 +177,10 @@ function Home() {
   return (
     <VStack m={4}>
       <HStack>
-        <Text>ここにはあなたが読んだ本や、みんながおすすめした本が表示されます。</Text>
+        <Text wordBreak='keep-all'>ここにはあなたが読んだ本や、みんながおすすめした本が表示されます。</Text>
         <Menu>
-          <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-            並び替え
+          <MenuButton as={Button} className='sorticon'>
+            並び順
           </MenuButton>
           <MenuList>
             <MenuOptionGroup title="並び順" type="radio">
@@ -352,14 +352,14 @@ function Home() {
           </VStack>
         </Box>
 
-        <VStack alignItems="start" alignSelf='start'>
+        <VStack alignItems="start" alignSelf="start">
           <SimpleGrid columns={[1, null, 2]} spacing={8} width="max-content">
             {books.map((book) => {
               console.log('book: ' + book);
               return <BookCard bookInfo={book} username={userInfo?.username} />;
             })}
           </SimpleGrid>
-          <Box alignSelf='center'>
+          <Box alignSelf="center">
             <PageNavigate {...{ hasNext, hasPrev, prev, next, isLoading }} />
           </Box>
           <Box>
@@ -390,9 +390,7 @@ function PageNavigate({ isLoading, hasNext, hasPrev, next, prev }) {
   const disabledPrev = !hasPrev || isLoading;
   const disabledNext = !hasNext || isLoading;
   return (
-    <Box
-      marginTop={4}
-    >
+    <Box marginTop={4}>
       <Button disabled={disabledPrev} onClick={prev} marginRight={4}>
         <span>前へ</span>
       </Button>

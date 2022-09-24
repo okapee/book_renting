@@ -119,3 +119,8 @@ ol li::before {
   display: inline-block;
   margin-right: 8px;
 }
+
+.sorticon::before {
+  content: '🔃';
+  padding-right: 2px;;
+}
