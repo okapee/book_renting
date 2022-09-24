@@ -179,7 +179,7 @@ function Home() {
       <HStack>
         <Text wordBreak='keep-all'>ここにはあなたが読んだ本や、みんながおすすめした本が表示されます。</Text>
         <Menu>
-          <MenuButton as={Button} className='sorticon'>
+          <MenuButton as={Button} className='sorticon' minW='max-content'>
             並び順
           </MenuButton>
           <MenuList>
