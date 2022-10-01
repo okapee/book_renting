@@ -81,9 +81,16 @@ h2 { font-size: 2.8rem; }
 .display {
   display: block;
 }
-@media screen and (max-width: 979px){
-.display {
+
+@media (max-width: 768px) {
+  .display {
     display: none;
+  }
+  .react-preview {
+    display: none;
+  }
+  .review-edit {
+    width: 100%;
   }
 }
 
@@ -123,4 +130,51 @@ ol li::before {
 .sorticon::before {
   content: '🔃';
   padding-right: 2px;;
+}
+
+.react-md h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  border-bottom: 1px solid black;
+    color: white;
+      text-shadow:
+        2px 2px 1px #0b0a0a, -2px -2px 1px #0f0f0f,
+        -2px 2px 1px #070606, 2px -2px 1px #010101,
+        2px 0px 1px #060606, -2px 0px 1px #080808,
+        0px 2px 1px #0f0f0f, 0px -2px 1px #000000;
+}
+
+.react-md h2 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.react-md h3 {
+  font-size: 1.7rem;
+}
+
+.react-md li {
+  margin-top: 0.5rem;
+  margin-bottom: 0rem;
+  margin-left: 2rem;
+}
+
+.task-list-item {
+  list-style: none;
+}
+
+.review-edit{
+  font-size: 1.5rem;
+}
+
+.review-disp{
+  padding: 8px;
+  background-color: lightcyan;
+  border-width: 1px;
+  border-color: green;
+  border-radius: 8px;
+}
+
+ol li::before {
+  color: black;
 }

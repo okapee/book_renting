@@ -26,13 +26,13 @@ import {
 } from '@chakra-ui/react';
 import { Auth, API, graphqlOperation, Storage } from 'aws-amplify';
 import { useForm } from 'react-hook-form';
+import ReactMarkdown from 'react-markdown';
 import { listComments, getUser } from './graphql/queries';
 import { createComment, deletePost } from './graphql/mutations';
 
 export default function BookDetail(props) {
   const username = useSelector((state) => state.auth.user.username);
   const userdata = useSelector((state) => state.userDataSlice.userdata);
-  //   const [dispCmt, setDispCmt] = useState('初期値');
   const ref = useRef(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [initCount, setInitCount] = useState(0);
@@ -103,10 +103,12 @@ export default function BookDetail(props) {
       <ModalContent p={4} minHeight="200px">
         <ModalHeader bgColor="gray.100">{book.title}</ModalHeader>
         <ModalBody p={2}>
-          <Text p='1rem'>{book.review}</Text>
+          <Box className='review-disp'>
+            <ReactMarkdown className="react-md">{book.review}</ReactMarkdown>
+          </Box>
           <Divider mt={4} mb={4} />
           <Text as="b">コメント</Text>
-          <List alignItems='flex-start'>
+          <List alignItems="flex-start">
             {comments?.map((comment) => {
               return (
                 <Comment

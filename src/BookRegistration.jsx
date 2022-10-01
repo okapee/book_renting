@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import {
+  Box,
+  Center,
   Flex,
   Text,
   Button,
@@ -23,6 +25,8 @@ import {
 } from '@chakra-ui/react';
 import { FaStar } from 'react-icons/fa';
 import toast, { Toaster } from 'react-hot-toast';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { Auth, API } from 'aws-amplify';
 import { useSelector, useDispatch } from 'react-redux';
 import * as mutations from './graphql/mutations';
@@ -87,30 +91,24 @@ function BookRegistration(props) {
         query: mutations.createPost,
         variables: { input: registrationInfo },
       });
-            toast('登録に成功しました', {
-              duration: 4000,
-              position: 'left-bottom',
-              // Styling
-              style: {},
-              className: '',
-              // Custom Icon
-              icon: '🙌',
-              // Change colors of success/error/loading icon
-              // iconTheme: {
-              //   primary: '#000',
-              //   secondary: '#fff',
-              // },
-              style: {
-                border: '1px solid #054d41',
-                padding: '16px',
-                color: '#19b448',
-              },
-              // Aria
-              ariaProps: {
-                role: 'status',
-                'aria-live': 'polite',
-              },
-            });
+      toast('登録に成功しました', {
+        duration: 4000,
+        position: 'left-bottom',
+        // Styling
+        style: {},
+        className: '',
+        icon: '🙌',
+        style: {
+          border: '1px solid #054d41',
+          padding: '16px',
+          color: '#19b448',
+        },
+        // Aria
+        ariaProps: {
+          role: 'status',
+          'aria-live': 'polite',
+        },
+      });
     } catch (err) {
       console.log(err);
       // Errorの場合、その旨をトーストとして通知する
@@ -121,13 +119,7 @@ function BookRegistration(props) {
         // Styling
         style: {},
         className: '',
-        // Custom Icon
         icon: '😭',
-        // Change colors of success/error/loading icon
-        // iconTheme: {
-        //   primary: '#000',
-        //   secondary: '#fff',
-        // },
         style: {
           border: '1px solid #713200',
           padding: '16px',
@@ -167,7 +159,7 @@ function BookRegistration(props) {
       >
         レビューを登録
       </Button>
-      <Modal blockScrollOnMount={false} size={'xl'} isOpen={isOpen} onClose={onClose} isCentered>
+      <Modal blockScrollOnMount={false} size={'5xl'} isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay bg="whiteAlpha.50" backdropFilter="blur(10px) hue-rotate(90deg)" />
         <ModalContent>
           <ModalHeader fontSize={['12px', '16px', '20px']}>レビュー投稿画面</ModalHeader>
@@ -180,23 +172,39 @@ function BookRegistration(props) {
             <VStack>
               <FormControl isInvalid={isError} wordBreak="normal">
                 <FormLabel htmlFor="review">本のレビュー</FormLabel>
-                <Textarea
-                  id="review"
-                  type="text"
-                  variant="filled"
-                  // placeholder='本のレビューを280文字以内で記載'
-                  value={input}
-                  onChange={handleInputChange}
-                  height={300}
-                  flexWrap="normal"
-                />
-                {!isError ? (
-                  <FormHelperText>本のレビューを280文字以内で記載してください。</FormHelperText>
-                ) : (
-                  <FormErrorMessage>
-                    レビューが記載されていない、もしくは280文字を超過しています。
-                  </FormErrorMessage>
-                )}
+                <Box className="markdown-layout" display="flex">
+                  <VStack w='100vw'>
+                      <Textarea
+                        id="review"
+                        className='review-edit'
+                        type="text"
+                        variant="filled"
+                        placeholder='Markdown記法に対応しています。'
+                        value={input}
+                        onChange={handleInputChange}
+                        height={300}
+                        width='100%'
+                        flexWrap="normal"
+                      />
+                      {!isError ? (
+                        <FormHelperText>
+                          本のレビューを280文字以内で記載してください。
+                        </FormHelperText>
+                      ) : (
+                        <FormErrorMessage>
+                          レビューが記載されていない、もしくは280文字を超過しています。
+                        </FormErrorMessage>
+                      )}
+                  </VStack>
+                  
+                  <Box className="react-preview">
+                    <Box h={300} w={300} px={4} p={4} ml={4} backgroundColor="azure">
+                      <ReactMarkdown className="react-md" remarkPlugins={[remarkGfm]}>
+                        {input}
+                      </ReactMarkdown>
+                    </Box>
+                  </Box>
+                </Box>
               </FormControl>
               <Spacer></Spacer>
               <Text>評価をしてください</Text>

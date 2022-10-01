@@ -177,9 +177,11 @@ function Home() {
   return (
     <VStack m={4}>
       <HStack>
-        <Text wordBreak='keep-all'>ここにはあなたが読んだ本や、みんながおすすめした本が表示されます。</Text>
+        <Text wordBreak="keep-all">
+          ここにはあなたが読んだ本や、みんながおすすめした本が表示されます。
+        </Text>
         <Menu>
-          <MenuButton as={Button} className='sorticon' minW='max-content'>
+          <MenuButton as={Button} className="sorticon" minW="max-content">
             並び順
           </MenuButton>
           <MenuList>
@@ -317,8 +319,9 @@ function Home() {
                 更新情報
               </Text>
               <ul class="news">
-                <li class="new">2022.9.22 サイドバーを設置</li>
-                <li class="new">2022.9.20 自己紹介ページ削除</li>
+                <li class="new">2022.10.2 Markdownでの投稿に対応</li>
+                <li>2022.9.22 サイドバーを設置</li>
+                <li>2022.9.20 自己紹介ページ削除</li>
               </ul>
             </Box>
             <Box
