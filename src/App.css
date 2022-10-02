@@ -83,14 +83,17 @@ h2 { font-size: 2.8rem; }
 }
 
 @media (max-width: 768px) {
-  .display {
-    display: none;
-  }
   .react-preview {
     display: none;
   }
   .review-edit {
     width: 100%;
+  }
+}
+
+@media screen and (max-width: 979px) {
+  .display {
+    display: none;
   }
 }
 
