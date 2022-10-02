@@ -173,31 +173,51 @@ function BookRegistration(props) {
               <FormControl isInvalid={isError} wordBreak="normal">
                 <FormLabel htmlFor="review">本のレビュー</FormLabel>
                 <Box className="markdown-layout" display="flex">
-                  <VStack w='100vw' minW='250px'>
-                      <Textarea
-                        id="review"
-                        className='review-edit'
-                        type="text"
-                        variant="filled"
-                        placeholder='Markdown記法に対応しています。'
-                        value={input}
-                        onChange={handleInputChange}
-                        height={300}
-                        width='100%'
-                        flexWrap="normal"
-                      />
-                      {!isError ? (
-                        <FormHelperText>
-                          本のレビューを280文字以内で記載してください。
-                        </FormHelperText>
-                      ) : (
-                        <FormErrorMessage>
-                          レビューが記載されていない、もしくは280文字を超過しています。
-                        </FormErrorMessage>
-                      )}
+                  <VStack w="100vw" minW="250px">
+                    <Textarea
+                      id="review"
+                      className="review-edit"
+                      type="text"
+                      variant="filled"
+                      placeholder="
+                        Markdown記法が使えます。&#13;&#10;
+                        --------------------&#13;&#10;
+                        (例)&#13;&#10;
+                        # これはH1タグです&#13;&#10;
+                        ## これはH2タグです&#13;&#10;
+                        ~~打ち消し線~~&#13;&#10;
+                        1. 2. 3. リスト&#13;&#10;
+                        - リスト&#13;&#10;
+                        [text](url) リンク&#13;&#10;
+                        - [ ] タスク1 - [x] タスク2チェックボックス&#13;&#10;
+                        ![代替テキスト](画像のURL '画像タイトル') 画像&#13;&#10;
+                        "
+                      value={input}
+                      onChange={handleInputChange}
+                      height={300}
+                      width="100%"
+                      flexWrap="normal"
+                    />
+                    {!isError ? (
+                      <FormHelperText>本のレビューを280文字以内で記載してください。</FormHelperText>
+                    ) : (
+                      <FormErrorMessage>
+                        レビューが記載されていない、もしくは280文字を超過しています。
+                      </FormErrorMessage>
+                    )}
                   </VStack>
                   <Box className="react-preview">
-                    <Box h={300} w='100%' px={4} p={4} ml={4} backgroundColor="azure" overflow='scroll' minW={300} wordBreak='break-word'>
+                    <Box
+                      h={300}
+                      w="100%"
+                      px={4}
+                      p={4}
+                      ml={4}
+                      backgroundColor="azure"
+                      overflow="scroll"
+                      minW={300}
+                      wordBreak="break-word"
+                    >
                       <ReactMarkdown className="react-md" remarkPlugins={[remarkGfm]}>
                         {input}
                       </ReactMarkdown>
