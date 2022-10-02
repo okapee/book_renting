@@ -173,7 +173,7 @@ function BookRegistration(props) {
               <FormControl isInvalid={isError} wordBreak="normal">
                 <FormLabel htmlFor="review">本のレビュー</FormLabel>
                 <Box className="markdown-layout" display="flex">
-                  <VStack w='100vw'>
+                  <VStack w='100vw' minW='250px'>
                       <Textarea
                         id="review"
                         className='review-edit'
@@ -196,9 +196,8 @@ function BookRegistration(props) {
                         </FormErrorMessage>
                       )}
                   </VStack>
-                  
                   <Box className="react-preview">
-                    <Box h={300} w={300} px={4} p={4} ml={4} backgroundColor="azure">
+                    <Box h={300} w='100%' px={4} p={4} ml={4} backgroundColor="azure" overflow='scroll' minW={300} wordBreak='break-word'>
                       <ReactMarkdown className="react-md" remarkPlugins={[remarkGfm]}>
                         {input}
                       </ReactMarkdown>

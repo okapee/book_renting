@@ -103,7 +103,8 @@ export default function BookDetail(props) {
       <ModalContent p={4} minHeight="200px">
         <ModalHeader bgColor="gray.100">{book.title}</ModalHeader>
         <ModalBody p={2}>
-          <Box className='review-disp'>
+          <Text as="b">レビュー</Text>
+          <Box className="review-disp">
             <ReactMarkdown className="react-md">{book.review}</ReactMarkdown>
           </Box>
           <Divider mt={4} mb={4} />
