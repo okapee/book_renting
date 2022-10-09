@@ -16,12 +16,14 @@ import {
   AvatarBadge,
   AvatarGroup,
 } from '@chakra-ui/react';
+import NotificationCenter from 'react-notification-center-component';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from './slices/authSlice';
 import { setUserData } from './slices/userDataSlice';
 import * as queries from './graphql/queries';
 
 export default function Header(props) {
+  let tmpUserName;
   const [isNavVisible, setNavVisibility] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [iconURL, setIconURL] = useState('');
@@ -44,12 +46,13 @@ export default function Header(props) {
     setIconURL(userdata?.profileImg);
     console.log(`profileImg in S3: ${userdata?.profileImg}`);
   }
- 
+
   console.log('userInfo in header: ' + userInfo);
 
   useEffect(() => {
     const setUserToStore = async () => {
       const res = await Auth.currentAuthenticatedUser();
+      tmpUserName = res.username;
       console.log('Headerのusername: ' + res.username);
       dispatch(setUser(res));
       setIconName(res.username);
@@ -137,13 +140,15 @@ export default function Header(props) {
           <NavLink className={({ isActive }) => (isActive ? 'active' : 'undefined')} to="/profile">
             ユーザー情報
           </NavLink>
-          {/* <NavLink className={({ isActive }) => (isActive ? 'active' : 'undefined')} to="/about">
-            目的と作者
-          </NavLink> */}
           <NavLink className={({ isActive }) => (isActive ? 'active' : 'undefined')} to="/contact">
             お問い合わせ
           </NavLink>
           <Avatar name={iconName} src={iconURL} size="lg" />
+          <NotificationCenter
+            className="feed-container"
+            appId="E9Ormu9DLP"
+            subscriberId={userInfo.username}
+          />
           <button onClick={props.signOut}>Logout</button>
         </nav>
       </CSSTransition>

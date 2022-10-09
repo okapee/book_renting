@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -33,11 +34,18 @@ import { createComment, deletePost } from './graphql/mutations';
 export default function BookDetail(props) {
   const username = useSelector((state) => state.auth.user.username);
   const userdata = useSelector((state) => state.userDataSlice.userdata);
+  const book = {
+    ...props.bookInfo,
+  };
   const ref = useRef(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [initCount, setInitCount] = useState(0);
   const [update, setUpdate] = useState(false);
   const [comments, setComments] = useState([]);
+
+  const subscriberId = book.owner;
+  let endpoint =
+    'https://api.ravenhub.io/company/E9Ormu9DLP/subscribers/' + subscriberId + '/events/9BlvencO4a';
 
   const finalRef = useRef();
   const {
@@ -86,16 +94,25 @@ export default function BookDetail(props) {
     };
     const res = await API.graphql(graphqlOperation(listComments, { filter: filter }));
     console.dir(res);
+
+    if (res != null) {
+      console.log(
+        'notification: to:' + endpoint + ', user:' + userdata.name + ', postId:' + book.title + ', sendTo:' +  book.owner,
+      );
+      axios.post(
+        endpoint,
+        { user: userdata.name, postId: book.title },
+        {
+          headers: { 'Content-type': 'application/json' },
+        },
+      );
+    }
     setComments(res.data.listComments.items);
     reset();
   };
 
   // モーダル表示時にInputからフォーカスを外す
   ref.current?.blur();
-
-  const book = {
-    ...props.bookInfo,
-  };
 
   return (
     <>
