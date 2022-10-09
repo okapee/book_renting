@@ -169,7 +169,7 @@ export default function UserInfo() {
           query: createUser,
           variables: {
             input: {
-              userId: userInfo.username,
+              userId: userInfo?.username,
               organization: data.department,
               age: data.年代,
               name: data.name,
@@ -180,7 +180,7 @@ export default function UserInfo() {
         // ユーザー情報のstoreを更新
         dispatch(
           setUserData({
-            userId: userInfo.username,
+            userId: userInfo?.username,
             organization: data.department,
             age: data.年代,
             name: data.name,
@@ -194,7 +194,7 @@ export default function UserInfo() {
           query: updateUser,
           variables: {
             input: {
-              userId: userInfo.username,
+              userId: userInfo?.username,
               organization: data.department,
               age: data.年代,
               name: data.name,
@@ -205,7 +205,7 @@ export default function UserInfo() {
         console.log('dispatch開始');
         dispatch(
           setUserData({
-            userId: userInfo.username,
+            userId: userInfo?.username,
             organization: data.department,
             age: data.年代,
             name: data.name,

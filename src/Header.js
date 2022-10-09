@@ -23,7 +23,7 @@ import { setUserData } from './slices/userDataSlice';
 import * as queries from './graphql/queries';
 
 export default function Header(props) {
-  let tmpUserName;
+  let tmpUserName = 'default';
   const [isNavVisible, setNavVisibility] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [iconURL, setIconURL] = useState('');
@@ -144,11 +144,11 @@ export default function Header(props) {
             お問い合わせ
           </NavLink>
           <Avatar name={iconName} src={iconURL} size="lg" />
-          <NotificationCenter
+          {/* <NotificationCenter
             className="feed-container"
             appId="E9Ormu9DLP"
-            subscriberId={userInfo.username}
-          />
+            subscriberId={tmpUserName}
+          /> */}
           <button onClick={props.signOut}>Logout</button>
         </nav>
       </CSSTransition>
