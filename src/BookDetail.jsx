@@ -95,18 +95,19 @@ export default function BookDetail(props) {
     const res = await API.graphql(graphqlOperation(listComments, { filter: filter }));
     console.dir(res);
 
-    // if (res != null) {
-    //   console.log(
-    //     'notification: to:' + endpoint + ', user:' + userdata.name + ', postId:' + book.title + ', sendTo:' +  book.owner,
-    //   );
-    //   axios.post(
-    //     endpoint,
-    //     { user: userdata.name, postId: book.title },
-    //     {
-    //       headers: { 'Content-type': 'application/json' },
-    //     },
-    //   );
-    // }
+    // Notification通知
+    if (res != null) {
+      console.log(
+        'notification: to:' + endpoint + ', user:' + userdata.name + ', postId:' + book.title + ', sendTo:' +  book.owner,
+      );
+      axios.post(
+        endpoint,
+        { user: userdata.name, postId: book.title },
+        {
+          headers: { 'Content-type': 'application/json' },
+        },
+      );
+    }
     setComments(res.data.listComments.items);
     reset();
   };
