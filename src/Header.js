@@ -145,7 +145,7 @@ export default function Header(props) {
             お問い合わせ
           </NavLink>
           <Avatar name={iconName} src={iconURL} size="lg" />
-          {console.log(`test ${userId}`)};
+          {console.log(`test ${userId}`)}
           <NotificationCenter
             className="feed-container"
             appId="E9Ormu9DLP"
