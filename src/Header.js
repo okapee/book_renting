@@ -50,7 +50,7 @@ export default function Header(props) {
 
   console.log('userInfo in header: ' + userInfo);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const setUserToStore = async () => {
       const res =  await Auth.currentAuthenticatedUser();
        setUserId(res.username);
