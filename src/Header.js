@@ -144,11 +144,11 @@ export default function Header(props) {
             お問い合わせ
           </NavLink>
           <Avatar name={iconName} src={iconURL} size="lg" />
-          {/* <NotificationCenter
+          <NotificationCenter
             className="feed-container"
             appId="E9Ormu9DLP"
             subscriberId={tmpUserName}
-          /> */}
+          />
           <button onClick={props.signOut}>Logout</button>
         </nav>
       </CSSTransition>
