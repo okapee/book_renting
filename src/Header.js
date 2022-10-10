@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import './Header.css';
 import { CSSTransition } from 'react-transition-group';
 import { Routes, Route, NavLink, Link } from 'react-router-dom';
@@ -28,6 +28,7 @@ export default function Header(props) {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [iconURL, setIconURL] = useState('');
   const [iconName, setIconName] = useState('');
+  const [userId, setUserId] = useState();
 
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.auth.user);
@@ -49,10 +50,10 @@ export default function Header(props) {
 
   console.log('userInfo in header: ' + userInfo);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const setUserToStore = async () => {
-      const res = await Auth.currentAuthenticatedUser();
-      tmpUserName = res.username;
+      const res =  await Auth.currentAuthenticatedUser();
+       setUserId(res.username);
       console.log('Headerのusername: ' + res.username);
       dispatch(setUser(res));
       setIconName(res.username);
@@ -144,10 +145,11 @@ export default function Header(props) {
             お問い合わせ
           </NavLink>
           <Avatar name={iconName} src={iconURL} size="lg" />
+          {console.log(`test ${userId}`)};
           <NotificationCenter
             className="feed-container"
             appId="E9Ormu9DLP"
-            subscriberId={tmpUserName}
+            subscriberId={userId}
           />
           <button onClick={props.signOut}>Logout</button>
         </nav>
