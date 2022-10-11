@@ -319,7 +319,8 @@ function Home() {
                 更新情報
               </Text>
               <ul class="news">
-                <li class="new">2022.10.2 Markdownでの投稿に対応</li>
+                <li class="new">2022.10.11 ヘッダに通知を実装(バグあるかも…)</li>
+                <li>2022.10.2 Markdownでの投稿に対応</li>
                 <li>2022.9.22 サイドバーを設置</li>
                 <li>2022.9.20 自己紹介ページ削除</li>
               </ul>

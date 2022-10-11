@@ -50,10 +50,10 @@ export default function Header(props) {
 
   console.log('userInfo in header: ' + userInfo);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const setUserToStore = async () => {
-      const res =  await Auth.currentAuthenticatedUser();
-       setUserId(res.username);
+      const res = await Auth.currentAuthenticatedUser();
+      setUserId(res.username);
       console.log('Headerのusername: ' + res.username);
       dispatch(setUser(res));
       setIconName(res.username);
@@ -146,11 +146,7 @@ export default function Header(props) {
           </NavLink>
           <Avatar name={iconName} src={iconURL} size="lg" />
           {console.log(`test ${userId}`)}
-          <NotificationCenter
-            className="feed-container"
-            appId="E9Ormu9DLP"
-            subscriberId={userId}
-          />
+          <NotificationCenter className="feed-container" appId="E9Ormu9DLP" subscriberId={userId} />
           <button onClick={props.signOut}>Logout</button>
         </nav>
       </CSSTransition>
