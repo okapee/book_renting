@@ -135,7 +135,7 @@ export default function BookDetail(props) {
           </HStack>
         </ModalHeader>
         <ModalBody p={2}>
-          <HStack justifyContent="space-around">
+          <HStack justifyContent="space-between">
             <Text as="b">レビュー</Text>
             <HStack>
               <Text>2022.xx.xx</Text>
