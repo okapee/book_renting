@@ -25,6 +25,8 @@ import {
   ListItem,
   List,
 } from '@chakra-ui/react';
+import { BsFillBookFill } from 'react-icons/bs';
+import { BiMessageEdit } from 'react-icons/bi';
 import { Auth, API, graphqlOperation, Storage } from 'aws-amplify';
 import { useForm } from 'react-hook-form';
 import ReactMarkdown from 'react-markdown';
@@ -98,7 +100,14 @@ export default function BookDetail(props) {
     // Notification通知
     if (res != null) {
       console.log(
-        'notification: to:' + endpoint + ', user:' + userdata.name + ', postId:' + book.title + ', sendTo:' +  book.owner,
+        'notification: to:' +
+          endpoint +
+          ', user:' +
+          userdata.name +
+          ', postId:' +
+          book.title +
+          ', sendTo:' +
+          book.owner,
       );
       axios.post(
         endpoint,
@@ -119,9 +128,21 @@ export default function BookDetail(props) {
     <>
       <ModalOverlay />
       <ModalContent p={4} minHeight="200px">
-        <ModalHeader bgColor="gray.100">{book.title}</ModalHeader>
+        <ModalHeader bgColor="gray.100">
+          <HStack>
+            <BsFillBookFill />
+            <Text>{book.title}</Text>
+          </HStack>
+        </ModalHeader>
         <ModalBody p={2}>
-          <Text as="b">レビュー</Text>
+          <HStack justifyContent="space-around">
+            <Text as="b">レビュー</Text>
+            <HStack>
+              <Text>2022.xx.xx</Text>
+              <Text>by xxxx</Text>
+              <BiMessageEdit />
+            </HStack>
+          </HStack>
           <Box className="review-disp">
             <ReactMarkdown className="react-md">{book.review}</ReactMarkdown>
           </Box>
@@ -275,14 +296,12 @@ function Comment(props) {
       borderColor="gray.300"
     >
       <HStack>
-        <VStack flexBasis="20%">
+        <VStack flexBasis="10%">
           <Avatar src={imgSrc} />
           <Text fontSize="sm">{username}</Text>
         </VStack>
-        <VStack flexBasis="80%" paddingLeft={4} alignItems="flex-start">
-          <Text fontSize="sm" alignSelf="baseline">
-            投稿日: {commentdate.slice(0, 10)}
-          </Text>
+        <VStack flexBasis="90%" paddingLeft={4} alignItems="flex-start" alignSelf="flex-start">
+          <Text fontSize="sm">投稿日: {commentdate.slice(0, 10)}</Text>
           <Text fontSize="sm" ml={4}>
             {comment}
           </Text>

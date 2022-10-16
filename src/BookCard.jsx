@@ -127,7 +127,7 @@ function BookCard(props) {
         isCentered
         motionPreset="slideInBottom"
         scrollBehavior="inside"
-        size="xl"
+        size="4xl"
       >
         <BookDetail bookInfo={book} onClose={onClose} />
         {/* <ModalOverlay />

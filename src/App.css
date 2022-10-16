@@ -172,10 +172,10 @@ ol li::before {
 
 .review-disp{
   margin-top: 4px;
-  padding: 8px;
-  background-color: lightcyan;
+  padding: 1.5rem;
+  background-color: #e0ffff47;
   border-width: 1px;
-  border-color: green;
+  border-color: #9ebb9e;
   border-radius: 8px;
 }
 
