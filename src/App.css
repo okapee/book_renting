@@ -8,7 +8,8 @@ h2 { font-size: 2.8rem; }
 }
 
 .container_body {
-  z-index: 0;;
+  position: relative;
+  z-index: 0;
 }
 
 .footer {

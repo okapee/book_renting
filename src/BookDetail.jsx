@@ -32,6 +32,9 @@ import { useForm } from 'react-hook-form';
 import ReactMarkdown from 'react-markdown';
 import { listComments, getUser } from './graphql/queries';
 import { createComment, deletePost } from './graphql/mutations';
+import { formatDistance, format } from 'date-fns';
+import { ja } from 'date-fns/locale';
+
 
 export default function BookDetail(props) {
   const username = useSelector((state) => state.auth.user.username);
@@ -138,7 +141,11 @@ export default function BookDetail(props) {
           <HStack justifyContent="space-between">
             <Text as="b">レビュー</Text>
             <HStack>
-              <Text>2022.xx.xx</Text>
+              <Text>
+                {format(Date.parse(book.postedDate), 'yyyy年M月d日', {
+                  locale: ja,
+                })}
+              </Text>
               <Text>by {book.owner}</Text>
               <BiMessageEdit title="レビューの編集" size="3rem" />
             </HStack>
