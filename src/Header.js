@@ -145,8 +145,8 @@ export default function Header(props) {
             お問い合わせ
           </NavLink>
           <Avatar name={iconName} src={iconURL} size="lg" />
-          {console.log(`test ${userId}`)}
-          <NotificationCenter className="feed-container" appId="E9Ormu9DLP" subscriberId={userId} />
+          {console.log(`userId is ${userInfo?.username}`)}
+          {userInfo?.username && <NotificationCenter className="feed-container" appId="E9Ormu9DLP" subscriberId={userInfo?.username} />}
           <button onClick={props.signOut}>Logout</button>
         </nav>
       </CSSTransition>

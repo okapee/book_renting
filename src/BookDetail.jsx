@@ -140,7 +140,7 @@ export default function BookDetail(props) {
             <HStack>
               <Text>2022.xx.xx</Text>
               <Text>by xxxx</Text>
-              <BiMessageEdit />
+              <BiMessageEdit title='レビューの編集' size='3rem' />
             </HStack>
           </HStack>
           <Box className="review-disp">
