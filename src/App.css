@@ -7,6 +7,10 @@ h2 { font-size: 2.8rem; }
   color: blue;
 }
 
+.container_body {
+  z-index: 0;;
+}
+
 .footer {
   width: 100%;
   height: 50px;

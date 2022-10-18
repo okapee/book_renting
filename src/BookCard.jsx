@@ -130,48 +130,7 @@ function BookCard(props) {
         size="4xl"
       >
         <BookDetail bookInfo={book} onClose={onClose} />
-        {/* <ModalOverlay />
-        <ModalContent p={4} minHeight="200px">
-          <ModalHeader bgColor="gray.100">{book.title}</ModalHeader>
-          <ModalBody p={2}>
-            <Text>{book.review}</Text>
-            <Divider mt={4} mb={4} />
-            <Text as="b">コメント</Text>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <input
-                {...register('comment', { required: true, maxLength: 50 })}
-                style={{ width: '80%', border: 'groove' }}
-                ref={ref}
-              />
-              <input
-                type="submit"
-                style={{
-                  marginLeft: '6px',
-                  border: 'outset',
-                  paddingLeft: '2px',
-                  paddingRight: '2px',
-                }}
-              />
-            </form>
-
-            {comments.length !== 0 ? <Text>コメントあり</Text> : <Text>{comment}</Text>}
-          </ModalBody>
-
-          <ModalFooter paddingRight="unset" paddingBottom="unset">
-            <DeleteBtn
-              postId={book.id}
-              update={update}
-              forceUpdate={setUpdate}
-              owner={book.owner}
-              username={username}
-            />
-            <Button colorScheme="orange" p={4} mr={2} size={['xs', 'sm']} onClick={onClose}>
-              閉じる
-            </Button>
-          </ModalFooter>
-        </ModalContent> */}
       </Modal>
-      {/* <BookDetail /> */}
       <Box
         p={4}
         rounded="4"
@@ -231,36 +190,5 @@ function Star({ filled }) {
 function modalWindow() {
   console.log('BookCard modal is Open!');
 }
-
-// function DeleteBtn(props) {
-//   console.log(`update in DeleteBtn: ${update}`);
-//   if (props.owner == props.username) {
-//     console.log(`update in DeleteBtn: ${props.update}`);
-//     return (
-//       <Button
-//         colorScheme="red"
-//         p={4}
-//         mr={2}
-//         size={['xs', 'sm']}
-//         onClick={async () => {
-//           console.log('デリートポストが押された');
-//           const input = {
-//             id: props.postId,
-//           };
-
-//           await API.graphql(graphqlOperation(mutations.deletePost, { input }));
-//           console.log('start update: ' + props.update);
-//           // Postを削除した際に強制リロード
-//           window.location.reload();
-//           console.log('finish update: ' + props.update);
-//         }}
-//       >
-//         削除
-//       </Button>
-//     );
-//   } else {
-//     return <></>;
-//   }
-// }
 
 export default BookCard;
