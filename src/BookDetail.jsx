@@ -133,20 +133,24 @@ export default function BookDetail(props) {
       <ModalContent p={4} minHeight="200px">
         <ModalHeader bgColor="gray.100">
           <HStack>
-            <BsFillBookFill />
-            <Text>{book.title}</Text>
+            <BsFillBookFill size='2rem'/>
+            <Text marginLeft='1.5rem'>{book.title}</Text>
           </HStack>
         </ModalHeader>
         <ModalBody p={2}>
           <HStack justifyContent="space-between">
-            <Text as="b">レビュー</Text>
+            <Text as="b" overflow="hidden" textOverflow="ellipsis" whiteSpace="nowrap">
+              レビュー
+            </Text>
             <HStack>
-              <Text>
+              <Text overflow="hidden" textOverflow="ellipsis" whiteSpace="nowrap">
                 {format(Date.parse(book.postedDate), 'yyyy年M月d日', {
                   locale: ja,
                 })}
               </Text>
-              <Text>by {book.owner}</Text>
+              <Text overflow="hidden" textOverflow="ellipsis" whiteSpace="nowrap">
+                by {book.owner}
+              </Text>
               <BiMessageEdit title="レビューの編集" size="3rem" />
             </HStack>
           </HStack>
