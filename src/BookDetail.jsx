@@ -24,7 +24,9 @@ import {
   Textarea,
   ListItem,
   List,
+  IconButton,
 } from '@chakra-ui/react';
+import { AiFillEdit } from 'react-icons/ai';
 import { BsFillBookFill } from 'react-icons/bs';
 import { BiMessageEdit } from 'react-icons/bi';
 import { Auth, API, graphqlOperation, Storage } from 'aws-amplify';
@@ -34,6 +36,8 @@ import { listComments, getUser } from './graphql/queries';
 import { createComment, deletePost } from './graphql/mutations';
 import { formatDistance, format } from 'date-fns';
 import { ja } from 'date-fns/locale';
+
+import ReviewEdit from './ReviewEdit';
 
 
 export default function BookDetail(props) {
@@ -47,6 +51,7 @@ export default function BookDetail(props) {
   const [initCount, setInitCount] = useState(0);
   const [update, setUpdate] = useState(false);
   const [comments, setComments] = useState([]);
+  const [editFlg, setEditFlg] = useState(false)
 
   const subscriberId = book.owner;
   let endpoint =
@@ -124,6 +129,13 @@ export default function BookDetail(props) {
     reset();
   };
 
+  // 編集ボタンを押下した際に発火するイベント
+  function onEditClick(){
+    console.log('編集ボタンが押された。');
+    setEditFlg(!editFlg);
+    console.log('editFlg: ' + editFlg);
+  }
+
   // モーダル表示時にInputからフォーカスを外す
   ref.current?.blur();
 
@@ -133,8 +145,8 @@ export default function BookDetail(props) {
       <ModalContent p={4} minHeight="200px">
         <ModalHeader bgColor="gray.100">
           <HStack>
-            <BsFillBookFill size='2rem'/>
-            <Text marginLeft='1.5rem'>{book.title}</Text>
+            <BsFillBookFill size="2rem" />
+            <Text marginLeft="1.5rem">{book.title}</Text>
           </HStack>
         </ModalHeader>
         <ModalBody p={2}>
@@ -149,13 +161,25 @@ export default function BookDetail(props) {
                 })}
               </Text>
               <Text overflow="hidden" textOverflow="ellipsis" whiteSpace="nowrap">
-                by {book.owner}
+                by {book.user?.name ? book.user?.name : book.owner}
               </Text>
-              <BiMessageEdit title="レビューの編集" size="3rem" />
+              {/* <BiMessageEdit title="レビューの編集" size="3rem" /> */}
+              <IconButton
+                variant="outline"
+                colorScheme="teal"
+                aria-label="Call Sage"
+                fontSize="20px"
+                icon={<AiFillEdit />}
+                onClick={onEditClick}
+              />
             </HStack>
           </HStack>
           <Box className="review-disp">
-            <ReactMarkdown className="react-md">{book.review}</ReactMarkdown>
+            {editFlg ? (
+              <ReviewEdit book={book} setEditFlg={setEditFlg} />
+            ) : (
+              <ReactMarkdown className="react-md">{book.review}</ReactMarkdown>
+            )}
           </Box>
           <Divider mt={4} mb={4} />
           <Text as="b">コメント</Text>
