@@ -34,6 +34,7 @@ import * as mutations from './graphql/mutations';
 function ReviewEdit(props) {
   const book = props.book;
   const setEditFlg = props.setEditFlg;
+  const setBookReview = props.setBookReview;
 
   console.log(`book: ${book}`);
 
@@ -94,6 +95,7 @@ function ReviewEdit(props) {
           'aria-live': 'polite',
         },
       });
+      setBookReview(input);
     } catch (err) {
       console.log(err);
       // Errorの場合、その旨をトーストとして通知する

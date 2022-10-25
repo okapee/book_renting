@@ -46,6 +46,8 @@ export default function BookDetail(props) {
   const book = {
     ...props.bookInfo,
   };
+  const bookReview = props.bookReview;
+  const setBookReview = props.setBookReview;
   const ref = useRef(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [initCount, setInitCount] = useState(0);
@@ -176,9 +178,9 @@ export default function BookDetail(props) {
           </HStack>
           <Box className="review-disp">
             {editFlg ? (
-              <ReviewEdit book={book} setEditFlg={setEditFlg} />
+              <ReviewEdit book={book} setEditFlg={setEditFlg} setBookReview={setBookReview} />
             ) : (
-              <ReactMarkdown className="react-md">{book.review}</ReactMarkdown>
+              <ReactMarkdown className="react-md">{bookReview}</ReactMarkdown>
             )}
           </Box>
           <Divider mt={4} mb={4} />

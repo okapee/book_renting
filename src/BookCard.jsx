@@ -38,6 +38,7 @@ function BookCard(props) {
   const [initCount, setInitCount] = useState(0);
   const [update, setUpdate] = useState(false);
   const [imgsrc, setImageSrc] = useState('');
+  const [bookReview, setBookReview] = useState('');
   const finalRef = useRef();
   const {
     register,
@@ -89,6 +90,7 @@ function BookCard(props) {
 
   // いいねの初期表示カウントを取得
   useEffect(() => {
+    setBookReview(book.review);
     const get_variables = {
       id: book.id,
     };
@@ -129,7 +131,7 @@ function BookCard(props) {
         scrollBehavior="inside"
         size="4xl"
       >
-        <BookDetail bookInfo={book} onClose={onClose} />
+        <BookDetail bookInfo={book} onClose={onClose} bookReview={bookReview} setBookReview={setBookReview} />
       </Modal>
       <Box
         p={4}
@@ -166,7 +168,7 @@ function BookCard(props) {
                 ))}
               </Flex>
               <Text mb={4} noOfLines={2}>
-                {book.review}
+                {bookReview}
               </Text>
               {console.log(`${initCount} in front of LikeButton`)};
               <LikeButton
