@@ -29,16 +29,16 @@ import {
 import { AiFillEdit } from 'react-icons/ai';
 import { BsFillBookFill } from 'react-icons/bs';
 import { BiMessageEdit } from 'react-icons/bi';
+import { TiDeleteOutline } from 'react-icons/ti';
 import { Auth, API, graphqlOperation, Storage } from 'aws-amplify';
 import { useForm } from 'react-hook-form';
 import ReactMarkdown from 'react-markdown';
 import { listComments, getUser } from './graphql/queries';
-import { createComment, deletePost } from './graphql/mutations';
+import { createComment, deleteComment, deletePost } from './graphql/mutations';
 import { formatDistance, format } from 'date-fns';
 import { ja } from 'date-fns/locale';
 
 import ReviewEdit from './ReviewEdit';
-
 
 export default function BookDetail(props) {
   const username = useSelector((state) => state.auth.user.username);
@@ -53,7 +53,7 @@ export default function BookDetail(props) {
   const [initCount, setInitCount] = useState(0);
   const [update, setUpdate] = useState(false);
   const [comments, setComments] = useState([]);
-  const [editFlg, setEditFlg] = useState(false)
+  const [editFlg, setEditFlg] = useState(false);
 
   const subscriberId = book.owner;
   let endpoint =
@@ -132,7 +132,7 @@ export default function BookDetail(props) {
   };
 
   // 編集ボタンを押下した際に発火するイベント
-  function onEditClick(){
+  function onEditClick() {
     console.log('編集ボタンが押された。');
     setEditFlg(!editFlg);
     console.log('editFlg: ' + editFlg);
@@ -165,15 +165,19 @@ export default function BookDetail(props) {
               <Text overflow="hidden" textOverflow="ellipsis" whiteSpace="nowrap">
                 by {book.user?.name ? book.user?.name : book.owner}
               </Text>
-              {/* <BiMessageEdit title="レビューの編集" size="3rem" /> */}
-              <IconButton
-                variant="outline"
-                colorScheme="teal"
-                aria-label="Call Sage"
-                fontSize="20px"
-                icon={<AiFillEdit />}
-                onClick={onEditClick}
-              />
+              {/* 自分のPostの場合のみEditアイコンを表示 */}
+              {book.owner == username ? (
+                <IconButton
+                  variant="outline"
+                  colorScheme="teal"
+                  aria-label="Call Sage"
+                  fontSize="20px"
+                  icon={<AiFillEdit />}
+                  onClick={onEditClick}
+                />
+              ) : (
+                <></>
+              )}
             </HStack>
           </HStack>
           <Box className="review-disp">
@@ -189,9 +193,13 @@ export default function BookDetail(props) {
             {comments?.map((comment) => {
               return (
                 <Comment
+                  commentId={comment?.id}
                   commentby={comment?.commentby}
                   comment={comment?.comment}
                   commentdate={comment?.createdAt}
+                  userId={username}
+                  comments={comments}
+                  setComments={setComments}
                 />
               );
             })}
@@ -290,9 +298,21 @@ function DeleteBtn(props) {
 }
 
 function Comment(props) {
-  const { commentby, comment, commentdate } = props;
+  const { commentId, commentby, comment, commentdate, userId } = props;
   const [username, setUserName] = useState('');
   const [imgSrc, setImgSrc] = useState('');
+
+  async function onCmtDelete() {
+    console.log(`onCmtDeleteが押された。commentId: ${commentId}`);
+    console.dir(props.comments);
+    const input = {
+      id: commentId,
+    };
+    const res = await API.graphql({
+      query: deleteComment,
+      variables: { input: input },
+    });
+  }
 
   console.log(
     `In Comment, comment: ${comment}, commentby: ${commentby}, commentdate: ${commentdate}`,
@@ -332,17 +352,24 @@ function Comment(props) {
       borderRadius="md"
       borderColor="gray.300"
     >
-      <HStack>
+      <HStack justifyContent="space-around">
         <VStack flexBasis="10%">
           <Avatar src={imgSrc} />
           <Text fontSize="sm">{username}</Text>
         </VStack>
-        <VStack flexBasis="90%" paddingLeft={4} alignItems="flex-start" alignSelf="flex-start">
+        <VStack flexBasis="80%" paddingLeft={4} alignItems="flex-start" alignSelf="flex-start">
           <Text fontSize="sm">投稿日: {commentdate.slice(0, 10)}</Text>
           <Text fontSize="sm" ml={4}>
             {comment}
           </Text>
         </VStack>
+        {commentby == userId ? (
+          <Box width="2rem">
+            <TiDeleteOutline color="red" onClick={onCmtDelete} />
+          </Box>
+        ) : (
+          <Box width="2rem"></Box>
+        )}
       </HStack>
     </ListItem>
   );
