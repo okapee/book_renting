@@ -192,7 +192,10 @@ export default function BookDetail(props) {
           <List alignItems="flex-start">
             {comments?.map((comment) => {
               return (
+                // keyとindexを渡し、indexを用いてコメント削除した際に再レンダリングする
                 <Comment
+                  key={comment?.id}
+                  bookId={book.id}
                   commentId={comment?.id}
                   commentby={comment?.commentby}
                   comment={comment?.comment}
@@ -298,7 +301,7 @@ function DeleteBtn(props) {
 }
 
 function Comment(props) {
-  const { commentId, commentby, comment, commentdate, userId } = props;
+  const { bookId, commentId, commentby, comment, commentdate, userId, setComments } = props;
   const [username, setUserName] = useState('');
   const [imgSrc, setImgSrc] = useState('');
 
@@ -312,6 +315,15 @@ function Comment(props) {
       query: deleteComment,
       variables: { input: input },
     });
+
+    const filter = {
+      bookId: {
+        eq: bookId,
+      },
+    };
+    const res_cmt = await API.graphql(graphqlOperation(listComments, { filter: filter }));
+    console.dir(res);
+    setComments(res_cmt.data.listComments.items);
   }
 
   console.log(
